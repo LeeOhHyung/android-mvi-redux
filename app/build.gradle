@@ -29,19 +29,36 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    buildFeatures {
+        dataBinding true
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+    }
 }
 
 dependencies {
+    implementation project(':core')
+
+    // Android, Kotlin Libraries
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-
-    // ConstraintLayout
-    implementation "androidx.constraintlayout:constraintlayout:2.0.1"
-
-    // Android, Libraries
     implementation 'androidx.core:core-ktx:1.3.1'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.annotation:annotation:1.1.0'
     implementation 'com.google.android.material:material:1.3.0-alpha02'
+    implementation "androidx.constraintlayout:constraintlayout:2.0.1"
 
     // Hilt-Android
     implementation 'com.google.dagger:hilt-android:2.28.3-alpha'
