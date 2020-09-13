@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import io.reactivex.functions.BiFunction
 
 interface StateStore<S: UiState, R: Result> {
-    val currentState: LiveData<S>
 
     /**
      * currentState + Result = newState
@@ -12,4 +11,6 @@ interface StateStore<S: UiState, R: Result> {
      * @Result is literally outcome of Actions.
      */
     val reducer: BiFunction<S, R, S>
+
+    val currentState: LiveData<S>
 }

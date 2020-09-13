@@ -21,8 +21,6 @@ abstract class BaseFragment<V: ViewDataBinding, I: Intent, S: UiState>(
 
     protected lateinit var binding: V
 
-    abstract val viewModel: BaseViewModel<I, *, S, *>
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
@@ -32,9 +30,5 @@ abstract class BaseFragment<V: ViewDataBinding, I: Intent, S: UiState>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         subscribeIntent()
-    }
-
-    override fun subscribeIntent() {
-        viewModel.subscribeIntents(mergeIntents())
     }
 }
