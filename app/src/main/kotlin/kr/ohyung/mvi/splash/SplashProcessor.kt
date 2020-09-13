@@ -3,7 +3,6 @@
  */
 package kr.ohyung.mvi.splash
 
-import android.util.Log
 import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -26,7 +25,6 @@ class SplashProcessor @Inject constructor() : Processor<SplashAction, SplashResu
             actions.flatMap { action ->
                 val duration = if(action is SplashAction.NavigateToHomeAction) action.duration else 0L
                 Observable.timer(duration, TimeUnit.MILLISECONDS)
-                    .doOnNext { Log.d("Splash", "navigateToHomeProcessor") }
                     .map { _ -> SplashResult.Success }
                     .cast(SplashResult::class.java)
                     .startWith(SplashResult.Loading)

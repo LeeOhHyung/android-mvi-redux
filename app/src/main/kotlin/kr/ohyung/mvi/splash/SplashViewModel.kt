@@ -3,7 +3,6 @@
  */
 package kr.ohyung.mvi.splash
 
-import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.LiveDataReactiveStreams
@@ -26,7 +25,6 @@ class SplashViewModel @ViewModelInject constructor(
     override val currentState: LiveData<SplashUiState> =
         LiveDataReactiveStreams.fromPublisher(
             intentsSubject
-                .doOnNext { Log.d("Splash", "SplashViewModel") }
                 .map(::actionFromIntent)
                 .compose(splashProcessor.actionProcessor)
                 .scan(SplashUiState.idle(), reducer)
