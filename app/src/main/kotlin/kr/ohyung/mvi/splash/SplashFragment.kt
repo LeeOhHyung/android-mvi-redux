@@ -28,17 +28,13 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashIntent,
         splashViewModel.currentState.observe(viewLifecycleOwner, Observer(::render))
     }
 
-    override fun initView() {
-        /* explicitly empty */
-    }
-
-    override fun mergeIntents(): Observable<SplashIntent> =
-        Observable.just(SplashIntent.InitialIntent(args.duration))
-
     override fun render(state: SplashUiState) {
-
+        if(state.isLoading) {
+            // TODO : show progress bar
+        }
     }
-
 
     override fun subscribeIntent() = splashViewModel.subscribeIntents(mergeIntents())
+
+    override fun mergeIntents(): Observable<SplashIntent> = Observable.just(SplashIntent.InitialIntent(args.duration))
 }

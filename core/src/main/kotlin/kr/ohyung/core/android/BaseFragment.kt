@@ -21,6 +21,8 @@ abstract class BaseFragment<V: ViewDataBinding, I: Intent, S: UiState>(
 
     protected lateinit var binding: V
 
+    override fun initView() { /* explicitly empty */ }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
