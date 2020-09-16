@@ -3,4 +3,4 @@
  */
 package kr.ohyung.core.mvi
 
-interface Result
+interface ViewResult

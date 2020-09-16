@@ -16,7 +16,7 @@ import kr.ohyung.mvi.databinding.FragmentSplashBinding
 
 @AndroidEntryPoint
 class SplashFragment : BaseFragment<FragmentSplashBinding, SplashIntent,
-        SplashUiState>(R.layout.fragment_splash) {
+        SplashViewState>(R.layout.fragment_splash) {
 
     private val args by navArgs<SplashFragmentArgs>()
     private val splashViewModel by navGraphViewModels<SplashViewModel>(R.id.nav_graph) {
@@ -28,13 +28,13 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashIntent,
         splashViewModel.currentState.observe(viewLifecycleOwner, Observer(::render))
     }
 
-    override fun render(state: SplashUiState) {
+    override fun render(state: SplashViewState) {
         if(state.isLoading) {
             // TODO : show progress bar
         }
     }
 
-    override fun subscribeIntent() = splashViewModel.subscribeIntents(mergeIntents())
+    override fun processIntents() = splashViewModel.subscribeIntents(mergeIntents())
 
     override fun mergeIntents(): Observable<SplashIntent> = Observable.just(SplashIntent.InitialIntent(args.duration))
 }

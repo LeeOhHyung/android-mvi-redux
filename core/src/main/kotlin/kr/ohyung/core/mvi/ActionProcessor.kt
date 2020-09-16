@@ -5,6 +5,6 @@ package kr.ohyung.core.mvi
 
 import io.reactivex.ObservableTransformer
 
-interface Processor<A: Action, R: Result> {
-    val actionProcessor: ObservableTransformer<A, R>
+interface ActionProcessor<A: ViewAction, R: ViewResult> {
+    fun actionToResult(): ObservableTransformer<A, R>
 }

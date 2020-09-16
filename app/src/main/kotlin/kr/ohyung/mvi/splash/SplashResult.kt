@@ -3,9 +3,9 @@
  */
 package kr.ohyung.mvi.splash
 
-import kr.ohyung.core.mvi.Result
+import kr.ohyung.core.mvi.ViewResult
 
-sealed class SplashResult : Result {
+sealed class SplashResult : ViewResult {
     object Loading : SplashResult()
     object Success : SplashResult()
     data class Error(val throwable: Throwable) : SplashResult()

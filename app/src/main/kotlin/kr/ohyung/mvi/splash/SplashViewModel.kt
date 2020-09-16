@@ -11,10 +11,10 @@ import io.reactivex.functions.BiFunction
 import kr.ohyung.core.android.BaseViewModel
 
 class SplashViewModel @ViewModelInject constructor(
-    splashProcessor: SplashProcessor,
-) : BaseViewModel<SplashIntent, SplashAction, SplashUiState, SplashResult>() {
+    splashProcessor: SplashActionProcessor,
+) : BaseViewModel<SplashIntent, SplashAction, SplashViewState, SplashResult>() {
 
-    override val reducer = BiFunction { oldState: SplashUiState, result: SplashResult ->
+    override val reducer = BiFunction { oldState: SplashViewState, result: SplashResult ->
         when(result) {
             SplashResult.Loading -> oldState.copy(isLoading = true)
             SplashResult.Success -> oldState.copy(isLoading = false, error = null)
@@ -22,19 +22,19 @@ class SplashViewModel @ViewModelInject constructor(
         }
     }
 
-    override val currentState: LiveData<SplashUiState> =
+    override val currentState: LiveData<SplashViewState> =
         LiveDataReactiveStreams.fromPublisher(
             intentsSubject
-                .map(::actionFromIntent)
-                .compose(splashProcessor.actionProcessor)
-                .scan(SplashUiState.idle(), reducer)
+                .map(::intentToAction)
+                .compose(splashProcessor.actionToResult())
+                .scan(SplashViewState.idle(), reducer)
                 .distinctUntilChanged()
                 .replay(1)
                 .autoConnect(0)
                 .toFlowable(BackpressureStrategy.BUFFER)
         )
 
-    override fun actionFromIntent(intent: SplashIntent): SplashAction =
+    override fun intentToAction(intent: SplashIntent): SplashAction =
         when(intent) {
             is SplashIntent.InitialIntent -> SplashAction.NavigateToHomeAction(intent.duration)
         }

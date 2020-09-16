@@ -7,13 +7,13 @@ import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kr.ohyung.core.mvi.Processor
+import kr.ohyung.core.mvi.ActionProcessor
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class SplashProcessor @Inject constructor() : Processor<SplashAction, SplashResult> {
+class SplashActionProcessor @Inject constructor() : ActionProcessor<SplashAction, SplashResult> {
 
-    override val actionProcessor =
+    override fun actionToResult() =
         ObservableTransformer<SplashAction, SplashResult> { action ->
             action.publish { selector ->
                 selector.ofType(SplashAction.NavigateToHomeAction::class.java).compose(navigateToHome)

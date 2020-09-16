@@ -6,8 +6,8 @@ package kr.ohyung.core.mvi
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 
-interface ActionDispatcher<I: Intent, A: Action> {
+interface IntentProcessor<I: ViewIntent, A: ViewAction> {
     val intentsSubject: PublishSubject<I>
     fun subscribeIntents(intents: Observable<I>)
-    fun actionFromIntent(intent: I): A
+    fun intentToAction(intent: I): A
 }

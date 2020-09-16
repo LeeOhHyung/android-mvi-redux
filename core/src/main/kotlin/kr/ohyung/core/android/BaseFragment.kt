@@ -11,11 +11,10 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import kr.ohyung.core.mvi.Intent
-import kr.ohyung.core.mvi.UiState
+import kr.ohyung.core.mvi.ViewIntent
+import kr.ohyung.core.mvi.ViewState
 
-abstract class BaseFragment<V: ViewDataBinding, I: Intent, S: UiState>(
+abstract class BaseFragment<V: ViewDataBinding, I: ViewIntent, S: ViewState>(
     @LayoutRes private val layoutId: Int
 ) : Fragment(), BaseView<I, S> {
 
@@ -31,6 +30,6 @@ abstract class BaseFragment<V: ViewDataBinding, I: Intent, S: UiState>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        subscribeIntent()
+        processIntents()
     }
 }

@@ -3,7 +3,7 @@ package kr.ohyung.core.mvi
 import androidx.lifecycle.LiveData
 import io.reactivex.functions.BiFunction
 
-interface StateStore<S: UiState, R: Result> {
+interface StateStore<S: ViewState, R: ViewResult> {
 
     /**
      * currentState + Result = newState
