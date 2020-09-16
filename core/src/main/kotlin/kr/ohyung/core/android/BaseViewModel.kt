@@ -1,16 +1,18 @@
 package kr.ohyung.core.android
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import io.reactivex.subjects.PublishSubject
 import kr.ohyung.core.mvi.*
 
-abstract class BaseViewModel<I: ViewIntent, A: ViewAction,
-        S: ViewState, R: ViewResult> : ViewModel(), StateStore<S, R> {
+abstract class BaseViewModel<I: ViewIntent, A: ViewAction, S: ViewState, R: ViewResult>(
+    private val stateMachine: StateMachine<I, A, S, R>
+) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
+    abstract val viewState: LiveData<S>
 
     override fun onCleared() {
         compositeDisposable.dispose()
@@ -18,4 +20,5 @@ abstract class BaseViewModel<I: ViewIntent, A: ViewAction,
     }
 
     fun Disposable.addDisposable() = compositeDisposable.add(this)
+    fun processIntents(intents: Observable<I>) = stateMachine.subscribeIntents(intents)
 }

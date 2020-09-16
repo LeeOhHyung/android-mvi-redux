@@ -4,34 +4,13 @@
 package kr.ohyung.mvi.splash
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.LiveDataReactiveStreams
-import io.reactivex.BackpressureStrategy
-import io.reactivex.functions.BiFunction
+import io.reactivex.Observable
 import kr.ohyung.core.android.BaseViewModel
+import kr.ohyung.mvi.splash.mvi.*
 
 class SplashViewModel @ViewModelInject constructor(
-    intentProcessor: SplashIntentProcessor,
-    actionProcessor: SplashActionProcessor,
-) : BaseViewModel<SplashIntent, SplashAction, SplashViewState, SplashResult>() {
+    splashStateMachine: SplashStateMachine
+) : BaseViewModel<SplashIntent, SplashAction, SplashViewState, SplashResult>(splashStateMachine) {
 
-    override val reducer = BiFunction { oldState: SplashViewState, result: SplashResult ->
-        when(result) {
-            SplashResult.Loading -> oldState.copy(isLoading = true)
-            SplashResult.Success -> oldState.copy(isLoading = false, error = null)
-            is SplashResult.Error -> oldState.copy(isLoading = false, error = result.throwable)
-        }
-    }
-
-    override val currentState: LiveData<SplashViewState> =
-        LiveDataReactiveStreams.fromPublisher(
-            intentProcessor.intentsSubject
-                .map { intent -> intentProcessor.intentToAction(intent = intent) }
-                .compose(actionProcessor.actionToResult())
-                .scan(SplashViewState.idle(), reducer)
-                .distinctUntilChanged()
-                .replay(1)
-                .autoConnect(0)
-                .toFlowable(BackpressureStrategy.BUFFER)
-        )
+    override val viewState = splashStateMachine.currentState
 }

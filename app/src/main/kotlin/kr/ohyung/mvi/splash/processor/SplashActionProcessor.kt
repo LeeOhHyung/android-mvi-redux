@@ -1,13 +1,15 @@
 /*
  * Created by Lee Oh Hyung on 2020/09/13.
  */
-package kr.ohyung.mvi.splash
+package kr.ohyung.mvi.splash.processor
 
 import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kr.ohyung.core.mvi.ActionProcessor
+import kr.ohyung.mvi.splash.mvi.SplashAction
+import kr.ohyung.mvi.splash.mvi.SplashResult
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -16,7 +18,9 @@ class SplashActionProcessor @Inject constructor() : ActionProcessor<SplashAction
     override fun actionToResult() =
         ObservableTransformer<SplashAction, SplashResult> { action ->
             action.publish { selector ->
-                selector.ofType(SplashAction.NavigateToHomeAction::class.java).compose(navigateToHome)
+                selector
+                    .ofType(SplashAction.NavigateToHomeAction::class.java)
+                    .compose(navigateToHome)
             }
         }
 

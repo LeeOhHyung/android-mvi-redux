@@ -13,10 +13,12 @@ import io.reactivex.Observable
 import kr.ohyung.core.android.BaseFragment
 import kr.ohyung.mvi.R
 import kr.ohyung.mvi.databinding.FragmentSplashBinding
+import kr.ohyung.mvi.splash.mvi.SplashIntent
+import kr.ohyung.mvi.splash.mvi.SplashViewState
 
 @AndroidEntryPoint
-class SplashFragment : BaseFragment<FragmentSplashBinding, SplashIntent,
-        SplashViewState>(R.layout.fragment_splash) {
+class SplashFragment : BaseFragment<FragmentSplashBinding,
+        SplashIntent, SplashViewState>(R.layout.fragment_splash) {
 
     private val args by navArgs<SplashFragmentArgs>()
     private val splashViewModel by navGraphViewModels<SplashViewModel>(R.id.nav_graph) {
@@ -25,7 +27,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashIntent,
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        splashViewModel.currentState.observe(viewLifecycleOwner, Observer(::render))
+        splashViewModel.viewState.observe(viewLifecycleOwner, Observer(::render))
     }
 
     override fun render(state: SplashViewState) {
@@ -34,7 +36,6 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashIntent,
         }
     }
 
-    override fun processIntents() = splashViewModel.subscribeIntents(mergeIntents())
-
-    override fun mergeIntents(): Observable<SplashIntent> = Observable.just(SplashIntent.InitialIntent(args.duration))
+    override fun mergeIntents() =  Observable.just<SplashIntent>(SplashIntent.InitialIntent(args.duration))
+    override fun processIntents() = splashViewModel.processIntents(mergeIntents())
 }
