@@ -1,7 +1,7 @@
 /*
  * Created by Lee Oh Hyung on 2020/09/17.
  */
-package kr.ohyung.mvi.splash
+package kr.ohyung.mvi.splash.mvi
 
 import io.reactivex.functions.BiFunction
 import kr.ohyung.core.mvi.ViewStateReducer

@@ -5,7 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
 import kr.ohyung.core.mvi.ViewStateReducer
-import kr.ohyung.mvi.splash.SplashViewStateReducer
+import kr.ohyung.mvi.splash.mvi.SplashViewStateReducer
 import kr.ohyung.mvi.splash.mvi.SplashViewResult
 import kr.ohyung.mvi.splash.mvi.SplashViewState
 import javax.inject.Singleton

@@ -4,7 +4,6 @@
 package kr.ohyung.mvi.splash.mvi
 
 import kr.ohyung.core.mvi.StateMachine
-import kr.ohyung.mvi.splash.SplashViewStateReducer
 import kr.ohyung.mvi.splash.processor.SplashActionProcessor
 import kr.ohyung.mvi.splash.processor.SplashIntentProcessor
 import javax.inject.Inject
