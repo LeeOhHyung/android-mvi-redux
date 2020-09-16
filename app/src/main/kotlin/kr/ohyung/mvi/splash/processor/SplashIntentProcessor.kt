@@ -6,15 +6,15 @@ package kr.ohyung.mvi.splash.processor
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import kr.ohyung.core.mvi.IntentProcessor
-import kr.ohyung.mvi.splash.mvi.SplashAction
-import kr.ohyung.mvi.splash.mvi.SplashIntent
+import kr.ohyung.mvi.splash.mvi.SplashViewAction
+import kr.ohyung.mvi.splash.mvi.SplashViewIntent
 import javax.inject.Inject
 
-class SplashIntentProcessor @Inject constructor() : IntentProcessor<SplashIntent, SplashAction> {
-    override val intentsSubject = PublishSubject.create<SplashIntent>()
-    override fun subscribeIntents(intents: Observable<SplashIntent>) = intents.subscribe(intentsSubject)
-    override fun intentToAction(intent: SplashIntent) =
+class SplashIntentProcessor @Inject constructor() : IntentProcessor<SplashViewIntent, SplashViewAction> {
+    override val intentsSubject = PublishSubject.create<SplashViewIntent>()
+    override fun subscribeIntents(intents: Observable<SplashViewIntent>) = intents.subscribe(intentsSubject)
+    override fun intentToAction(intent: SplashViewIntent) =
         when(intent) {
-            is SplashIntent.InitialIntent -> SplashAction.NavigateToHomeAction(intent.duration)
+            is SplashViewIntent.InitialIntent -> SplashViewAction.NavigateToHomeAction(intent.duration)
         }
 }

@@ -13,7 +13,7 @@ class SplashStateMachine @Inject constructor(
     intentProcessor: SplashIntentProcessor,
     actionProcessor: SplashActionProcessor,
     reducer: SplashViewStateReducer
-) : StateMachine<SplashIntent, SplashAction, SplashViewState, SplashResult>(
+) : StateMachine<SplashViewIntent, SplashViewAction, SplashViewState, SplashViewResult>(
     intentProcessor = intentProcessor,
     actionProcessor = actionProcessor,
     reducer = reducer,

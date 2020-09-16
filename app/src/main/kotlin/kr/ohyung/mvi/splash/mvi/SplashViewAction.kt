@@ -5,6 +5,6 @@ package kr.ohyung.mvi.splash.mvi
 
 import kr.ohyung.core.mvi.ViewAction
 
-sealed class SplashAction : ViewAction {
-    data class NavigateToHomeAction(val duration: Long) : SplashAction()
+sealed class SplashViewAction : ViewAction {
+    data class NavigateToHomeAction(val duration: Long) : SplashViewAction()
 }

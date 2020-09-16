@@ -5,16 +5,16 @@ package kr.ohyung.mvi.splash
 
 import io.reactivex.functions.BiFunction
 import kr.ohyung.core.mvi.ViewStateReducer
-import kr.ohyung.mvi.splash.mvi.SplashResult
+import kr.ohyung.mvi.splash.mvi.SplashViewResult
 import kr.ohyung.mvi.splash.mvi.SplashViewState
 import javax.inject.Inject
 
-class SplashViewStateReducer @Inject constructor(): ViewStateReducer<SplashViewState, SplashResult> {
-    override fun reduce() = BiFunction { oldState: SplashViewState, result: SplashResult ->
+class SplashViewStateReducer @Inject constructor(): ViewStateReducer<SplashViewState, SplashViewResult> {
+    override fun reduce() = BiFunction { oldState: SplashViewState, result: SplashViewResult ->
         when(result) {
-            SplashResult.Loading -> oldState.copy(isLoading = true)
-            SplashResult.Success -> oldState.copy(isLoading = false, error = null)
-            is SplashResult.Error -> oldState.copy(isLoading = false, error = result.throwable)
+            SplashViewResult.Loading -> oldState.copy(isLoading = true)
+            SplashViewResult.Success -> oldState.copy(isLoading = false, error = null)
+            is SplashViewResult.Error -> oldState.copy(isLoading = false, error = result.throwable)
         }
     }
 }

@@ -20,5 +20,5 @@ abstract class BaseViewModel<I: ViewIntent, A: ViewAction, S: ViewState, R: View
     }
 
     fun Disposable.addDisposable() = compositeDisposable.add(this)
-    fun processIntents(intents: Observable<I>) = stateMachine.subscribeIntents(intents)
+    fun subscribeIntents(intents: Observable<I>) = stateMachine.subscribeIntents(intents)
 }

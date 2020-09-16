@@ -6,7 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
 import kr.ohyung.core.mvi.ViewStateReducer
 import kr.ohyung.mvi.splash.SplashViewStateReducer
-import kr.ohyung.mvi.splash.mvi.SplashResult
+import kr.ohyung.mvi.splash.mvi.SplashViewResult
 import kr.ohyung.mvi.splash.mvi.SplashViewState
 import javax.inject.Singleton
 
@@ -16,5 +16,5 @@ object ReducerModule {
 
     @Provides
     @Singleton
-    fun provideSplashStateReducer(): ViewStateReducer<SplashViewState, SplashResult> = SplashViewStateReducer()
+    fun provideSplashStateReducer(): ViewStateReducer<SplashViewState, SplashViewResult> = SplashViewStateReducer()
 }

@@ -5,6 +5,6 @@ package kr.ohyung.mvi.splash.mvi
 
 import kr.ohyung.core.mvi.ViewIntent
 
-sealed class SplashIntent : ViewIntent {
-    data class InitialIntent(val duration: Long) : SplashIntent()
+sealed class SplashViewIntent : ViewIntent {
+    data class InitialIntent(val duration: Long) : SplashViewIntent()
 }
