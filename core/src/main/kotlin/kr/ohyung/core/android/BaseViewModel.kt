@@ -8,12 +8,9 @@ import io.reactivex.subjects.PublishSubject
 import kr.ohyung.core.mvi.*
 
 abstract class BaseViewModel<I: ViewIntent, A: ViewAction,
-        S: ViewState, R: ViewResult> : ViewModel(), StateStore<S, R>, IntentProcessor<I, A> {
+        S: ViewState, R: ViewResult> : ViewModel(), StateStore<S, R> {
 
     private val compositeDisposable = CompositeDisposable()
-    override val intentsSubject = PublishSubject.create<I>()
-
-    override fun subscribeIntents(intents: Observable<I>) = intents.subscribe(intentsSubject)
 
     override fun onCleared() {
         compositeDisposable.dispose()
