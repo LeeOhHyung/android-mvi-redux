@@ -75,9 +75,9 @@ class GetPhotoSummariesTest : UseCaseTest() {
         val result = getPhotoSummaries.execute(params = params).blockingGet()
         assertEquals(params.perPage, result.size)
         assertEquals(listOf(mockPhotoSummary, normalPhotoSummary), result)
-        assertTrue {
-            result.any { it.username == "이오형" }
-        }
+
+        val existedUserName = result.any { it.username == "이오형" }
+        assertTrue(existedUserName)
     }
 
     @Test
