@@ -11,5 +11,7 @@ data class PhotoSummary(
     val height: Int,
     val color: String,
     val description: String,
-    val thumbnail: String
+    val thumbnail: String,
+    val likes: Int,
+    val username: String
 ) : Entity
