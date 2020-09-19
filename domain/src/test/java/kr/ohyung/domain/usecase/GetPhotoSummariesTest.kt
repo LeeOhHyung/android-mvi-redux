@@ -1,16 +1,17 @@
 /*
  * Created by Lee Oh Hyung on 2020/09/19.
  */
-package kr.ohyung.domain
+package kr.ohyung.domain.usecase
 
 import com.nhaarman.mockitokotlin2.any
 import io.reactivex.Single
+import kr.ohyung.domain.UseCaseTest
 import kr.ohyung.domain.entity.OrderBy
 import kr.ohyung.domain.entity.PhotoSummary
 import kr.ohyung.domain.exception.NoParamsException
+import kr.ohyung.domain.executor.ExecutorProvider
+import kr.ohyung.domain.mock.TestExecutors
 import kr.ohyung.domain.repository.PhotoRepository
-import kr.ohyung.domain.usecase.GetPhotoSummaries
-import kr.ohyung.domain.usecase.PhotoParams
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.ExpectedException
@@ -31,16 +32,17 @@ class GetPhotoSummariesTest : UseCaseTest() {
     @get:Rule
     val expectException: ExpectedException = ExpectedException.none()
 
-    private lateinit var getPhotoSummaries: GetPhotoSummaries
-    private val testExecutors = TestExecutors()
+    private lateinit var testExecutors: ExecutorProvider
     private lateinit var mockPhotoSummary: PhotoSummary
     private lateinit var normalPhotoSummary: PhotoSummary
+    private lateinit var getPhotoSummaries: GetPhotoSummaries
 
     @Mock
     lateinit var photoRepository: PhotoRepository
 
     override fun setup() {
         super.setup()
+        testExecutors = TestExecutors()
         mockPhotoSummary = mock(PhotoSummary::class.java)
         normalPhotoSummary = PhotoSummary(
             id = "",
