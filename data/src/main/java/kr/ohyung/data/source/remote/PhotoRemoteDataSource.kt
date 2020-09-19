@@ -6,7 +6,8 @@ package kr.ohyung.data.source.remote
 import io.reactivex.Single
 import kr.ohyung.data.model.PhotoSummaryDataModel
 import kr.ohyung.data.source.DataSource
+import kr.ohyung.domain.entity.OrderBy
 
 interface PhotoRemoteDataSource : DataSource {
-    fun getPhoto(): Single<List<PhotoSummaryDataModel>>
+    fun getPhotos(page: Int, perPage: Int, orderBy: OrderBy): Single<List<PhotoSummaryDataModel>>
 }
