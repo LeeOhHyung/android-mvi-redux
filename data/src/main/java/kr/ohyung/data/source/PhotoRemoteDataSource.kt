@@ -4,8 +4,8 @@
 package kr.ohyung.data.source
 
 import io.reactivex.Single
-import kr.ohyung.data.model.PhotoSummaryEntity
+import kr.ohyung.data.model.PhotoSummaryDataModel
 
 interface PhotoRemoteDataSource : DataSource {
-    fun getPhoto(): Single<List<PhotoSummaryEntity>>
+    fun getPhoto(): Single<List<PhotoSummaryDataModel>>
 }

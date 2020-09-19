@@ -5,7 +5,7 @@ package kr.ohyung.data.model
 
 import kr.ohyung.domain.entity.PhotoSummary as Entity
 
-data class PhotoSummaryEntity(
+data class PhotoSummaryDataModel(
     val id: String,
     val width: Int,
     val height: Int,
@@ -16,7 +16,7 @@ data class PhotoSummaryEntity(
     val username: String
 ) : DataModel
 
-fun PhotoSummaryEntity.toEntity() =
+fun PhotoSummaryDataModel.toEntity() =
     Entity(
         id = id,
         width = width,
@@ -28,4 +28,4 @@ fun PhotoSummaryEntity.toEntity() =
         username = username
     )
 
-fun List<PhotoSummaryEntity>.toEntity() = map { it.toEntity() }
+fun List<PhotoSummaryDataModel>.toEntity() = map { it.toEntity() }
