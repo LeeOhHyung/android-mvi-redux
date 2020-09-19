@@ -3,4 +3,4 @@
  */
 package kr.ohyung.domain
 
-interface DomainEntity
+interface Entity

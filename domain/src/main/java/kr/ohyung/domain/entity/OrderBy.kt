@@ -3,9 +3,9 @@
  */
 package kr.ohyung.domain.entity
 
-import kr.ohyung.domain.DomainEntity
+import kr.ohyung.domain.Entity
 
-enum class OrderBy(val value: String) : DomainEntity {
+enum class OrderBy(val value: String) : Entity {
     LATEST("latest"),
     OLDEST("oldest"),
     POPULAR("popular")

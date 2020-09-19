@@ -3,7 +3,7 @@
  */
 package kr.ohyung.domain.entity
 
-import kr.ohyung.domain.DomainEntity
+import kr.ohyung.domain.Entity
 
 data class PhotoSummary(
     val id: String,
@@ -14,4 +14,4 @@ data class PhotoSummary(
     val thumbnail: String,
     val likes: Int,
     val username: String
-) : DomainEntity
+) : Entity
