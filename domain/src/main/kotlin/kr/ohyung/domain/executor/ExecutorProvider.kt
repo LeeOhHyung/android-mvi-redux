@@ -5,7 +5,7 @@ package kr.ohyung.domain.executor
 
 import io.reactivex.Scheduler
 
-interface BaseExecutorProvider {
+interface ExecutorProvider {
     fun io(): Scheduler
     fun main(): Scheduler
     fun computation(): Scheduler

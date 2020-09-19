@@ -11,10 +11,10 @@ abstract class CompletableUseCase<in Params>(
     override val postExecutionThread: Scheduler
 ) : BaseUseCase<Params>() {
 
-    protected abstract fun buildUseCaseCompletable(): Completable
+    protected abstract fun buildUseCaseCompletable(params: Params): Completable
 
-    override fun execute(params: Params): Completable =
-        buildUseCaseCompletable()
+    override fun execute(params: Params?): Completable =
+        buildUseCaseCompletable(params = requireParams(params))
             .subscribeOn(executorThread)
             .observeOn(postExecutionThread)
 }
