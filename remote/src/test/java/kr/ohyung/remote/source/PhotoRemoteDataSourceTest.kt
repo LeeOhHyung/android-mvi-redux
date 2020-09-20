@@ -14,7 +14,7 @@ import org.junit.Before
 import org.junit.Test
 import kotlin.test.assertTrue
 
-class PhotoRemoteDataSourceTest : DataSourceTest(){
+internal class PhotoRemoteDataSourceTest : DataSourceTest(){
 
     private lateinit var mockWebServer: MockWebServer
     private lateinit var photosResponseMapper: PhotosResponseMapper

@@ -8,7 +8,7 @@ import io.reactivex.schedulers.Schedulers
 import org.junit.Before
 import org.mockito.MockitoAnnotations
 
-abstract class DataSourceTest {
+internal abstract class DataSourceTest {
 
     @Before
     open fun setup() {

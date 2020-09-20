@@ -9,7 +9,7 @@ import org.junit.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
 
-class PhotosResponseMapperTest {
+internal class PhotosResponseMapperTest {
 
     private lateinit var photosResponseMapper: PhotosResponseMapper
 

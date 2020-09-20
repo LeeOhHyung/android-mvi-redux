@@ -6,7 +6,7 @@ import kr.ohyung.remote.response.PhotosResponse
 import kr.ohyung.remote.response.UrlsResponse
 import kr.ohyung.remote.response.UserResponse
 
-object MockData {
+internal object MockData {
 
     val photoSummaryDataModel =
         PhotoSummaryDataModel(
