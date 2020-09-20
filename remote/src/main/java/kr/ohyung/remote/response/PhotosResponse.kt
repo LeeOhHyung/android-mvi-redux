@@ -3,15 +3,30 @@
  */
 package kr.ohyung.remote.response
 
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import kr.ohyung.remote.Response
 
+@JsonClass(generateAdapter = true)
 data class PhotosResponse(
+    @field:Json(name = "id")
     val id: String,
+    @field:Json(name = "width")
     val width: Int,
+    @field:Json(name = "height")
     val height: Int,
+    @field:Json(name = "color")
     val color: String,
-    val description: String,
-    val thumbnail: String,
+    @field:Json(name = "description")
+    val description: String?,
+    @field:Json(name = "alt_description")
+    val altDescription: String?,
+    @field:Json(name = "urls")
+    val urls: UrlsResponse,
+    @field: Json(name = "links")
+    val links: PhotoLinksResponse,
+    @field:Json(name = "likes")
     val likes: Int,
-    val username: String
+    @field:Json(name = "user")
+    val user: UserResponse
 ) : Response
