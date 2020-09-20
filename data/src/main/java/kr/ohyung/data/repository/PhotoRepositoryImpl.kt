@@ -14,6 +14,6 @@ class PhotoRepositoryImpl(
 ) : PhotoRepository {
 
     override fun getPhotos(page: Int, perPage: Int, orderBy: OrderBy) =
-        photoRemoteDataSource.getPhotos(page = page, perPage = perPage, orderBy = orderBy)
+        photoRemoteDataSource.getPhotos(page = page, perPage = perPage, orderBy = orderBy.value)
             .map { photoEntityMapper.toEntities(it) }
 }

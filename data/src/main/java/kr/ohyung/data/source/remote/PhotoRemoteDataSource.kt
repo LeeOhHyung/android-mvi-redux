@@ -9,5 +9,5 @@ import kr.ohyung.data.source.DataSource
 import kr.ohyung.domain.entity.OrderBy
 
 interface PhotoRemoteDataSource : DataSource {
-    fun getPhotos(page: Int, perPage: Int, orderBy: OrderBy): Single<List<PhotoSummaryDataModel>>
+    fun getPhotos(page: Int, perPage: Int, orderBy: String): Single<List<PhotoSummaryDataModel>>
 }
