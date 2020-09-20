@@ -20,7 +20,7 @@ data class PhotosResponse(
     @field:Json(name = "description")
     val description: String?,
     @field:Json(name = "alt_description")
-    val altDescription: String?,
+    val alt_description: String?,
     @field:Json(name = "urls")
     val urls: UrlsResponse,
     @field: Json(name = "links")

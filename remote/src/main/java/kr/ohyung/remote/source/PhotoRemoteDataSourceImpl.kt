@@ -15,7 +15,7 @@ class PhotoRemoteDataSourceImpl(
     private val photosApi: PhotosApi,
     private val photosResponseMapper: PhotosResponseMapper
 ) : PhotoRemoteDataSource {
-    override fun getPhotos(page: Int, perPage: Int, orderBy: String): Single<List<PhotoSummaryDataModel>> =
+    override fun getPhotos(page: Int?, perPage: Int?, orderBy: String?): Single<List<PhotoSummaryDataModel>> =
         photosApi.getPhotos(page, perPage, orderBy)
             .map { response -> photosResponseMapper.toDataModels(response) }
             .onErrorResumeNext { throwable ->

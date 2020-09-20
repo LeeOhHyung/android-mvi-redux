@@ -16,5 +16,5 @@ data class PhotoLinksResponse(
     @field:Json(name = "download")
     val download: String?,
     @field:Json(name = "download_location")
-    val downloadLocation: String?
+    val download_location: String?
 ) : Response

@@ -14,7 +14,7 @@ data class UserResponse(
     @field:Json(name = "username")
     val username: String,
     @field:Json(name = "portfolio_url")
-    val portfolioUrl: String?,
+    val portfolio_url: String?,
     @field:Json(name = "bio")
     val bio: String?,
     @field:Json(name = "location")
@@ -22,17 +22,17 @@ data class UserResponse(
     @field:Json(name = "links")
     val links: UserLinksResponse?,
     @field:Json(name = "profile_image")
-    val profileImage: UserProfileImageResponse?,
+    val profile_image: UserProfileImageResponse,
     @field:Json(name = "instagram_username")
-    val instagramUsername: String?,
+    val instagram_username: String?,
     @field:Json(name = "total_collections")
-    val totalCollections: Int,
+    val total_collections: Int,
     @field:Json(name = "total_likes")
-    val totalLikes: Int,
+    val total_likes: Int,
     @field:Json(name = "total_photos")
-    val totalPhotos: Int,
+    val total_photos: Int,
     @field:Json(name = "accepted_tos")
-    val acceptedTos: Boolean
+    val accepted_tos: Boolean
 ) : Response {
 
     @JsonClass(generateAdapter = true)

@@ -13,8 +13,8 @@ interface PhotosApi : Api {
 
     @GET("photos")
     fun getPhotos(
-        @Query("page") page: Int,
-        @Query("per_page") perPage: Int,
-        @Query("order_by") orderBy: String
+        @Query("page") page: Int?,
+        @Query("per_page") perPage: Int?,
+        @Query("order_by") orderBy: String?
     ): Single<List<PhotosResponse>>
 }
