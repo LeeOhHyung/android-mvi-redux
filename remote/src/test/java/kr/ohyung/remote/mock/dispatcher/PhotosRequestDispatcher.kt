@@ -12,8 +12,8 @@ import java.net.HttpURLConnection
 internal class PhotosRequestDispatcher : Dispatcher() {
 
     override fun dispatch(request: RecordedRequest): MockResponse {
-        return when(request.path) {
-            "/photos" ->
+        return when {
+            (request.path?.startsWith("/photos") == true) ->
                 MockResponse()
                     .setResponseCode(HttpURLConnection.HTTP_OK)
                     .setBody(getJsonFromFile("response/get_photos_response.json"))

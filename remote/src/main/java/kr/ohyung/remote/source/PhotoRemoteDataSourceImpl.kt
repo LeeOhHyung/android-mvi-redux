@@ -19,9 +19,16 @@ class PhotoRemoteDataSourceImpl(
         photosApi.getPhotos(page, perPage, orderBy)
             .map { response -> photosResponseMapper.toDataModels(response) }
             .onErrorResumeNext { throwable ->
-                when(throwable) {
-                    is HttpException -> Single.error(NetworkException.BadRequestException(throwable.message.toString()))
-                    else -> Single.error(throwable)
+                if(throwable is HttpException) {
+                    val errorMessage = throwable.message.toString()
+                    when(throwable.code()) {
+                        400 -> Single.error(NetworkException.BadRequestException(errorMessage))
+                        401 -> Single.error(NetworkException.UnauthorizedException(errorMessage))
+                        404 -> Single.error(NetworkException.NotFoundException(errorMessage))
+                        else -> Single.error(NetworkException.UnknownException(errorMessage))
+                    }
+                } else {
+                    Single.error(throwable)
                 }
             }
 }

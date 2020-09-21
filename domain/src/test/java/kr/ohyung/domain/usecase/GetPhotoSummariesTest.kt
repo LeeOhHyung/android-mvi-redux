@@ -61,9 +61,8 @@ class GetPhotoSummariesTest : UseCaseTest() {
         )
     }
 
-    @Test
+    @Test(expected = NoParamsException::class)
     fun `params가 null일때 에러 발생 여부 테스트`() {
-        expectException.expect(NoParamsException::class.java)
         getPhotoSummaries.execute(params = null)
     }
 

@@ -11,4 +11,5 @@ sealed class NetworkException(message: String) : Exception(message) {
     data class RequestTimeoutException(override val message: String) : NetworkException(message) // 408
     data class TooManyRequestsException(override val message: String) : NetworkException(message) // 429
     data class InternalServerException(override val message: String) : NetworkException(message) // 500
+    data class UnknownException(override val message: String) : NetworkException(message) // ETC
 }
