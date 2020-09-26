@@ -15,6 +15,12 @@ interface SearchHistoryDao : RoomDao<SearchHistoryRoomObject> {
     @Query("SELECT * FROM search_history")
     override fun getAll(): Single<List<SearchHistoryRoomObject>>
 
+    @Query("SELECT COUNT(*) FROM search_history")
+    override fun getCount(): Single<Int>
+
     @Query("DELETE FROM search_history")
     override fun drop(): Completable
+
+    @Query("SELECT EXISTS(SELECT * FROM search_history WHERE keyword = :keyword)")
+    fun hasItem(keyword: String): Single<Boolean>
 }

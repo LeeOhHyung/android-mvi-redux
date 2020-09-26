@@ -26,5 +26,7 @@ interface RoomDao<T: RoomObject> {
 
     fun getAll(): Single<List<T>>
 
+    fun getCount(): Single<Int>
+
     fun drop(): Completable
 }

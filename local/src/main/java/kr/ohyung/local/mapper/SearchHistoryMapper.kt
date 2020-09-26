@@ -4,6 +4,7 @@
 package kr.ohyung.local.mapper
 
 import kr.ohyung.data.model.SearchHistoryDataModel
+import kr.ohyung.local.RoomObjectMapper
 import kr.ohyung.local.model.SearchHistoryRoomObject
 
 class SearchHistoryMapper : RoomObjectMapper<SearchHistoryRoomObject, SearchHistoryDataModel> {

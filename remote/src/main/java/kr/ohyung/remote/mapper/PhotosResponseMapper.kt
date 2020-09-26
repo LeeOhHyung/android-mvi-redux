@@ -4,6 +4,7 @@
 package kr.ohyung.remote.mapper
 
 import kr.ohyung.data.model.PhotoSummaryDataModel
+import kr.ohyung.remote.ResponseMapper
 import kr.ohyung.remote.response.PhotosResponse
 
 class PhotosResponseMapper : ResponseMapper<PhotosResponse, PhotoSummaryDataModel> {

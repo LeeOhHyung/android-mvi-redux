@@ -1,10 +1,9 @@
 /*
  * Created by Lee Oh Hyung on 2020/09/19.
  */
-package kr.ohyung.remote.mapper
+package kr.ohyung.remote
 
 import kr.ohyung.data.model.DataModel
-import kr.ohyung.remote.Response
 
 interface ResponseMapper<R: Response, D: DataModel> {
     fun toDataModel(response: R): D
