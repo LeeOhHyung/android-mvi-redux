@@ -13,6 +13,6 @@ data class BookmarkRoomObject(
     val id: String, // same as photosResponse id field
     val description: String,
     val thumbnail: String,
-    val likes: String,
+    val likes: Int,
     val username: String
 ) : RoomObject

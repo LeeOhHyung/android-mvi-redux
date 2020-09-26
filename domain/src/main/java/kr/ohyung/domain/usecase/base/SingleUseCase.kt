@@ -7,8 +7,8 @@ import io.reactivex.Scheduler
 import io.reactivex.Single
 
 abstract class SingleUseCase<T>(
-    override val executorThread: Scheduler,
-    override val postExecutionThread: Scheduler
+    private val executorThread: Scheduler,
+    private val postExecutionThread: Scheduler
 ) : NoParamsUseCase() {
 
     protected abstract fun buildUseCaseSingle(): Single<T>

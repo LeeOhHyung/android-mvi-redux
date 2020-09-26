@@ -32,13 +32,12 @@ class GetPhotoSummariesTest : UseCaseTest() {
     @get:Rule
     val expectException: ExpectedException = ExpectedException.none()
 
-    private lateinit var testExecutors: ExecutorProvider
     private lateinit var mockPhotoSummary: PhotoSummary
     private lateinit var normalPhotoSummary: PhotoSummary
     private lateinit var getPhotoSummaries: GetPhotoSummaries
 
     @Mock
-    lateinit var photoRepository: PhotoRepository
+    private lateinit var photoRepository: PhotoRepository
 
     override fun setup() {
         super.setup()

@@ -7,6 +7,6 @@ data class BookmarksDataModel(
     val id: String,
     val description: String,
     val thumbnail: String,
-    val likes: String,
+    val likes: Int,
     val username: String
 ) : DataModel

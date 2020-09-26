@@ -7,8 +7,8 @@ import io.reactivex.Completable
 import io.reactivex.Scheduler
 
 abstract class CompletableUseCase(
-    override val executorThread: Scheduler,
-    override val postExecutionThread: Scheduler
+    private val executorThread: Scheduler,
+    private val postExecutionThread: Scheduler
 ) : NoParamsUseCase() {
 
     protected abstract fun buildUseCaseCompletable(): Completable
