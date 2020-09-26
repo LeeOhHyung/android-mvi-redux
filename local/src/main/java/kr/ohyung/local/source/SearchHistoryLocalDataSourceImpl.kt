@@ -12,7 +12,6 @@ class SearchHistoryLocalDataSourceImpl(
     private val searchHistoryDao: SearchHistoryDao,
     private val searchHistoryMapper: SearchHistoryMapper
 ) : SearchHistoryLocalDataSource {
-
     override fun insert(dataModel: SearchHistoryDataModel) = searchHistoryDao.insert(searchHistoryMapper.toRoomObject(dataModel))
     override fun insert(dataModels: List<SearchHistoryDataModel>) = searchHistoryDao.insert(searchHistoryMapper.toRoomObjects(dataModels))
     override fun update(dataModel: SearchHistoryDataModel) = searchHistoryDao.update(searchHistoryMapper.toRoomObject(dataModel))
@@ -20,4 +19,5 @@ class SearchHistoryLocalDataSourceImpl(
     override fun getAll() = searchHistoryDao.getAll().map { searchHistoryMapper.toDataModels(it) }
     override fun getCount() = searchHistoryDao.getCount()
     override fun drop() = searchHistoryDao.drop()
+    override fun hasItem(keyword: String) = searchHistoryDao.hasItem(keyword = keyword)
 }
