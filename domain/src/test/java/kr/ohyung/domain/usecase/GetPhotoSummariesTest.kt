@@ -26,12 +26,6 @@ import kotlin.test.assertTrue
 
 class GetPhotoSummariesTest : UseCaseTest() {
 
-    @get:Rule
-    val mockitoRule: MockitoRule = MockitoJUnit.rule()
-
-    @get:Rule
-    val expectException: ExpectedException = ExpectedException.none()
-
     private lateinit var mockPhotoSummary: PhotoSummary
     private lateinit var normalPhotoSummary: PhotoSummary
     private lateinit var getPhotoSummaries: GetPhotoSummaries
@@ -61,7 +55,7 @@ class GetPhotoSummariesTest : UseCaseTest() {
     }
 
     @Test(expected = NoParamsException::class)
-    fun `params가 null일때 에러 발생 여부 테스트`() {
+    fun `params 가 null 일때 에러 발생 여부 테스트`() {
         getPhotoSummaries.execute(params = null)
     }
 

@@ -19,9 +19,6 @@ import org.mockito.junit.MockitoRule
 
 class AddBookmarkTest : UseCaseTest() {
 
-    @get:Rule
-    val mockitoRule: MockitoRule = MockitoJUnit.rule()
-
     private lateinit var bookmark: Bookmark
     private lateinit var addBookmark: AddBookmark
 
@@ -66,5 +63,4 @@ class AddBookmarkTest : UseCaseTest() {
         Mockito.`when`(bookmarkRepository.insert(bookmark)).thenReturn(Completable.error(testEntityNotFoundException))
         addBookmark.execute(params = bookmark).test().assertError(testEntityNotFoundException)
     }
-
 }

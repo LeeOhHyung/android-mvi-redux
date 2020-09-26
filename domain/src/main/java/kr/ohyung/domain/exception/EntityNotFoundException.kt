@@ -3,4 +3,4 @@
  */
 package kr.ohyung.domain.exception
 
-class EntityNotFoundException(message: String) : Exception(message)
+class EntityNotFoundException(message: String = "Entity Not Found in Database") : Exception(message)

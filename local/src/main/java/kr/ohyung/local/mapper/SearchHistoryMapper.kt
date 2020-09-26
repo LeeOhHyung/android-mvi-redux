@@ -15,4 +15,11 @@ class SearchHistoryMapper : RoomObjectMapper<SearchHistoryRoomObject, SearchHist
             keyword = roomObject.keyword,
             timestamp = roomObject.timestamp,
         )
+
+    override fun toRoomObject(dataModel: SearchHistoryDataModel) =
+        SearchHistoryRoomObject(
+            id = dataModel.id,
+            keyword = dataModel.keyword,
+            timestamp = dataModel.timestamp
+        )
 }
