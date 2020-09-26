@@ -17,4 +17,13 @@ class BookmarksMapper : RoomObjectMapper<BookmarksRoomObject, BookmarksDataModel
             likes = roomObject.likes,
             username = roomObject.username
         )
+
+    override fun toRoomObject(dataModel: BookmarksDataModel) =
+        BookmarksRoomObject(
+            id = dataModel.id,
+            description = dataModel.description,
+            thumbnail = dataModel.thumbnail,
+            likes = dataModel.likes,
+            username = dataModel.username
+        )
 }

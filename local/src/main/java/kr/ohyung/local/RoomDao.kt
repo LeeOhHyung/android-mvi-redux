@@ -23,10 +23,7 @@ interface RoomDao<T: RoomObject> {
 
     @Delete
     fun delete(entity: T): Completable
-
     fun getAll(): Single<List<T>>
-
     fun getCount(): Single<Int>
-
     fun drop(): Completable
 }
