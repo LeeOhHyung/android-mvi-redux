@@ -4,5 +4,5 @@
 package kr.ohyung.data.exception
 
 sealed class DatabaseException(message: String) : Exception(message) {
-    data class EntityNotFoundException(override val message: String) : DatabaseException(message) // EmptyResultSetException
+    data class EntityResultException(override val message: String) : DatabaseException(message) // EmptyResultSetException
 }
