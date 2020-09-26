@@ -30,6 +30,9 @@ class SearchHistoryLocalDataSourceImpl(
     override fun delete(dataModel: SearchHistoryDataModel): Completable =
         searchHistoryDao.delete(searchHistoryMapper.toRoomObject(dataModel)).compose()
 
+    override fun delete(keyword: String): Completable =
+        searchHistoryDao.delete(keyword = keyword).compose()
+
     override fun getAll(): Single<List<SearchHistoryDataModel>> =
         searchHistoryDao.getAll()
             .map { searchHistoryMapper.toDataModels(it) }

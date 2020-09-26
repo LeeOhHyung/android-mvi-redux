@@ -30,6 +30,9 @@ class SearchHistoryRepositoryImpl(
     override fun delete(entity: SearchHistory): Completable =
         searchHistoryLocalDataSource.delete(mapper.toDataModel(entity)).compose()
 
+    override fun delete(keyword: String): Completable =
+        searchHistoryLocalDataSource.delete(keyword = keyword).compose()
+
     override fun getAll(): Single<List<SearchHistory>> =
         searchHistoryLocalDataSource.getAll()
             .map { mapper.toEntities(it) }

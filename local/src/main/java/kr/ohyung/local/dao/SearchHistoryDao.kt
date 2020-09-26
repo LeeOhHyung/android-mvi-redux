@@ -23,4 +23,7 @@ interface SearchHistoryDao : RoomDao<SearchHistoryRoomObject> {
 
     @Query("SELECT EXISTS(SELECT * FROM search_history WHERE keyword = :keyword)")
     fun hasItem(keyword: String): Single<Boolean>
+
+    @Query("DELETE FROM search_history WHERE keyword = :keyword")
+    fun delete(keyword: String): Completable
 }

@@ -14,6 +14,7 @@ interface SearchHistoryRepository : Repository {
     fun insert(entities: List<SearchHistory>): Completable
     fun update(entity: SearchHistory): Completable
     fun delete(entity: SearchHistory): Completable
+    fun delete(keyword: String): Completable
     fun getAll(): Single<List<SearchHistory>>
     fun getCount(): Single<Int>
     fun drop(): Completable

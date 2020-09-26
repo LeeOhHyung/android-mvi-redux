@@ -3,9 +3,11 @@
  */
 package kr.ohyung.data.source.local
 
+import io.reactivex.Completable
 import io.reactivex.Single
 import kr.ohyung.data.model.SearchHistoryDataModel
 
 interface SearchHistoryLocalDataSource : LocalDataSource<SearchHistoryDataModel> {
     fun hasItem(keyword: String): Single<Boolean>
+    fun delete(keyword: String): Completable
 }
