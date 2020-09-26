@@ -1,7 +1,7 @@
 /*
  * Created by Lee Oh Hyung on 2020/09/26.
  */
-package kr.ohyung.domain.usecase
+package kr.ohyung.domain.usecase.bookmark
 
 import io.reactivex.Scheduler
 import io.reactivex.Single
@@ -14,6 +14,5 @@ class GetAllBookmarks(
     executorThread: Scheduler,
     postExecutionThread: Scheduler
 ) : SingleUseCase<List<Bookmark>>(executorThread, postExecutionThread) {
-
     override fun buildUseCaseSingle(): Single<List<Bookmark>> = bookmarkRepository.getAll()
 }
