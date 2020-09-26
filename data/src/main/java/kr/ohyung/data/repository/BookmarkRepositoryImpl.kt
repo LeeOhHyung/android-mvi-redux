@@ -30,6 +30,9 @@ class BookmarkRepositoryImpl(
     override fun delete(entity: Bookmark): Completable =
         bookmarkLocalDataSource.delete(mapper.toDataModel(entity = entity)).compose()
 
+    override fun delete(id: String): Completable =
+        bookmarkLocalDataSource.delete(id = id).compose()
+
     override fun getAll(): Single<List<Bookmark>> =
         bookmarkLocalDataSource.getAll()
             .map { mapper.toEntities(dataModels = it) }

@@ -3,4 +3,9 @@
  */
 package kr.ohyung.domain
 
-interface UseCase
+import io.reactivex.Scheduler
+
+interface UseCase {
+    val executorThread: Scheduler
+    val postExecutionThread: Scheduler
+}

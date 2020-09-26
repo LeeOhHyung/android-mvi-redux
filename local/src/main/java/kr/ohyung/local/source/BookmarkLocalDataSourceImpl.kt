@@ -30,6 +30,9 @@ class BookmarkLocalDataSourceImpl(
     override fun delete(dataModel: BookmarksDataModel): Completable =
         bookmarkDao.delete(bookmarkMapper.toRoomObject(dataModel)).compose()
 
+    override fun delete(id: String): Completable =
+        bookmarkDao.delete(id = id).compose()
+
     override fun getAll(): Single<List<BookmarksDataModel>> =
         bookmarkDao.getAll()
             .map { bookmarkMapper.toDataModels(it) }

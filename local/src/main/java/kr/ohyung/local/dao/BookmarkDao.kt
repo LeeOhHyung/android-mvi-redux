@@ -24,4 +24,7 @@ interface BookmarkDao : RoomDao<BookmarkRoomObject> {
 
     @Query("SELECT EXISTS(SELECT * FROM bookmarks WHERE id = :id)")
     fun hasItem(id: String): Single<Boolean>
+
+    @Query("DELETE FROM bookmarks WHERE id = :id")
+    fun delete(id: String): Completable
 }

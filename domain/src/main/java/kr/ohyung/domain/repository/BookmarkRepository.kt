@@ -14,6 +14,7 @@ interface BookmarkRepository : Repository {
     fun insert(entities: List<Bookmark>): Completable
     fun update(entity: Bookmark): Completable
     fun delete(entity: Bookmark): Completable
+    fun delete(id: String): Completable
     fun getAll(): Single<List<Bookmark>>
     fun getCount(): Single<Int>
     fun drop(): Completable

@@ -1,20 +1,20 @@
 /*
- * Created by Lee Oh Hyung on 2020/09/19.
+ * Created by Lee Oh Hyung on 2020/09/26.
  */
 package kr.ohyung.domain.usecase.base
 
 import io.reactivex.Scheduler
 import io.reactivex.Single
 
-abstract class SingleUseCase<T, in Params>(
+abstract class SingleUseCase<T>(
     override val executorThread: Scheduler,
     override val postExecutionThread: Scheduler
-) : BaseUseCase<Params>() {
+) : NoParamsUseCase() {
 
-    protected abstract fun buildUseCaseSingle(params: Params): Single<T>
+    protected abstract fun buildUseCaseSingle(): Single<T>
 
-    override fun execute(params: Params?): Single<T> =
-        buildUseCaseSingle(params = requireParams(params))
+    override fun execute(): Single<T> =
+        buildUseCaseSingle()
             .subscribeOn(executorThread)
             .observeOn(postExecutionThread)
 }

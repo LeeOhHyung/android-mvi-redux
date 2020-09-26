@@ -7,7 +7,7 @@ import io.reactivex.Scheduler
 import kr.ohyung.domain.entity.OrderBy
 import kr.ohyung.domain.entity.PhotoSummary
 import kr.ohyung.domain.repository.PhotoRepository
-import kr.ohyung.domain.usecase.base.SingleUseCase
+import kr.ohyung.domain.usecase.base.ParameterizedSingleUseCase
 
 data class PhotoParams(
     val page: Int = 1, // default = 1
@@ -19,7 +19,7 @@ class GetPhotoSummaries(
     private val photoRepository: PhotoRepository,
     executorThread: Scheduler,
     postExecutionThread: Scheduler
-) : SingleUseCase<List<PhotoSummary>, PhotoParams>(executorThread, postExecutionThread) {
+) : ParameterizedSingleUseCase<List<PhotoSummary>, PhotoParams>(executorThread, postExecutionThread) {
     override fun buildUseCaseSingle(params: PhotoParams) =
         photoRepository.getPhotos(
             page = params.page,
