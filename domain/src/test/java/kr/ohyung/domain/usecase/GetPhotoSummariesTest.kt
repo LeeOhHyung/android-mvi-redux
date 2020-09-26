@@ -101,24 +101,14 @@ class GetPhotoSummariesTest : UseCaseTest() {
     @Test
     fun `인기순으로 가져오기 테스트`() {
         val params = PhotoParams(orderBy = OrderBy.POPULAR)
+        val copiedList = List(10) { integer -> normalPhotoSummary.copy(likes = integer * 10) }
 
         `when`(photoRepository.getPhotos(page = params.page, perPage = params.perPage, params.orderBy))
-            .thenReturn(Single.just(listOf( // size = 10
-                normalPhotoSummary.copy(likes = 10),
-                normalPhotoSummary.copy(likes = 20),
-                normalPhotoSummary.copy(likes = 34),
-                normalPhotoSummary.copy(likes = 80),
-                normalPhotoSummary.copy(likes = 110),
-                normalPhotoSummary.copy(likes = 230),
-                normalPhotoSummary.copy(likes = 96),
-                normalPhotoSummary.copy(likes = 12304),
-                normalPhotoSummary.copy(likes = 111),
-                normalPhotoSummary.copy(likes = 15),
-            )))
+            .thenReturn(Single.just(copiedList))
 
         val result = getPhotoSummaries.execute(params = params).blockingGet()
         assertEquals(params.perPage, result.size)
-        assertEquals(10, result.minOf { it.likes })
-        assertEquals(12304, result.maxOf { it.likes })
+        assertEquals(0, result.minOf { it.likes })
+        assertEquals(90, result.maxOf { it.likes })
     }
 }
