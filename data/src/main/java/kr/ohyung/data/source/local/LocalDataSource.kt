@@ -25,7 +25,7 @@ internal class RoomSingleTransformer<T> : SingleTransformer<T, T> {
     override fun apply(upstream: Single<T>) =
         upstream.onErrorResumeNext {
             if(it is DatabaseException.EntityResultException) {
-                Single.error(EntityNotFoundException(it.message.toString()))
+                Single.error(EntityNotFoundException(it.message))
             } else {
                 Single.error(it)
             }
@@ -36,7 +36,7 @@ internal class RoomCompletableTransformer : CompletableTransformer {
     override fun apply(upstream: Completable) =
         upstream.onErrorResumeNext {
             if(it is DatabaseException.EntityResultException)
-                Completable.error(EntityNotFoundException(it.message.toString()))
+                Completable.error(EntityNotFoundException(it.message))
             else
                 Completable.error(it)
         }

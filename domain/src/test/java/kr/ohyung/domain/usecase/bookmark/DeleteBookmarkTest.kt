@@ -25,7 +25,7 @@ class DeleteBookmarkTest : UseCaseTest() {
         super.setup()
         bookmark = Bookmark(
             id = "HelloWorld",
-            description = "BookmarkRepository 테스트 중",
+            description = "deleteBookmark 테스트 중",
             thumbnail = "N/A",
             likes = 10224,
             username = "이오형"

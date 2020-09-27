@@ -4,18 +4,15 @@
 package kr.ohyung.domain.usecase.bookmark
 
 import io.reactivex.Completable
-import io.reactivex.CompletableObserver
 import kr.ohyung.domain.UseCaseTest
 import kr.ohyung.domain.entity.Bookmark
 import kr.ohyung.domain.exception.EntityNotFoundException
 import kr.ohyung.domain.exception.NoParamsException
 import kr.ohyung.domain.repository.BookmarkRepository
-import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito
-import org.mockito.junit.MockitoJUnit
-import org.mockito.junit.MockitoRule
+
 
 class AddBookmarkTest : UseCaseTest() {
 
@@ -30,7 +27,7 @@ class AddBookmarkTest : UseCaseTest() {
         super.setup()
         bookmark = Bookmark(
             id = "HelloWorld",
-            description = "BookmarkRepository 테스트 중",
+            description = "addBookmark 테스트 중",
             thumbnail = "N/A",
             likes = 10224,
             username = "이오형"
