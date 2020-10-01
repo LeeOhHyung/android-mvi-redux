@@ -1,6 +1,8 @@
 package kr.ohyung.data.mock
 
+import kr.ohyung.data.model.BookmarksDataModel
 import kr.ohyung.data.model.PhotoSummaryDataModel
+import kr.ohyung.domain.entity.Bookmark
 import kr.ohyung.domain.entity.PhotoSummary
 
 object MockData {
@@ -15,10 +17,6 @@ object MockData {
             likes = 10224,
             username = "이오형"
         )
-
-    val photoSummaryDataModels: List<PhotoSummaryDataModel> =
-        listOf(photoSummaryDataModel)
-
     val photoSummaryEntity =
         PhotoSummary(
             id = "Photo",
@@ -30,7 +28,25 @@ object MockData {
             likes = 10224,
             username = "이오형"
         )
+    val bookmarkDataModel =
+        BookmarksDataModel(
+            id = "Bookmark",
+            description = "북마크",
+            thumbnail = "N/A",
+            likes = 10224,
+            username = "이오형"
+        )
+    val bookmarkEntity =
+        Bookmark(
+            id = "Bookmark",
+            description = "북마크",
+            thumbnail = "N/A",
+            likes = 10224,
+            username = "이오형"
+        )
 
-    val photoSummaryEntities =
-        listOf(photoSummaryEntity)
+    val photoSummaryDataModels = listOf(photoSummaryDataModel)
+    val photoSummaryEntities = listOf(photoSummaryEntity)
+    val bookmarkDataModels = listOf(bookmarkDataModel)
+    val bookmarkEntities = listOf(bookmarkEntity)
 }
