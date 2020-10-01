@@ -1,6 +1,6 @@
 package kr.ohyung.data.mock
 
-import kr.ohyung.data.model.BookmarksDataModel
+import kr.ohyung.data.model.BookmarkDataModel
 import kr.ohyung.data.model.PhotoSummaryDataModel
 import kr.ohyung.data.model.SearchHistoryDataModel
 import kr.ohyung.domain.entity.Bookmark
@@ -31,7 +31,7 @@ object MockData {
             username = "이오형"
         )
     val bookmarkDataModel =
-        BookmarksDataModel(
+        BookmarkDataModel(
             id = "Bookmark",
             description = "북마크",
             thumbnail = "N/A",

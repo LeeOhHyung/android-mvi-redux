@@ -3,7 +3,7 @@
  */
 package kr.ohyung.data.model
 
-data class BookmarksDataModel(
+data class BookmarkDataModel(
     val id: String,
     val description: String,
     val thumbnail: String,

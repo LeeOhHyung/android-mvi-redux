@@ -3,14 +3,14 @@
  */
 package kr.ohyung.local.mapper
 
-import kr.ohyung.data.model.BookmarksDataModel
+import kr.ohyung.data.model.BookmarkDataModel
 import kr.ohyung.local.RoomObjectMapper
 import kr.ohyung.local.model.BookmarkRoomObject
 
-class BookmarkMapper : RoomObjectMapper<BookmarkRoomObject, BookmarksDataModel> {
+class BookmarkMapper : RoomObjectMapper<BookmarkRoomObject, BookmarkDataModel> {
 
     override fun toDataModel(roomObject: BookmarkRoomObject) =
-        BookmarksDataModel(
+        BookmarkDataModel(
             id = roomObject.id,
             description = roomObject.description,
             thumbnail = roomObject.thumbnail,
@@ -18,7 +18,7 @@ class BookmarkMapper : RoomObjectMapper<BookmarkRoomObject, BookmarksDataModel> 
             username = roomObject.username
         )
 
-    override fun toRoomObject(dataModel: BookmarksDataModel) =
+    override fun toRoomObject(dataModel: BookmarkDataModel) =
         BookmarkRoomObject(
             id = dataModel.id,
             description = dataModel.description,

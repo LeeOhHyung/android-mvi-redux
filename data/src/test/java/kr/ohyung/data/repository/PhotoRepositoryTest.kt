@@ -39,7 +39,7 @@ class PhotoRepositoryTest : RepositoryTest() {
         val params = PhotoParams()
         val result = photoRepository.getPhotos(page = params.page, perPage =  params.perPage, orderBy = params.orderBy).blockingGet()
         val firstPhotoSummary = result.first()
-        assertEquals("PhotoA", firstPhotoSummary.id)
+        assertEquals("Photo", firstPhotoSummary.id)
         assertEquals(MockData.photoSummaryDataModel.description, firstPhotoSummary.description)
         assertEquals(MockData.photoSummaryDataModel.width, firstPhotoSummary.width)
         assertEquals(MockData.photoSummaryDataModel.height, firstPhotoSummary.height)

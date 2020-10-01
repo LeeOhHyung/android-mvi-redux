@@ -5,9 +5,9 @@ package kr.ohyung.data.source.local
 
 import io.reactivex.Completable
 import io.reactivex.Single
-import kr.ohyung.data.model.BookmarksDataModel
+import kr.ohyung.data.model.BookmarkDataModel
 
-interface BookmarkLocalDataSource : LocalDataSource<BookmarksDataModel> {
+interface BookmarkLocalDataSource : LocalDataSource<BookmarkDataModel> {
     fun hasItem(id: String): Single<Boolean>
     fun delete(id: String): Completable
 }

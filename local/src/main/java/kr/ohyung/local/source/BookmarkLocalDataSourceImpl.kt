@@ -5,7 +5,7 @@ package kr.ohyung.local.source
 
 import io.reactivex.Completable
 import io.reactivex.Single
-import kr.ohyung.data.model.BookmarksDataModel
+import kr.ohyung.data.model.BookmarkDataModel
 import kr.ohyung.data.source.local.BookmarkLocalDataSource
 import kr.ohyung.local.compose
 import kr.ohyung.local.dao.BookmarkDao
@@ -18,22 +18,22 @@ class BookmarkLocalDataSourceImpl(
     override fun hasItem(id: String): Single<Boolean> =
         bookmarkDao.hasItem(id = id).compose()
 
-    override fun insert(dataModel: BookmarksDataModel): Completable =
+    override fun insert(dataModel: BookmarkDataModel): Completable =
         bookmarkDao.insert(bookmarkMapper.toRoomObject(dataModel)).compose()
 
-    override fun insert(dataModels: List<BookmarksDataModel>): Completable =
+    override fun insert(dataModels: List<BookmarkDataModel>): Completable =
         bookmarkDao.insert(bookmarkMapper.toRoomObjects(dataModels)).compose()
 
-    override fun update(dataModel: BookmarksDataModel): Completable =
+    override fun update(dataModel: BookmarkDataModel): Completable =
         bookmarkDao.update(bookmarkMapper.toRoomObject(dataModel)).compose()
 
-    override fun delete(dataModel: BookmarksDataModel): Completable =
+    override fun delete(dataModel: BookmarkDataModel): Completable =
         bookmarkDao.delete(bookmarkMapper.toRoomObject(dataModel)).compose()
 
     override fun delete(id: String): Completable =
         bookmarkDao.delete(id = id).compose()
 
-    override fun getAll(): Single<List<BookmarksDataModel>> =
+    override fun getAll(): Single<List<BookmarkDataModel>> =
         bookmarkDao.getAll()
             .map { bookmarkMapper.toDataModels(it) }
             .compose()

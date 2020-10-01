@@ -3,11 +3,11 @@
  */
 package kr.ohyung.data.mapper
 
-import kr.ohyung.data.model.BookmarksDataModel
+import kr.ohyung.data.model.BookmarkDataModel
 import kr.ohyung.domain.entity.Bookmark
 
-class BookmarkEntityMapper : EntityMapper<BookmarksDataModel, Bookmark> {
-    override fun toEntity(dataModel: BookmarksDataModel) =
+class BookmarkEntityMapper : EntityMapper<BookmarkDataModel, Bookmark> {
+    override fun toEntity(dataModel: BookmarkDataModel) =
         Bookmark(
             id = dataModel.id,
             description = dataModel.description,
@@ -17,7 +17,7 @@ class BookmarkEntityMapper : EntityMapper<BookmarksDataModel, Bookmark> {
         )
 
     override fun toDataModel(entity: Bookmark) =
-        BookmarksDataModel(
+        BookmarkDataModel(
             id = entity.id,
             description = entity.description,
             thumbnail = entity.thumbnail,

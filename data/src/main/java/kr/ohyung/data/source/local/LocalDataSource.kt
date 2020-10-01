@@ -9,7 +9,9 @@ import io.reactivex.Single
 import io.reactivex.SingleTransformer
 import kr.ohyung.data.exception.DatabaseException
 import kr.ohyung.data.model.DataModel
+import kr.ohyung.domain.exception.DuplicatedEntityException
 import kr.ohyung.domain.exception.EntityNotFoundException
+import javax.xml.crypto.Data
 
 interface LocalDataSource<D: DataModel> {
     fun insert(dataModel: D): Completable
@@ -23,22 +25,23 @@ interface LocalDataSource<D: DataModel> {
 
 internal class RoomSingleTransformer<T> : SingleTransformer<T, T> {
     override fun apply(upstream: Single<T>) =
-        upstream.onErrorResumeNext {
-            if(it is DatabaseException.EntityResultException) {
-                Single.error(EntityNotFoundException(it.message))
-            } else {
-                Single.error(it)
+        upstream.onErrorResumeNext { throwable ->
+            when(throwable) {
+                is DatabaseException.EmptyResultException -> Single.error(EntityNotFoundException(throwable.message))
+                is DatabaseException.DuplicatedException -> Single.error(DuplicatedEntityException(throwable.message))
+                else -> Single.error(throwable)
             }
         }
 }
 
 internal class RoomCompletableTransformer : CompletableTransformer {
     override fun apply(upstream: Completable) =
-        upstream.onErrorResumeNext {
-            if(it is DatabaseException.EntityResultException)
-                Completable.error(EntityNotFoundException(it.message))
-            else
-                Completable.error(it)
+        upstream.onErrorResumeNext { throwable ->
+            when(throwable) {
+                is DatabaseException.EmptyResultException -> Completable.error(EntityNotFoundException(throwable.message))
+                is DatabaseException.DuplicatedException -> Completable.error(DuplicatedEntityException(throwable.message))
+                else -> Completable.error(throwable)
+            }
         }
 }
 

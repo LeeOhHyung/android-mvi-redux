@@ -58,10 +58,10 @@ class BookmarkEntityMapperTest {
         val bookmarkDataModels = bookmarkEntityMapper.toDataModels(entities = bookmarkEntities)
 
         // Mapper 를 통해서 변환한 리스트와 실제 리스트가 같은지 확인
-        assertEquals(MockData.photoSummaryDataModels.first().id, bookmarkDataModels.first().id)
-        assertEquals(MockData.photoSummaryDataModels.first().description, bookmarkDataModels.first().description)
-        assertEquals(MockData.photoSummaryDataModels.first().thumbnail, bookmarkDataModels.first().thumbnail)
-        assertEquals(MockData.photoSummaryDataModels.first().likes, bookmarkDataModels.first().likes)
-        assertEquals(MockData.photoSummaryDataModels.first().username, bookmarkDataModels.first().username)
+        assertEquals(MockData.bookmarkDataModels.first().id, bookmarkDataModels.first().id)
+        assertEquals(MockData.bookmarkDataModels.first().description, bookmarkDataModels.first().description)
+        assertEquals(MockData.bookmarkDataModels.first().thumbnail, bookmarkDataModels.first().thumbnail)
+        assertEquals(MockData.bookmarkDataModels.first().likes, bookmarkDataModels.first().likes)
+        assertEquals(MockData.bookmarkDataModels.first().username, bookmarkDataModels.first().username)
     }
 }
