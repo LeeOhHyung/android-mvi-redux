@@ -20,7 +20,7 @@ class MockBookmarkLocalDataSource : BookmarkLocalDataSource {
             bookmarks.removeAll { it.id == id }
             Completable.complete()
         } else {
-            Completable.error(DatabaseException.EmptyResultException("result is empty"))
+            Completable.error(DatabaseException.NotFoundException("result is empty"))
         }
 
     override fun delete(dataModel: BookmarkDataModel): Completable =
@@ -28,7 +28,7 @@ class MockBookmarkLocalDataSource : BookmarkLocalDataSource {
             bookmarks.removeAll { it.id == dataModel.id }
             Completable.complete()
         } else {
-            Completable.error(DatabaseException.EmptyResultException("result is empty"))
+            Completable.error(DatabaseException.NotFoundException("result is empty"))
         }
 
     override fun insert(dataModel: BookmarkDataModel): Completable =
@@ -56,7 +56,7 @@ class MockBookmarkLocalDataSource : BookmarkLocalDataSource {
             bookmarks[index] = dataModel
             Completable.complete()
         } else {
-            Completable.error(DatabaseException.EmptyResultException("result is empty"))
+            Completable.error(DatabaseException.NotFoundException("result is empty"))
         }
 
     override fun getAll(): Single<List<BookmarkDataModel>> = Single.just(bookmarks)

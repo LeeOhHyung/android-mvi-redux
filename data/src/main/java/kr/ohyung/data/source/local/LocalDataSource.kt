@@ -11,7 +11,6 @@ import kr.ohyung.data.exception.DatabaseException
 import kr.ohyung.data.model.DataModel
 import kr.ohyung.domain.exception.DuplicatedEntityException
 import kr.ohyung.domain.exception.EntityNotFoundException
-import javax.xml.crypto.Data
 
 interface LocalDataSource<D: DataModel> {
     fun insert(dataModel: D): Completable
@@ -27,7 +26,7 @@ internal class RoomSingleTransformer<T> : SingleTransformer<T, T> {
     override fun apply(upstream: Single<T>) =
         upstream.onErrorResumeNext { throwable ->
             when(throwable) {
-                is DatabaseException.EmptyResultException -> Single.error(EntityNotFoundException(throwable.message))
+                is DatabaseException.NotFoundException -> Single.error(EntityNotFoundException(throwable.message))
                 is DatabaseException.DuplicatedException -> Single.error(DuplicatedEntityException(throwable.message))
                 else -> Single.error(throwable)
             }
@@ -38,7 +37,7 @@ internal class RoomCompletableTransformer : CompletableTransformer {
     override fun apply(upstream: Completable) =
         upstream.onErrorResumeNext { throwable ->
             when(throwable) {
-                is DatabaseException.EmptyResultException -> Completable.error(EntityNotFoundException(throwable.message))
+                is DatabaseException.NotFoundException -> Completable.error(EntityNotFoundException(throwable.message))
                 is DatabaseException.DuplicatedException -> Completable.error(DuplicatedEntityException(throwable.message))
                 else -> Completable.error(throwable)
             }

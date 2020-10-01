@@ -17,6 +17,9 @@ import kotlin.test.assertEquals
 
 class BookmarkRepositoryTest : RepositoryTest() {
 
+    /*
+     * Repository 에 대한 CRUD 상황을 가정해서 테스트 케이스를 구성한다.
+     */
     private lateinit var bookmarkLocalDataSource: BookmarkLocalDataSource
     private lateinit var bookmarkEntityMapper: BookmarkEntityMapper
     private lateinit var bookmarkRepository: BookmarkRepository
