@@ -48,7 +48,7 @@ internal class PhotoRemoteDataSourceTest : DataSourceTest(){
     }
 
     @After
-    fun tearDown() {
+    override fun tearDown() {
         mockWebServer.shutdown()
     }
 
