@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Typography">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="Typography.100">
+        <item name="android:textSize" tools:ignore="SpUsage">@dimen/text_size10</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="Typography.200">
+        <item name="android:textSize" tools:ignore="SpUsage">@dimen/text_size12</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="Typography.300">
+        <item name="android:textSize" tools:ignore="SpUsage">@dimen/text_size14</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="Typography.400">
+        <item name="android:textSize" tools:ignore="SpUsage">@dimen/text_size16</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="Typography.500">
+        <item name="android:textSize" tools:ignore="SpUsage">@dimen/text_size20</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="Typography.600">
+        <item name="android:textSize" tools:ignore="SpUsage">@dimen/text_size24</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="Typography.700">
+        <item name="android:textSize" tools:ignore="SpUsage">@dimen/text_size28</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="Typography.800">
+        <item name="android:textSize" tools:ignore="SpUsage">@dimen/text_size32</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="Typography.900">
+        <item name="android:textSize" tools:ignore="SpUsage">@dimen/text_size36</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="Typography.1000">
+        <item name="android:textSize" tools:ignore="SpUsage">@dimen/text_size40</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="Typography.1100">
+        <item name="android:textSize" tools:ignore="SpUsage">@dimen/text_size48</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+</resources>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Typography.100.Thin">
+        <item name="fontFamily">@font/roboto_thin</item>
+    </style>
+    <style name="Typography.100.Light">
+        <item name="fontFamily">@font/roboto_light</item>
+    </style>
+    <style name="Typography.100.Medium">
+        <item name="fontFamily">@font/roboto_medium</item>
+    </style>
+    <style name="Typography.100.Bold">
+        <item name="fontFamily">@font/roboto_bold</item>
+    </style>
+
+    <style name="Typography.200.Thin">
+        <item name="fontFamily">@font/roboto_thin</item>
+    </style>
+    <style name="Typography.200.Light">
+        <item name="fontFamily">@font/roboto_light</item>
+    </style>
+    <style name="Typography.200.Medium">
+        <item name="fontFamily">@font/roboto_medium</item>
+    </style>
+    <style name="Typography.200.Bold">
+        <item name="fontFamily">@font/roboto_bold</item>
+    </style>
+
+    <style name="Typography.300.Thin">
+        <item name="fontFamily">@font/roboto_thin</item>
+    </style>
+    <style name="Typography.300.Light">
+        <item name="fontFamily">@font/roboto_light</item>
+    </style>
+    <style name="Typography.300.Medium">
+        <item name="fontFamily">@font/roboto_medium</item>
+    </style>
+    <style name="Typography.300.Bold">
+        <item name="fontFamily">@font/roboto_bold</item>
+    </style>
+
+    <style name="Typography.400.Thin">
+        <item name="fontFamily">@font/roboto_thin</item>
+    </style>
+    <style name="Typography.400.Light">
+        <item name="fontFamily">@font/roboto_light</item>
+    </style>
+    <style name="Typography.400.Medium">
+        <item name="fontFamily">@font/roboto_medium</item>
+    </style>
+    <style name="Typography.400.Bold">
+        <item name="fontFamily">@font/roboto_bold</item>
+    </style>
+
+    <style name="Typography.500.Thin">
+        <item name="fontFamily">@font/roboto_thin</item>
+    </style>
+    <style name="Typography.500.Light">
+        <item name="fontFamily">@font/roboto_light</item>
+    </style>
+    <style name="Typography.500.Medium">
+        <item name="fontFamily">@font/roboto_medium</item>
+    </style>
+    <style name="Typography.500.Bold">
+        <item name="fontFamily">@font/roboto_bold</item>
+    </style>
+
+    <style name="Typography.600.Thin">
+        <item name="fontFamily">@font/roboto_thin</item>
+    </style>
+    <style name="Typography.600.Light">
+        <item name="fontFamily">@font/roboto_light</item>
+    </style>
+    <style name="Typography.600.Medium">
+        <item name="fontFamily">@font/roboto_medium</item>
+    </style>
+    <style name="Typography.600.Bold">
+        <item name="fontFamily">@font/roboto_bold</item>
+    </style>
+
+    <style name="Typography.700.Thin">
+        <item name="fontFamily">@font/roboto_thin</item>
+    </style>
+    <style name="Typography.700.Light">
+        <item name="fontFamily">@font/roboto_light</item>
+    </style>
+    <style name="Typography.700.Medium">
+        <item name="fontFamily">@font/roboto_medium</item>
+    </style>
+    <style name="Typography.700.Bold">
+        <item name="fontFamily">@font/roboto_bold</item>
+    </style>
+
+    <style name="Typography.800.Thin">
+        <item name="fontFamily">@font/roboto_thin</item>
+    </style>
+    <style name="Typography.800.Light">
+        <item name="fontFamily">@font/roboto_light</item>
+    </style>
+    <style name="Typography.800.Medium">
+        <item name="fontFamily">@font/roboto_medium</item>
+    </style>
+    <style name="Typography.800.Bold">
+        <item name="fontFamily">@font/roboto_bold</item>
+    </style>
+
+    <style name="Typography.900.Thin">
+        <item name="fontFamily">@font/roboto_thin</item>
+    </style>
+    <style name="Typography.900.Light">
+        <item name="fontFamily">@font/roboto_light</item>
+    </style>
+    <style name="Typography.900.Medium">
+        <item name="fontFamily">@font/roboto_medium</item>
+    </style>
+    <style name="Typography.900.Bold">
+        <item name="fontFamily">@font/roboto_bold</item>
+    </style>
+
+</resources>
