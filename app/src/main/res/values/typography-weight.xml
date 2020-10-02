@@ -117,5 +117,41 @@
     <style name="Typography.900.Bold">
         <item name="fontFamily">@font/roboto_bold</item>
     </style>
+    <style name="Typography.900.ExtraBold">
+        <item name="fontFamily">@font/roboto_black</item>
+    </style>
+
+    <style name="Typography.1000.Thin">
+        <item name="fontFamily">@font/roboto_thin</item>
+    </style>
+    <style name="Typography.1000.Light">
+        <item name="fontFamily">@font/roboto_light</item>
+    </style>
+    <style name="Typography.1000.Medium">
+        <item name="fontFamily">@font/roboto_medium</item>
+    </style>
+    <style name="Typography.1000.Bold">
+        <item name="fontFamily">@font/roboto_bold</item>
+    </style>
+    <style name="Typography.1000.ExtraBold">
+        <item name="fontFamily">@font/roboto_black</item>
+    </style>
+
+    <style name="Typography.1100.Thin">
+        <item name="fontFamily">@font/roboto_thin</item>
+    </style>
+    <style name="Typography.1100.Light">
+        <item name="fontFamily">@font/roboto_light</item>
+    </style>
+    <style name="Typography.1100.Medium">
+        <item name="fontFamily">@font/roboto_medium</item>
+    </style>
+    <style name="Typography.1100.Bold">
+        <item name="fontFamily">@font/roboto_bold</item>
+    </style>
+    <style name="Typography.1100.ExtraBold">
+        <item name="fontFamily">@font/roboto_black</item>
+    </style>
+
 
 </resources>
