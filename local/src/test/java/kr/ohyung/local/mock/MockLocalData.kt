@@ -1,7 +1,9 @@
 package kr.ohyung.local.mock
 
 import kr.ohyung.data.model.BookmarkDataModel
+import kr.ohyung.data.model.SearchHistoryDataModel
 import kr.ohyung.local.model.BookmarkRoomObject
+import kr.ohyung.local.model.SearchHistoryRoomObject
 
 object MockLocalData {
 
@@ -19,7 +21,19 @@ object MockLocalData {
         likes = 10224,
         username = "이오형"
     )
+    val searchHistoryRoomObject = SearchHistoryRoomObject(
+        id = 0,
+        keyword = "이오형과 함께하는 즐거운 안드로이드 프로그래밍",
+        timestamp = 12342312
+    )
+    val searchHistoryDataModel = SearchHistoryDataModel(
+        id = 0,
+        keyword = "이오형과 함께하는 즐거운 안드로이드 프로그래밍",
+        timestamp = 12342312
+    )
 
     val bookmarkRoomObjects = listOf(bookmarkRoomObject)
     val bookmarkDataModels = listOf(bookmarkDataModel)
+    val searchHistoryRoomObjects = listOf(searchHistoryRoomObject)
+    val searchHistoryDataModels = listOf(searchHistoryDataModel)
 }

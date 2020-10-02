@@ -6,7 +6,6 @@ package kr.ohyung.local.dao
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import kr.ohyung.local.DaoTest
 import kr.ohyung.local.database.LocalDatabase
 import kr.ohyung.local.mock.MockLocalData
 import org.junit.After
@@ -14,7 +13,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import kotlin.test.assertEquals
