@@ -22,12 +22,12 @@ object MockLocalData {
         username = "이오형"
     )
     val searchHistoryRoomObject = SearchHistoryRoomObject(
-        id = 0,
+        id = 1,
         keyword = "이오형과 함께하는 즐거운 안드로이드 프로그래밍",
         timestamp = 12342312
     )
     val searchHistoryDataModel = SearchHistoryDataModel(
-        id = 0,
+        id = 1,
         keyword = "이오형과 함께하는 즐거운 안드로이드 프로그래밍",
         timestamp = 12342312
     )
