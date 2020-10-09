@@ -7,7 +7,6 @@ import androidx.navigation.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kr.ohyung.mvi.databinding.ActivityRootBinding
 import kr.ohyung.mvi.splash.SplashFragmentArgs
-import kr.ohyung.mvi.utility.Constants
 
 @AndroidEntryPoint
 class RootActivity : AppCompatActivity() {
@@ -19,7 +18,11 @@ class RootActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_root)
         binding.lifecycleOwner = this
 
-        val startArgs = SplashFragmentArgs(Constants.DURATION_SPLASH).toBundle()
+        val startArgs = SplashFragmentArgs(DURATION_SPLASH).toBundle()
         findNavController(R.id.nav_host_fragment).setGraph(R.navigation.nav_graph, startArgs)
+    }
+
+    companion object {
+        private const val DURATION_SPLASH: Long = 2500L
     }
 }
