@@ -10,6 +10,7 @@ data class PhotoSummaryDataModel(
     val color: String,
     val description: String,
     val thumbnail: String,
+    val regularImageUrl: String,
     val likes: Int,
     val username: String
 ) : DataModel

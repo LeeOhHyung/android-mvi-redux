@@ -16,6 +16,7 @@ class PhotosResponseMapper : ResponseMapper<PhotosResponse, PhotoSummaryDataMode
             color = response.color,
             description = response.description ?: "",
             thumbnail = response.urls.thumb ?: "",
+            regularImageUrl = response.urls.regular ?: "",
             likes = response.likes,
             username = response.user.username
         )

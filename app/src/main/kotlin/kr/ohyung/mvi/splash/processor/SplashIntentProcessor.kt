@@ -15,6 +15,6 @@ class SplashIntentProcessor @Inject constructor() : IntentProcessor<SplashViewIn
     override fun subscribeIntents(intents: Observable<SplashViewIntent>) = intents.subscribe(intentsSubject)
     override fun intentToAction(intent: SplashViewIntent) =
         when(intent) {
-            is SplashViewIntent.InitialIntent -> SplashViewAction.NavigateToHomeAction(intent.duration)
+            is SplashViewIntent.InitialIntent -> SplashViewAction.Loading(intent.duration, intent.query)
         }
 }

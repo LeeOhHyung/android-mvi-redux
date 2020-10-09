@@ -17,4 +17,10 @@ interface PhotosApi : Api {
         @Query("per_page") perPage: Int?,
         @Query("order_by") orderBy: String?
     ): Single<List<PhotosResponse>>
+
+    @GET("photos/random")
+    fun getRandomPhoto(
+        @Query("query") query: String?,
+        @Query("count") count: Int?
+    ): Single<PhotosResponse>
 }

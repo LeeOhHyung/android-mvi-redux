@@ -27,4 +27,17 @@ class PhotoRepositoryImpl(
                 }
                 Single.error(errorType)
             }
+
+    override fun getRandomPhoto(query: String, count: Int): Single<PhotoSummary> =
+        photoRemoteDataSource.getRandomPhoto(query = query, count = count)
+            .map { photoDataModel -> photoEntityMapper.toEntity(photoDataModel) }
+            .onErrorResumeNext { throwable ->
+                val errorType = when(throwable) {
+                    is NetworkException.BadRequestException -> Externals.BadRequestException(throwable.message) // 400
+                    is NetworkException.UnauthorizedException -> Externals.UnauthorizedException(throwable.message) // 401
+                    is NetworkException.NotFoundException -> Externals.NotFoundException(throwable.message) // 404
+                    else -> Exception(throwable) // etc
+                }
+                Single.error(errorType)
+            }
 }

@@ -10,4 +10,5 @@ import kr.ohyung.domain.entity.OrderBy
 
 interface PhotoRemoteDataSource : DataSource {
     fun getPhotos(page: Int?, perPage: Int?, orderBy: String?): Single<List<PhotoSummaryDataModel>>
+    fun getRandomPhoto(query: String?, count: Int?): Single<PhotoSummaryDataModel>
 }

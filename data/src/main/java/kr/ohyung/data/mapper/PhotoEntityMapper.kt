@@ -15,6 +15,7 @@ class PhotoEntityMapper : EntityMapper<PhotoSummaryDataModel, PhotoSummary> {
             color = color,
             description = description,
             thumbnail = thumbnail,
+            regularImageUrl = regularImageUrl,
             likes = likes,
             username = username
         )
@@ -28,6 +29,7 @@ class PhotoEntityMapper : EntityMapper<PhotoSummaryDataModel, PhotoSummary> {
             color = color,
             description = description,
             thumbnail = thumbnail,
+            regularImageUrl = regularImageUrl,
             likes = likes,
             username = username
         )

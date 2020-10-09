@@ -12,6 +12,9 @@
         <argument
             android:name="duration"
             app:argType="long" />
+        <argument
+            android:name="query"
+            app:argType="String" />
     </fragment>
 
 </navigation>

@@ -10,4 +10,5 @@ import kr.ohyung.domain.entity.PhotoSummary
 
 interface PhotoRepository : Repository {
     fun getPhotos(page: Int, perPage: Int, orderBy: OrderBy): Single<List<PhotoSummary>>
+    fun getRandomPhoto(query: String, count: Int): Single<PhotoSummary>
 }

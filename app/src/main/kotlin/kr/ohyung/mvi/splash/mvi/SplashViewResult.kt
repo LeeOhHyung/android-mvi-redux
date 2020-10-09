@@ -7,6 +7,6 @@ import kr.ohyung.core.mvi.ViewResult
 
 sealed class SplashViewResult : ViewResult {
     object Loading : SplashViewResult()
-    object Success : SplashViewResult()
+    data class Success(val imageUrl: String?) : SplashViewResult()
     data class Error(val throwable: Throwable) : SplashViewResult()
 }

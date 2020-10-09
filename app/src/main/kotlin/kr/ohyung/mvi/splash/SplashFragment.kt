@@ -5,7 +5,6 @@ package kr.ohyung.mvi.splash
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
@@ -17,6 +16,7 @@ import kr.ohyung.mvi.R
 import kr.ohyung.mvi.databinding.FragmentSplashBinding
 import kr.ohyung.mvi.splash.mvi.SplashViewIntent
 import kr.ohyung.mvi.splash.mvi.SplashViewState
+import kr.ohyung.mvi.utility.load
 import org.jetbrains.anko.support.v4.toast
 
 @AndroidEntryPoint
@@ -35,6 +35,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding,
 
     override fun render(state: SplashViewState) {
         if(state.isLoading) {
+            binding.ivSplashImage.load(state.imageUrl, centerCrop = true)
             binding.progressBar.isVisible = true
         }
         if(state.error != null){
@@ -42,6 +43,6 @@ class SplashFragment : BaseFragment<FragmentSplashBinding,
         }
     }
 
-    override fun mergeIntents() =  Observable.just<SplashViewIntent>(SplashViewIntent.InitialIntent(args.duration))
+    override fun mergeIntents() =  Observable.just<SplashViewIntent>(SplashViewIntent.InitialIntent(args.duration, args.query))
     override fun processIntents() = splashViewModel.subscribeIntents(mergeIntents())
 }
