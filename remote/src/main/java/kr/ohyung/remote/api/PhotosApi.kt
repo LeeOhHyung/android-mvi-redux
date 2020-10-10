@@ -23,4 +23,6 @@ interface PhotosApi : Api {
         @Query("query") query: String?,
         @Query("count") count: Int?
     ): Single<PhotosResponse>
+
+    //@Query("client_id") clientId: String = "3TBV_AQ9ys4fbiTdUBNRUInTf_KlwkqNzCeXLZgdQqQ"
 }
