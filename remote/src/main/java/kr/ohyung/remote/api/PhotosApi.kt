@@ -20,9 +20,6 @@ interface PhotosApi : Api {
 
     @GET("photos/random")
     fun getRandomPhoto(
-        @Query("query") query: String?,
-        @Query("count") count: Int?
+        @Query("query") query: String?
     ): Single<PhotosResponse>
-
-    //@Query("client_id") clientId: String = "3TBV_AQ9ys4fbiTdUBNRUInTf_KlwkqNzCeXLZgdQqQ"
 }

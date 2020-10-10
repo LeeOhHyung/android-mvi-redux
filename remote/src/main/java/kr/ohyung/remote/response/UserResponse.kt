@@ -22,7 +22,7 @@ data class UserResponse(
     @field:Json(name = "links")
     val links: UserLinksResponse?,
     @field:Json(name = "profile_image")
-    val profile_image: UserProfileImageResponse,
+    val profile_image: UserProfileImageResponse?,
     @field:Json(name = "instagram_username")
     val instagram_username: String?,
     @field:Json(name = "total_collections")

@@ -16,8 +16,10 @@ import kr.ohyung.mvi.R
 import kr.ohyung.mvi.databinding.FragmentSplashBinding
 import kr.ohyung.mvi.splash.mvi.SplashViewIntent
 import kr.ohyung.mvi.splash.mvi.SplashViewState
+import kr.ohyung.mvi.utility.*
 import kr.ohyung.mvi.utility.load
-import kr.ohyung.mvi.utility.toast
+import kr.ohyung.mvi.utility.setOnLoadFailedListener
+import kr.ohyung.mvi.utility.setOnResourceReadyListener
 
 @AndroidEntryPoint
 class SplashFragment : BaseFragment<FragmentSplashBinding,
@@ -30,13 +32,20 @@ class SplashFragment : BaseFragment<FragmentSplashBinding,
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        requireActivity().setTransparentStatusBar()
         splashViewModel.viewState.observe(viewLifecycleOwner, Observer(::render))
     }
 
     override fun render(state: SplashViewState) {
-        binding.progressBar.isVisible = state.isLoading
         if(state.isLoading) {
-            binding.ivSplashImage.load(state.imageUrl, centerCrop = true)
+            binding.progressBar.isVisible = true
+        }
+        if(state.imageUrl != null) {
+            binding.ivSplashImage.load(state.imageUrl) {
+                centerCrop()
+                setOnLoadFailedListener { binding.progressBar.isVisible = false }
+                setOnResourceReadyListener { binding.progressBar.isVisible = false }
+            }
         }
         if(state.error != null){
             toast(state.error.message.toString())

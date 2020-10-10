@@ -15,5 +15,5 @@ class GetRandomPhotoUseCase @Inject constructor(
     postExecutionThread: Scheduler
 ) : ParameterizedSingleUseCase<PhotoSummary, String>(executorThread, postExecutionThread) {
     override fun buildUseCaseSingle(params: String) =
-        photoRepository.getRandomPhoto(query = params, count = 1)
+        photoRepository.getRandomPhoto(query = params)
 }

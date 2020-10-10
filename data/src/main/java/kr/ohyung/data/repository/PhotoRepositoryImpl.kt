@@ -29,8 +29,8 @@ class PhotoRepositoryImpl @Inject constructor(
                 Single.error(errorType)
             }
 
-    override fun getRandomPhoto(query: String, count: Int): Single<PhotoSummary> =
-        photoRemoteDataSource.getRandomPhoto(query = query, count = count)
+    override fun getRandomPhoto(query: String): Single<PhotoSummary> =
+        photoRemoteDataSource.getRandomPhoto(query = query)
             .map { photoDataModel -> photoEntityMapper.toEntity(photoDataModel) }
             .onErrorResumeNext { throwable ->
                 val errorType = when(throwable) {

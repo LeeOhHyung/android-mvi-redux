@@ -36,18 +36,11 @@ class SplashActionProcessor @Inject constructor(
         ObservableTransformer<SplashViewAction, SplashViewResult> { actions ->
             actions.flatMap { action ->
                 if(action is SplashViewAction.Loading) {
-                    Single.zip(
-                        getRandomPhotoUseCase.execute(params = action.query),
-                        Single.timer(action.duration, TimeUnit.MILLISECONDS),
-                        BiFunction { photo: PhotoSummary, _ ->
-                            return@BiFunction SplashViewResult.Success(imageUrl = photo.regularImageUrl)
-                        })
+                    getRandomPhotoUseCase.execute(params = action.query)
+                        .map { response -> SplashViewResult.Success(imageUrl = response.regularImageUrl) }
                         .toObservable()
                         .cast(SplashViewResult::class.java)
-                        .onErrorReturn { throwable ->
-                            SplashViewResult.Error(throwable)
-                            //if(throwable is Externals.)
-                        }
+                        .onErrorReturn { throwable -> SplashViewResult.Error(throwable) }
                         .startWith(SplashViewResult.Loading)
                 } else {
                     Observable.error(IllegalStateException("this transformer must be handled about loading state"))

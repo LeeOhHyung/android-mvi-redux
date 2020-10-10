@@ -19,7 +19,11 @@ class RootActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
 
         val startArgs = SplashFragmentArgs(SPLASH_DURATION, SPLASH_IMAGE_QUERY).toBundle()
-        findNavController(R.id.nav_host_fragment).setGraph(R.navigation.nav_graph, startArgs)
+        val navController = findNavController(R.id.nav_host_fragment)
+        navController.setGraph(R.navigation.nav_graph, startArgs)
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            // can set about state bar or action bar, etc when navigating fragments.
+        }
     }
 
     companion object {

@@ -3,13 +3,11 @@
  */
 package kr.ohyung.core.mvi
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.LiveDataReactiveStreams
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 abstract class StateMachine<I: ViewIntent, A: ViewAction, S: ViewState, R: ViewResult>(
@@ -22,9 +20,6 @@ abstract class StateMachine<I: ViewIntent, A: ViewAction, S: ViewState, R: ViewR
     override val currentState: LiveData<S> =
         LiveDataReactiveStreams.fromPublisher(
             intentProcessor.intentsSubject
-                .doOnNext { intent ->
-                    Log.d("StateMachine", "on Stream, intent : $intent")
-                }
                 .map { intent -> intentProcessor.intentToAction(intent) }
                 .compose(actionProcessor.compose())
                 .scan(initialState, reducer.reduce())
@@ -35,7 +30,6 @@ abstract class StateMachine<I: ViewIntent, A: ViewAction, S: ViewState, R: ViewR
         )
 
     fun subscribeIntents(intents: Observable<I>) = intents
-        .doOnNext { intent -> Log.d("StateMachine", "intent : $intent") }
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(intentProcessor.intentsSubject)
