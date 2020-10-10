@@ -11,8 +11,9 @@ import kr.ohyung.domain.entity.OrderBy
 import kr.ohyung.domain.entity.PhotoSummary
 import kr.ohyung.domain.exception.Externals
 import kr.ohyung.domain.repository.PhotoRepository
+import javax.inject.Inject
 
-class PhotoRepositoryImpl(
+class PhotoRepositoryImpl @Inject constructor(
     private val photoRemoteDataSource: PhotoRemoteDataSource,
     private val photoEntityMapper: PhotoEntityMapper
 ) : PhotoRepository {

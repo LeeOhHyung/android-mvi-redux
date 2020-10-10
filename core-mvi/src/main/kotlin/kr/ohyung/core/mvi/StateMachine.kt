@@ -3,11 +3,14 @@
  */
 package kr.ohyung.core.mvi
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.LiveDataReactiveStreams
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Observable
-import io.reactivex.subjects.BehaviorSubject
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 
 abstract class StateMachine<I: ViewIntent, A: ViewAction, S: ViewState, R: ViewResult>(
     private val intentProcessor: IntentProcessor<I, A>,
@@ -19,8 +22,11 @@ abstract class StateMachine<I: ViewIntent, A: ViewAction, S: ViewState, R: ViewR
     override val currentState: LiveData<S> =
         LiveDataReactiveStreams.fromPublisher(
             intentProcessor.intentsSubject
+                .doOnNext { intent ->
+                    Log.d("currentState", "intent : $intent")
+                }
                 .map { intent -> intentProcessor.intentToAction(intent) }
-                .compose(actionProcessor.actionToResult())
+                .compose(actionProcessor.compose())
                 .scan(initialState, reducer.reduce())
                 .distinctUntilChanged()
                 .replay(1)
@@ -28,5 +34,10 @@ abstract class StateMachine<I: ViewIntent, A: ViewAction, S: ViewState, R: ViewR
                 .toFlowable(BackpressureStrategy.BUFFER)
         )
 
-    fun subscribeIntents(intents: Observable<I>) = intentProcessor.subscribeIntents(intents)
+    fun processIntent(intents: Observable<I>): Disposable = intents
+        .subscribe(intentProcessor.intentsSubject::onNext, intentProcessor.intentsSubject::onError)
+
+        // intentProcessor.intentsSubject.onNext(intent)
+    //        .doOnNext { intent -> Log.d("processIntent", "intent : $intent") }
+    //        .subscribe(intentProcessor.intentsSubject)
 }

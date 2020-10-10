@@ -27,9 +27,4 @@ abstract class BaseFragment<V: ViewDataBinding, I: ViewIntent, S: ViewState>(
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        processIntents()
-    }
 }

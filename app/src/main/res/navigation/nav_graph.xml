@@ -14,7 +14,7 @@
             app:argType="long" />
         <argument
             android:name="query"
-            app:argType="String" />
+            app:argType="string" />
     </fragment>
 
 </navigation>

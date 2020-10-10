@@ -7,6 +7,7 @@ import kr.ohyung.domain.UseCase
 import kr.ohyung.domain.exception.NoParamsException
 
 abstract class ParameterizedUseCase<in Params> : UseCase {
+    abstract fun get(params: Params?): Any
     abstract fun execute(params: Params?): Any
 }
 

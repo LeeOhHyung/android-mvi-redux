@@ -18,11 +18,12 @@ class RootActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_root)
         binding.lifecycleOwner = this
 
-        val startArgs = SplashFragmentArgs(DURATION_SPLASH).toBundle()
+        val startArgs = SplashFragmentArgs(SPLASH_DURATION, SPLASH_IMAGE_QUERY).toBundle()
         findNavController(R.id.nav_host_fragment).setGraph(R.navigation.nav_graph, startArgs)
     }
 
     companion object {
-        private const val DURATION_SPLASH: Long = 2500L
+        private const val SPLASH_DURATION: Long = 2500L
+        private const val SPLASH_IMAGE_QUERY: String = "weather"
     }
 }

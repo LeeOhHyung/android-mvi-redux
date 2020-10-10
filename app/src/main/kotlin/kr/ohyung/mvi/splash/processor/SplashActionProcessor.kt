@@ -11,6 +11,7 @@ import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
 import kr.ohyung.core.mvi.ActionProcessor
 import kr.ohyung.domain.entity.PhotoSummary
+import kr.ohyung.domain.executor.ExecutorProvider
 import kr.ohyung.domain.usecase.GetRandomPhotoUseCase
 import kr.ohyung.mvi.splash.mvi.SplashViewAction
 import kr.ohyung.mvi.splash.mvi.SplashViewResult
@@ -21,7 +22,7 @@ class SplashActionProcessor @Inject constructor(
     private val getRandomPhotoUseCase: GetRandomPhotoUseCase
 ) : ActionProcessor<SplashViewAction, SplashViewResult> {
 
-    override fun actionToResult() =
+    override fun compose() =
         ObservableTransformer<SplashViewAction, SplashViewResult> { action ->
             action.publish { selector ->
                 selector
@@ -33,20 +34,26 @@ class SplashActionProcessor @Inject constructor(
     private val navigateToHome =
         ObservableTransformer<SplashViewAction, SplashViewResult> { actions ->
             actions.flatMap { action ->
-                val duration = if(action is SplashViewAction.Loading) action.duration else 0L
                 if(action is SplashViewAction.Loading) {
-                    Single.zip(
-                        getRandomPhotoUseCase.execute(params = action.query),
-                        Single.timer(duration, TimeUnit.MILLISECONDS),
-                        BiFunction { photo: PhotoSummary, _ ->
-                            return@BiFunction SplashViewResult.Success(imageUrl = photo.thumbnail)
-                        })
+//                    Single.zip(
+//                        getRandomPhotoUseCase.execute(params = action.query),
+//                        Single.timer(action.duration, TimeUnit.MILLISECONDS),
+//                        BiFunction { photo: PhotoSummary, _ ->
+//                            return@BiFunction SplashViewResult.Success(imageUrl = photo.thumbnail)
+//                        })
+//                        .toObservable()
+//                        .cast(SplashViewResult::class.java)
+//                        .onErrorReturn { throwable -> SplashViewResult.Error(throwable) }
+//                        .subscribeOn(executorProvider.io())
+//                        .observeOn(executorProvider.main())
+//                        .startWith(SplashViewResult.Loading)
+
+                    getRandomPhotoUseCase.get(params = action.query)
+                        .toObservable()
+                        .map { response -> SplashViewResult.Success(imageUrl = response.regularImageUrl) }
                         .cast(SplashViewResult::class.java)
                         .onErrorReturn { throwable -> SplashViewResult.Error(throwable) }
-                        .toObservable()
                         .startWith(SplashViewResult.Loading)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
                 } else {
                     Observable.error(IllegalStateException("this transformer must be handled about loading state"))
                 }

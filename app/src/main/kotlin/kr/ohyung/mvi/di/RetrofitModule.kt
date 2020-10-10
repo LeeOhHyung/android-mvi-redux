@@ -1,5 +1,11 @@
-package kr.ohyung.remote
+package kr.ohyung.mvi.di
 
+import android.util.Log
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
+import kr.ohyung.mvi.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -8,12 +14,13 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
-object RetrofitManager {
+@Module
+@InstallIn(ApplicationComponent::class)
+object RetrofitModule {
 
-    private const val TAG: String = "RetrofitManager"
-    private const val BASE_URL = ""
-    private var isDebugMode: Boolean = true
+    private const val TAG: String = "ApiModule"
     private const val CONNECT_TIMEOUT: Long = 30L
     private const val WRITE_TIMEOUT: Long = 30L
     private const val READ_TIMEOUT: Long = 30L
@@ -21,40 +28,43 @@ object RetrofitManager {
     private const val HEADER_NAVER_MAP_CLIENT_ID: String = "X-NCP-APIGW-API-KEY-ID"
     private const val HEADER_NAVER_MAP_CLIENT_SECRET: String = "X-NCP-APIGW-API-KEY"
 
-    fun <T: Api> create(api: Class<T>, isDebug: Boolean): T {
-        isDebugMode = isDebug
-        return getRetrofit(BASE_URL).create(api)
-    }
+    @Provides
+    @Singleton
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+        .baseUrl("https://api.unsplash.com/")
+        .addConverterFactory(MoshiConverterFactory.create())
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        .client(okHttpClient)
+        .build()
 
-    private fun getRetrofit(baseUrl: String) : Retrofit =
-        Retrofit.Builder()
-            .baseUrl(baseUrl)
-            .addConverterFactory(MoshiConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .client(getOkHttpClient())
-            .build()
 
-    private fun getOkHttpClient(): OkHttpClient =
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(
+        loggerInterceptor: HttpLoggingInterceptor,
+        headerInterceptor: Interceptor
+    ): OkHttpClient =
         OkHttpClient.Builder()
             .retryOnConnectionFailure(true)
             .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
             .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
-            .addInterceptor(getHttpLoggerInterceptor())
-            .addInterceptor(createNaverMapHeaderInterceptor())
+            .addInterceptor(loggerInterceptor)
+            .addInterceptor(headerInterceptor)
             .build()
 
-    private fun getHttpLoggerInterceptor(): HttpLoggingInterceptor =
-        HttpLoggingInterceptor()
-            .apply {
-                level =
-                    if(isDebugMode)
-                        HttpLoggingInterceptor.Level.BODY
-                    else
-                        HttpLoggingInterceptor.Level.NONE
+    @Provides
+    @Singleton
+    fun provideHttpLoggerInterceptor(): HttpLoggingInterceptor =
+        HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
+            override fun log(message: String) {
+                Log.e(TAG, message)
             }
+        }).apply { level = HttpLoggingInterceptor.Level.BODY }
 
-    private fun createNaverMapHeaderInterceptor(): Interceptor =
+    @Provides
+    @Singleton
+    fun provideHeaderIntercept(): Interceptor =
         object: Interceptor {
             override fun intercept(chain: Interceptor.Chain): Response =
                 chain.proceed(

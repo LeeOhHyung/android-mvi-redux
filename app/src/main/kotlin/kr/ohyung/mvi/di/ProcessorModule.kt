@@ -6,6 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
 import kr.ohyung.core.mvi.ActionProcessor
 import kr.ohyung.core.mvi.IntentProcessor
+import kr.ohyung.domain.executor.ExecutorProvider
 import kr.ohyung.domain.usecase.GetRandomPhotoUseCase
 import kr.ohyung.mvi.splash.mvi.SplashViewAction
 import kr.ohyung.mvi.splash.mvi.SplashViewIntent

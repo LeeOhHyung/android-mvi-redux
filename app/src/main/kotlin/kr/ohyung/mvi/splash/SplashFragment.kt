@@ -34,15 +34,19 @@ class SplashFragment : BaseFragment<FragmentSplashBinding,
     }
 
     override fun render(state: SplashViewState) {
+        binding.progressBar.isVisible = state.isLoading
         if(state.isLoading) {
             binding.ivSplashImage.load(state.imageUrl, centerCrop = true)
-            binding.progressBar.isVisible = true
         }
         if(state.error != null){
             toast(state.error.message.toString())
         }
     }
 
-    override fun mergeIntents() =  Observable.just<SplashViewIntent>(SplashViewIntent.InitialIntent(args.duration, args.query))
-    override fun processIntents() = splashViewModel.subscribeIntents(mergeIntents())
+    override val intents: Observable<SplashViewIntent>
+        get() = Observable.just(SplashViewIntent.InitialIntent(args.duration, args.query))
+
+    override fun processIntents(){
+        splashViewModel.processIntent(intents)
+    }
 }

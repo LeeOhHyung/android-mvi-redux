@@ -4,15 +4,14 @@
 package kr.ohyung.remote.source
 
 import io.reactivex.Single
-import kr.ohyung.data.exception.NetworkException
 import kr.ohyung.data.model.PhotoSummaryDataModel
 import kr.ohyung.data.source.remote.PhotoRemoteDataSource
 import kr.ohyung.remote.api.PhotosApi
 import kr.ohyung.remote.compose
 import kr.ohyung.remote.mapper.PhotosResponseMapper
-import retrofit2.HttpException
+import javax.inject.Inject
 
-class PhotoRemoteDataSourceImpl(
+class PhotoRemoteDataSourceImpl @Inject constructor(
     private val photosApi: PhotosApi,
     private val photosResponseMapper: PhotosResponseMapper
 ) : PhotoRemoteDataSource {

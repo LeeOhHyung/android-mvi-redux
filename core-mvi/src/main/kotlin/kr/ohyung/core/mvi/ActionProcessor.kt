@@ -6,5 +6,5 @@ package kr.ohyung.core.mvi
 import io.reactivex.ObservableTransformer
 
 interface ActionProcessor<A: ViewAction, R: ViewResult> {
-    fun actionToResult(): ObservableTransformer<A, R>
+    fun compose(): ObservableTransformer<A, R>
 }
