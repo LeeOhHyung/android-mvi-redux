@@ -11,6 +11,7 @@ import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
 import kr.ohyung.core.mvi.ActionProcessor
 import kr.ohyung.domain.entity.PhotoSummary
+import kr.ohyung.domain.exception.Externals
 import kr.ohyung.domain.executor.ExecutorProvider
 import kr.ohyung.domain.usecase.GetRandomPhotoUseCase
 import kr.ohyung.mvi.splash.mvi.SplashViewAction
@@ -35,24 +36,18 @@ class SplashActionProcessor @Inject constructor(
         ObservableTransformer<SplashViewAction, SplashViewResult> { actions ->
             actions.flatMap { action ->
                 if(action is SplashViewAction.Loading) {
-//                    Single.zip(
-//                        getRandomPhotoUseCase.execute(params = action.query),
-//                        Single.timer(action.duration, TimeUnit.MILLISECONDS),
-//                        BiFunction { photo: PhotoSummary, _ ->
-//                            return@BiFunction SplashViewResult.Success(imageUrl = photo.thumbnail)
-//                        })
-//                        .toObservable()
-//                        .cast(SplashViewResult::class.java)
-//                        .onErrorReturn { throwable -> SplashViewResult.Error(throwable) }
-//                        .subscribeOn(executorProvider.io())
-//                        .observeOn(executorProvider.main())
-//                        .startWith(SplashViewResult.Loading)
-
-                    getRandomPhotoUseCase.get(params = action.query)
+                    Single.zip(
+                        getRandomPhotoUseCase.execute(params = action.query),
+                        Single.timer(action.duration, TimeUnit.MILLISECONDS),
+                        BiFunction { photo: PhotoSummary, _ ->
+                            return@BiFunction SplashViewResult.Success(imageUrl = photo.regularImageUrl)
+                        })
                         .toObservable()
-                        .map { response -> SplashViewResult.Success(imageUrl = response.regularImageUrl) }
                         .cast(SplashViewResult::class.java)
-                        .onErrorReturn { throwable -> SplashViewResult.Error(throwable) }
+                        .onErrorReturn { throwable ->
+                            SplashViewResult.Error(throwable)
+                            //if(throwable is Externals.)
+                        }
                         .startWith(SplashViewResult.Loading)
                 } else {
                     Observable.error(IllegalStateException("this transformer must be handled about loading state"))

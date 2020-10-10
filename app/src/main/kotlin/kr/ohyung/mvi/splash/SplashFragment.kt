@@ -17,7 +17,7 @@ import kr.ohyung.mvi.databinding.FragmentSplashBinding
 import kr.ohyung.mvi.splash.mvi.SplashViewIntent
 import kr.ohyung.mvi.splash.mvi.SplashViewState
 import kr.ohyung.mvi.utility.load
-import org.jetbrains.anko.support.v4.toast
+import kr.ohyung.mvi.utility.toast
 
 @AndroidEntryPoint
 class SplashFragment : BaseFragment<FragmentSplashBinding,
@@ -44,9 +44,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding,
     }
 
     override val intents: Observable<SplashViewIntent>
-        get() = Observable.just(SplashViewIntent.InitialIntent(args.duration, args.query))
+        get() = Observable.just(SplashViewIntent.InitialIntent(duration = args.duration, query = args.query))
 
-    override fun processIntents(){
-        splashViewModel.processIntent(intents)
-    }
+    override fun subscribeIntents() = splashViewModel.subscribeIntents(intents)
 }

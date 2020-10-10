@@ -11,7 +11,7 @@ internal class ResponseSingleTransformer<T> : SingleTransformer<T, T> {
     override fun apply(upstream: Single<T>): Single<T> =
         upstream.onErrorResumeNext { throwable ->
             if(throwable is HttpException) {
-                val errorMessage = throwable.message.toString()
+                val errorMessage = throwable.response()?.errorBody()?.string().toString()
                 when(throwable.code()) {
                     400 -> Single.error(NetworkException.BadRequestException(errorMessage))
                     401 -> Single.error(NetworkException.UnauthorizedException(errorMessage))

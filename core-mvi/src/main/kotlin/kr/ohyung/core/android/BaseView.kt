@@ -10,6 +10,6 @@ import kr.ohyung.core.mvi.ViewRenderer
 
 interface BaseView<I: ViewIntent, S: ViewState> : ViewRenderer<S> {
     fun initView()
-    fun processIntents()
+    fun subscribeIntents()
     val intents: Observable<I>
 }

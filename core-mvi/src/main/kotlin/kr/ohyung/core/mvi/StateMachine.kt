@@ -23,21 +23,22 @@ abstract class StateMachine<I: ViewIntent, A: ViewAction, S: ViewState, R: ViewR
         LiveDataReactiveStreams.fromPublisher(
             intentProcessor.intentsSubject
                 .doOnNext { intent ->
-                    Log.d("currentState", "intent : $intent")
+                    Log.d("StateMachine", "on Stream, intent : $intent")
                 }
                 .map { intent -> intentProcessor.intentToAction(intent) }
                 .compose(actionProcessor.compose())
                 .scan(initialState, reducer.reduce())
                 .distinctUntilChanged()
                 .replay(1)
-                .autoConnect()
+                .autoConnect(1)
                 .toFlowable(BackpressureStrategy.BUFFER)
         )
 
-    fun processIntent(intents: Observable<I>): Disposable = intents
-        .subscribe(intentProcessor.intentsSubject::onNext, intentProcessor.intentsSubject::onError)
+    fun subscribeIntents(intents: Observable<I>) = intents
+        .doOnNext { intent -> Log.d("StateMachine", "intent : $intent") }
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(intentProcessor.intentsSubject)
 
-        // intentProcessor.intentsSubject.onNext(intent)
-    //        .doOnNext { intent -> Log.d("processIntent", "intent : $intent") }
-    //        .subscribe(intentProcessor.intentsSubject)
+    fun processIntent(intent: I) = intentProcessor.intentsSubject.onNext(intent)
 }

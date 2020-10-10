@@ -8,8 +8,9 @@ import kr.ohyung.core.android.BaseViewModel
 import kr.ohyung.mvi.splash.mvi.*
 
 class SplashViewModel @ViewModelInject constructor(
-    splashStateMachine: SplashStateMachine
+    private val splashStateMachine: SplashStateMachine
 ) : BaseViewModel<SplashViewIntent, SplashViewAction, SplashViewState, SplashViewResult>(splashStateMachine) {
 
-    override val viewState = splashStateMachine.currentState
+    override val viewState
+        get() = splashStateMachine.currentState
 }

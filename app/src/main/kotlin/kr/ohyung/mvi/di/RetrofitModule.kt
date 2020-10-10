@@ -5,7 +5,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
-import kr.ohyung.mvi.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -20,7 +19,7 @@ import javax.inject.Singleton
 @InstallIn(ApplicationComponent::class)
 object RetrofitModule {
 
-    private const val TAG: String = "ApiModule"
+    private const val TAG: String = "RetrofitModule"
     private const val CONNECT_TIMEOUT: Long = 30L
     private const val WRITE_TIMEOUT: Long = 30L
     private const val READ_TIMEOUT: Long = 30L
@@ -32,8 +31,8 @@ object RetrofitModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         .baseUrl("https://api.unsplash.com/")
-        .addConverterFactory(MoshiConverterFactory.create())
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        .addConverterFactory(MoshiConverterFactory.create())
         .client(okHttpClient)
         .build()
 
