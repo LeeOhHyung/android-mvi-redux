@@ -44,6 +44,7 @@ class GetPhotoSummariesTest : UseCaseTest() {
             color = "",
             description = "이오형이 만드는 재미있는 안드로이드 프로젝트",
             thumbnail = "",
+            regularImageUrl = "",
             likes = 10000,
             username = "이오형"
         )

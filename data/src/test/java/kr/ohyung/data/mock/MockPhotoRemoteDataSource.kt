@@ -10,4 +10,7 @@ import kr.ohyung.data.source.remote.PhotoRemoteDataSource
 class MockPhotoRemoteDataSource : PhotoRemoteDataSource {
     override fun getPhotos(page: Int?, perPage: Int?, orderBy: String?) =
         Single.just(MockData.photoSummaryDataModels)
+
+    override fun getRandomPhoto(query: String?): Single<PhotoSummaryDataModel>  =
+        Single.just(MockData.photoSummaryDataModel)
 }

@@ -11,6 +11,7 @@ import io.reactivex.SingleTransformer
 import kr.ohyung.data.exception.NetworkException
 import kr.ohyung.remote.response.UnsplashErrorResponseJsonAdapter
 import retrofit2.HttpException
+import java.lang.Exception
 
 internal class ResponseSingleTransformer<T> : SingleTransformer<T, T> {
     override fun apply(upstream: Single<T>): Single<T> =
@@ -58,5 +59,7 @@ val HttpException.errorMessage: String
             .fromJson(bufferedSource)
         errorResponse?.errors?.joinToString() ?: ""
     } catch (e: NullPointerException) {
+        this.message.toString()
+    } catch (e: Exception) {
         this.message.toString()
     }

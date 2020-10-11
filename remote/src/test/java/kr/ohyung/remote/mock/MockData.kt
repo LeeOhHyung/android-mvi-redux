@@ -35,7 +35,7 @@ internal object MockData {
             urls = UrlsResponse(
                 raw = null,
                 full = null,
-                regular = null,
+                regular = "N/A",
                 small = null,
                 thumb = "썸네일 없음"
             ),
