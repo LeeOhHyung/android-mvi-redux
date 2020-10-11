@@ -17,9 +17,6 @@ import kr.ohyung.mvi.databinding.FragmentSplashBinding
 import kr.ohyung.mvi.splash.mvi.SplashViewIntent
 import kr.ohyung.mvi.splash.mvi.SplashViewState
 import kr.ohyung.mvi.utility.*
-import kr.ohyung.mvi.utility.load
-import kr.ohyung.mvi.utility.setOnLoadFailedListener
-import kr.ohyung.mvi.utility.setOnResourceReadyListener
 
 @AndroidEntryPoint
 class SplashFragment : BaseFragment<FragmentSplashBinding,
@@ -40,12 +37,16 @@ class SplashFragment : BaseFragment<FragmentSplashBinding,
         if(state.isLoading) {
             binding.progressBar.isVisible = true
         }
-        if(state.imageUrl != null) {
+        if(state.imageUrl.isNullOrEmpty().not()) {
             binding.ivSplashImage.load(state.imageUrl) {
                 centerCrop()
                 setOnLoadFailedListener { binding.progressBar.isVisible = false }
                 setOnResourceReadyListener { binding.progressBar.isVisible = false }
             }
+        }
+        if(state.timerEnd) {
+            // Home 화면으로 이동
+            //findNavController().navigate()
         }
         if(state.error != null){
             toast(state.error.message.toString())

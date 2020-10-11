@@ -10,6 +10,7 @@ data class SplashViewState(
     @DrawableRes val imageResId: Int?,
     val imageUrl: String?,
     val isLoading: Boolean,
+    val timerEnd: Boolean,
     val error: Throwable?
 ) : ViewState {
     companion object {
@@ -18,6 +19,7 @@ data class SplashViewState(
                 imageResId = null,
                 imageUrl = null,
                 isLoading = true,
+                timerEnd = false,
                 error = null
             )
     }
