@@ -18,7 +18,7 @@ class PhotosResponseMapper @Inject constructor(
             color = response.color,
             description = response.description ?: "",
             thumbnail = response.urls.thumb ?: "",
-            regularImageUrl = response.urls.regular ?: "",
+            fullSizeImageUrl = response.urls.full ?: "",
             likes = response.likes,
             username = response.user.username
         )

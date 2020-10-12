@@ -1,7 +1,17 @@
-apply plugin: 'kotlin'
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
 
 dependencies {
     implementation project(':domain')
@@ -11,8 +21,11 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxjava:2.2.19'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
 
-    // inject annotation
-    implementation 'javax.inject:javax.inject:1'
+    // Hilt
+    implementation 'com.google.dagger:hilt-android:2.28.3-alpha'
+    implementation 'androidx.hilt:hilt-common:1.0.0-alpha02'
+    kapt 'com.google.dagger:hilt-android-compiler:2.28.3-alpha'
+    kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha02'
 
     // Testing
     testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"

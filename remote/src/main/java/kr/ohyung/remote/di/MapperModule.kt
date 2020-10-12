@@ -1,9 +1,10 @@
-package kr.ohyung.mvi.di
+package kr.ohyung.remote.di
 
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import kr.ohyung.data.mapper.EntityMapper
 import kr.ohyung.data.mapper.PhotoEntityMapper
 import kr.ohyung.data.model.PhotoSummaryDataModel
 import kr.ohyung.remote.ResponseMapper
@@ -17,11 +18,5 @@ object MapperModule {
 
     @Provides
     @Singleton
-    fun providePhotoEntityMapper(): PhotoEntityMapper = PhotoEntityMapper()
-
-    @Provides
-    @Singleton
     fun providePhotosResponseMapper(): ResponseMapper<PhotosResponse, PhotoSummaryDataModel> = PhotosResponseMapper()
-
-
 }

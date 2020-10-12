@@ -30,7 +30,7 @@ class SplashActionProcessor @Inject constructor(
             actions.flatMap { action ->
                 if(action is SplashViewAction.Loading) {
                     getRandomPhotoUseCase.execute(params = action.query)
-                        .map { response -> SplashViewResult.Success(imageUrl = response.regularImageUrl) }
+                        .map { response -> SplashViewResult.Success(imageUrl = response.fullSizeImageUrl) }
                         .toObservable()
                         .cast(SplashViewResult::class.java)
                         .onErrorReturn { throwable -> SplashViewResult.Error(throwable) }

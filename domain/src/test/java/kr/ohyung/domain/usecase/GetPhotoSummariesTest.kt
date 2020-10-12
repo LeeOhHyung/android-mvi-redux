@@ -9,17 +9,12 @@ import kr.ohyung.domain.UseCaseTest
 import kr.ohyung.domain.entity.OrderBy
 import kr.ohyung.domain.entity.PhotoSummary
 import kr.ohyung.domain.exception.NoParamsException
-import kr.ohyung.domain.executor.ExecutorProvider
 import kr.ohyung.domain.mock.TestExecutors
 import kr.ohyung.domain.repository.PhotoRepository
-import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.ExpectedException
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
-import org.mockito.junit.MockitoJUnit
-import org.mockito.junit.MockitoRule
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
 import kotlin.test.assertTrue
@@ -44,7 +39,7 @@ class GetPhotoSummariesTest : UseCaseTest() {
             color = "",
             description = "이오형이 만드는 재미있는 안드로이드 프로젝트",
             thumbnail = "",
-            regularImageUrl = "",
+            fullSizeImageUrl = "",
             likes = 10000,
             username = "이오형"
         )

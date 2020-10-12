@@ -1,4 +1,4 @@
-package kr.ohyung.mvi.di
+package kr.ohyung.remote.di
 
 import dagger.Module
 import dagger.Provides

@@ -3,11 +3,9 @@
  */
 package kr.ohyung.mvi.splash.mvi
 
-import androidx.annotation.DrawableRes
 import kr.ohyung.core.mvi.ViewState
 
 data class SplashViewState(
-    @DrawableRes val imageResId: Int?,
     val imageUrl: String?,
     val isLoading: Boolean,
     val timerEnd: Boolean,
@@ -16,7 +14,6 @@ data class SplashViewState(
     companion object {
         fun idle() =
             SplashViewState(
-                imageResId = null,
                 imageUrl = null,
                 isLoading = true,
                 timerEnd = false,
