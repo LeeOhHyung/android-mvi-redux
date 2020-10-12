@@ -3,15 +3,15 @@ package kr.ohyung.mvi.di
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityRetainedComponent
+import dagger.hilt.android.components.ApplicationComponent
 import kr.ohyung.core.mvi.ViewStateReducer
-import kr.ohyung.mvi.splash.mvi.SplashViewStateReducer
 import kr.ohyung.mvi.splash.mvi.SplashViewResult
 import kr.ohyung.mvi.splash.mvi.SplashViewState
+import kr.ohyung.mvi.splash.mvi.SplashViewStateReducer
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ActivityRetainedComponent::class)
+@InstallIn(ApplicationComponent::class)
 object ReducerModule {
 
     @Provides

@@ -6,6 +6,8 @@ package kr.ohyung.mvi.splash.processor
 import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
 import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kr.ohyung.core.mvi.ActionProcessor
 import kr.ohyung.domain.usecase.GetRandomPhotoUseCase
 import kr.ohyung.mvi.splash.mvi.SplashViewAction
@@ -19,11 +21,8 @@ class SplashActionProcessor @Inject constructor(
 
     override fun compose() =
         ObservableTransformer<SplashViewAction, SplashViewResult> { action ->
-            action.publish { selector ->
-                selector
-                    .ofType(SplashViewAction.Loading::class.java)
-                    .compose(fetchRandomImage)
-            }
+            return@ObservableTransformer action.ofType(SplashViewAction.Loading::class.java)
+                .compose(fetchRandomImage)
         }
 
     private val fetchRandomImage =
@@ -35,6 +34,8 @@ class SplashActionProcessor @Inject constructor(
                         .toObservable()
                         .cast(SplashViewResult::class.java)
                         .onErrorReturn { throwable -> SplashViewResult.Error(throwable) }
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
                         .startWith(SplashViewResult.Loading)
                         .concatWith(
                             Single.timer(action.duration, TimeUnit.MILLISECONDS)
