@@ -11,7 +11,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.navigation.navGraphViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.Observable
-import kr.ohyung.core.android.BaseFragment
+import kr.ohyung.core.android.BaseMviFragment
 import kr.ohyung.mvi.R
 import kr.ohyung.mvi.databinding.FragmentSplashBinding
 import kr.ohyung.mvi.splash.mvi.SplashViewIntent
@@ -19,7 +19,7 @@ import kr.ohyung.mvi.splash.mvi.SplashViewState
 import kr.ohyung.mvi.utility.*
 
 @AndroidEntryPoint
-class SplashFragment : BaseFragment<FragmentSplashBinding,
+class SplashFragment : BaseMviFragment<FragmentSplashBinding,
         SplashViewIntent, SplashViewState>(R.layout.fragment_splash) {
 
     private val args by navArgs<SplashFragmentArgs>()
