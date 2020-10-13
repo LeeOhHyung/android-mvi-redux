@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.navGraphViewModels
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,7 +48,7 @@ class SplashFragment : BaseMviFragment<FragmentSplashBinding,
         }
         if(state.timerEnd) {
             // Home 화면으로 이동
-            //findNavController().navigate()
+            findNavController().navigate(R.id.to_bottom_navigation_fragment)
         }
         if(state.error != null){
             toast(state.error.message.toString())
