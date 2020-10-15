@@ -8,6 +8,10 @@ on:
     branches:
       - '*'
 
+env:
+  BASEURL: ${{ secrets.BASE_URL }}
+  CLIENTID: ${{ secrets.CLIENTID }}
+
 jobs:
   ci:
     name: Run Unit Test
@@ -22,7 +26,11 @@ jobs:
      - name: Decode BASEURL
        env:
         BASEURL: ${{ secrets.BASE_URL }}
-        run: echo BASE_URL="$BASE_URL" > /local.properties
+       run: echo BASE_URL="$BASE_URL" > local.properties
+     - name: Decode clientId
+       env:
+        CLIENTID: ${{ secrets.CLIENTID }}
+       run: echo CLIENTID="$CLIENTID" > local.properties
      
      - name: Unit Test
        run: bash ./gradlew test --stacktrace
