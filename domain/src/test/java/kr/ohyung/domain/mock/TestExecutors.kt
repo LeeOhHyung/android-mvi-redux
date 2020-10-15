@@ -8,7 +8,7 @@ import kr.ohyung.domain.executor.ExecutorProvider
 
 class TestExecutors : ExecutorProvider {
     override fun io() = Schedulers.trampoline()
-    override fun main() = Schedulers.trampoline()
+    override fun mainThread() = Schedulers.trampoline()
     override fun computation() = Schedulers.trampoline()
     override fun newThread() = Schedulers.trampoline()
 }

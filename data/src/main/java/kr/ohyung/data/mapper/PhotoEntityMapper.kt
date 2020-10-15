@@ -17,6 +17,7 @@ class PhotoEntityMapper @Inject constructor() : EntityMapper<PhotoSummaryDataMod
             description = description,
             thumbnail = thumbnail,
             fullSizeImageUrl = fullSizeImageUrl,
+            regularSizeImageUrl = regularSizeImageUrl,
             likes = likes,
             username = username
         )
@@ -31,6 +32,7 @@ class PhotoEntityMapper @Inject constructor() : EntityMapper<PhotoSummaryDataMod
             description = description,
             thumbnail = thumbnail,
             fullSizeImageUrl = fullSizeImageUrl,
+            regularSizeImageUrl = regularSizeImageUrl,
             likes = likes,
             username = username
         )

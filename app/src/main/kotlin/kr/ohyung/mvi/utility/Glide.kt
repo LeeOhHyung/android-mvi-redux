@@ -19,47 +19,36 @@ internal fun ImageView.load(imageUrl: String?, @DrawableRes placeHolder: Int) = 
 internal fun ImageView.load(imageUrl: String?, centerCrop: Boolean) = loadInternals(imageUrl, centerCrop = centerCrop)
 internal fun ImageView.load(imageUrl: String?, @DrawableRes placeHolder: Int, centerCrop: Boolean) = loadInternals(imageUrl, placeHolder, centerCrop)
 
-internal fun RequestBuilder<Drawable>.setOnLoadFailedListener(action: () -> Unit) =
+internal fun RequestBuilder<Drawable>.setOnDrawableListener(action: () -> Unit) =
     addListener(object : RequestListener<Drawable> {
-        override fun onLoadFailed(
-            e: GlideException?,
-            model: Any?,
-            target: Target<Drawable>?,
-            isFirstResource: Boolean
-        ): Boolean {
+        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
             action.invoke()
             return false
         }
 
-        override fun onResourceReady(
-            resource: Drawable?,
-            model: Any?,
-            target: Target<Drawable>?,
-            dataSource: DataSource?,
-            isFirstResource: Boolean
-        ): Boolean {
+        override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+            action.invoke()
             return false
         }
     })
 
-internal fun RequestBuilder<Drawable>.setOnResourceReadyListener(action: () -> Unit) =
+internal fun RequestBuilder<Drawable>.addOnLoadFailedListener(action: () -> Unit) =
     addListener(object : RequestListener<Drawable> {
-        override fun onLoadFailed(
-            e: GlideException?,
-            model: Any?,
-            target: Target<Drawable>?,
-            isFirstResource: Boolean
-        ): Boolean {
+        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+            action.invoke()
             return false
         }
+        override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+            return false
+        }
+    })
 
-        override fun onResourceReady(
-            resource: Drawable?,
-            model: Any?,
-            target: Target<Drawable>?,
-            dataSource: DataSource?,
-            isFirstResource: Boolean
-        ): Boolean {
+internal fun RequestBuilder<Drawable>.addOnResourceReadyListener(action: () -> Unit) =
+    addListener(object : RequestListener<Drawable> {
+        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+            return false
+        }
+        override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
             action.invoke()
             return false
         }

@@ -40,22 +40,22 @@ class SearchHistoryUseCaseTest : UseCaseTest() {
         addSearchHistory = AddSearchHistory(
             searchHistoryRepository = searchHistoryRepository,
             executorThread = testExecutors.io(),
-            postExecutionThread = testExecutors.main()
+            postExecutionThread = testExecutors.mainThread()
         )
         deleteSearchHistory = DeleteSearchHistory(
             searchHistoryRepository = searchHistoryRepository,
             executorThread = testExecutors.io(),
-            postExecutionThread = testExecutors.main()
+            postExecutionThread = testExecutors.mainThread()
         )
         dropSearchHistory = DropSearchHistory(
             searchHistoryRepository = searchHistoryRepository,
             executorThread = testExecutors.io(),
-            postExecutionThread = testExecutors.main()
+            postExecutionThread = testExecutors.mainThread()
         )
         getAllSearchHistory = GetAllSearchHistory(
             searchHistoryRepository = searchHistoryRepository,
             executorThread = testExecutors.io(),
-            postExecutionThread = testExecutors.main()
+            postExecutionThread = testExecutors.mainThread()
         )
         searchHistory = SearchHistory(
             id = 1,

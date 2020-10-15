@@ -46,7 +46,7 @@ class GetPhotoSummariesTest : UseCaseTest() {
         getPhotoSummaries = GetPhotoSummaries(
             photoRepository = photoRepository,
             executorThread = testExecutors.io(),
-            postExecutionThread = testExecutors.main()
+            postExecutionThread = testExecutors.mainThread()
         )
     }
 

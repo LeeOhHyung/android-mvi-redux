@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import kr.ohyung.core.android.BaseFragment
 import kr.ohyung.mvi.R
 import kr.ohyung.mvi.databinding.FragmentBottomNavigationBinding
@@ -17,10 +18,7 @@ class BottomNavigationFragment :
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-
-        binding.bottomNavigationView
-        findNavController(R.id.bottom_navigation_fragment)
+        NavigationUI.setupWithNavController(binding.bottomNavigationView, findNavController())
         return binding.root
     }
-
 }

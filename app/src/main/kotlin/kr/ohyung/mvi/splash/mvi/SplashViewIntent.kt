@@ -6,5 +6,6 @@ package kr.ohyung.mvi.splash.mvi
 import kr.ohyung.core.mvi.ViewIntent
 
 sealed class SplashViewIntent : ViewIntent {
-    data class InitialIntent(val duration: Long, val query: String) : SplashViewIntent()
+    data class FetchImage(val query: String) : SplashViewIntent()
+    data class ToHomeScreen(val duration: Long) : SplashViewIntent()
 }

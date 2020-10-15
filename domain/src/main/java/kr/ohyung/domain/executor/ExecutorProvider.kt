@@ -7,7 +7,7 @@ import io.reactivex.Scheduler
 
 interface ExecutorProvider {
     fun io(): Scheduler
-    fun main(): Scheduler
+    fun mainThread(): Scheduler
     fun computation(): Scheduler
     fun newThread(): Scheduler
 }

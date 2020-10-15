@@ -11,6 +11,7 @@ data class PhotoSummaryDataModel(
     val description: String,
     val thumbnail: String,
     val fullSizeImageUrl: String,
+    val regularSizeImageUrl: String,
     val likes: Int,
     val username: String
 ) : DataModel

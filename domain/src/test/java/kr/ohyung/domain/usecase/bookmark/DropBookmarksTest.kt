@@ -7,7 +7,6 @@ import io.reactivex.Completable
 import kr.ohyung.domain.UseCaseTest
 import kr.ohyung.domain.entity.Bookmark
 import kr.ohyung.domain.exception.EntityNotFoundException
-import kr.ohyung.domain.exception.NoParamsException
 import kr.ohyung.domain.repository.BookmarkRepository
 import org.junit.Before
 import org.junit.Test
@@ -28,7 +27,7 @@ class DropBookmarksTest : UseCaseTest() {
         dropBookmarks = DropBookmarks(
             bookmarkRepository = bookmarkRepository,
             executorThread = testExecutors.io(),
-            postExecutionThread = testExecutors.main()
+            postExecutionThread = testExecutors.mainThread()
         )
 
         bookmark = Bookmark(

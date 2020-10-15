@@ -2,11 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:icon="@drawable/ic_home"
-        android:title="Home" />
+        android:id="@+id/menu_home"
+        android:title="Home"
+        android:orderInCategory="1"/>
     <item
         android:icon="@drawable/ic_bookmark"
-        android:title="Bookmark" />
+        android:id="@+id/menu_bookmark"
+        android:title="Bookmark"
+        android:orderInCategory="2"/>
     <item
         android:icon="@drawable/ic_settings"
-        android:title="Settings" />
+        android:id="@+id/menu_settings"
+        android:title="Settings"
+        android:orderInCategory="3"/>
 </menu>

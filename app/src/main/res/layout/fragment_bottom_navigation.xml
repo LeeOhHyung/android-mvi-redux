@@ -23,6 +23,9 @@
             android:layout_height="wrap_content"
             android:background="@color/white_900"
             app:menu="@menu/bottom_navigation_menu"
+            app:showAsAction="always"
+            app:itemIconTint="@color/gray_900"
+            app:itemTextColor="@color/gray_900"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

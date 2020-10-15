@@ -5,8 +5,6 @@ package kr.ohyung.mvi.splash.mvi
 
 import io.reactivex.functions.BiFunction
 import kr.ohyung.core.mvi.ViewStateReducer
-import kr.ohyung.mvi.splash.mvi.SplashViewResult
-import kr.ohyung.mvi.splash.mvi.SplashViewState
 import javax.inject.Inject
 
 class SplashViewStateReducer @Inject constructor(): ViewStateReducer<SplashViewState, SplashViewResult> {

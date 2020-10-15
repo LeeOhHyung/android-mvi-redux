@@ -21,6 +21,6 @@ object UseCaseModule {
     ): GetRandomPhotoUseCase = GetRandomPhotoUseCase(
         photoRepository = photoRepository,
         executorThread = executorProvider.io(),
-        postExecutionThread = executorProvider.main()
+        postExecutionThread = executorProvider.mainThread()
     )
 }

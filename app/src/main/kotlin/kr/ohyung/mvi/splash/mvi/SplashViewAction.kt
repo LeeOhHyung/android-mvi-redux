@@ -6,5 +6,6 @@ package kr.ohyung.mvi.splash.mvi
 import kr.ohyung.core.mvi.ViewAction
 
 sealed class SplashViewAction : ViewAction {
-    data class Loading(val duration: Long, val query: String) : SplashViewAction()
+    data class FetchImageFromApi(val query: String) : SplashViewAction()
+    data class Loading(val duration: Long) : SplashViewAction()
 }

@@ -28,7 +28,7 @@ class GetAllBookmarksTest : UseCaseTest() {
         getAllBookmarks = GetAllBookmarks(
             bookmarkRepository = bookmarkRepository,
             executorThread = testExecutors.io(),
-            postExecutionThread = testExecutors.main()
+            postExecutionThread = testExecutors.mainThread()
         )
         bookmark = Bookmark(
             id = "Bookmark",

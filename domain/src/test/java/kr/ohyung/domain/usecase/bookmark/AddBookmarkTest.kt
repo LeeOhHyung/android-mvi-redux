@@ -35,7 +35,7 @@ class AddBookmarkTest : UseCaseTest() {
         addBookmark = AddBookmark(
             bookmarkRepository = bookmarkRepository,
             executorThread = testExecutors.io(),
-            postExecutionThread = testExecutors.main()
+            postExecutionThread = testExecutors.mainThread()
         )
     }
 

@@ -33,7 +33,7 @@ class DeleteBookmarkTest : UseCaseTest() {
         deleteBookmark = DeleteBookmark(
             bookmarkRepository = bookmarkRepository,
             executorThread = testExecutors.io(),
-            postExecutionThread = testExecutors.main()
+            postExecutionThread = testExecutors.mainThread()
         )
     }
 

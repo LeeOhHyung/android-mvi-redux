@@ -13,6 +13,7 @@ class SplashIntentProcessor @Inject constructor() : IntentProcessor<SplashViewIn
     override val intentsSubject = PublishSubject.create<SplashViewIntent>()
     override fun intentToAction(intent: SplashViewIntent) =
         when(intent) {
-            is SplashViewIntent.InitialIntent -> SplashViewAction.Loading(intent.duration, intent.query)
+            is SplashViewIntent.FetchImage -> SplashViewAction.FetchImageFromApi(intent.query)
+            is SplashViewIntent.ToHomeScreen -> SplashViewAction.Loading(intent.duration)
         }
 }

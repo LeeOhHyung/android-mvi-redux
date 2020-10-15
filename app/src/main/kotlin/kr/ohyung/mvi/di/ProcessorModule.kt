@@ -6,6 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import kr.ohyung.core.mvi.ActionProcessor
 import kr.ohyung.core.mvi.IntentProcessor
+import kr.ohyung.domain.executor.ExecutorProvider
 import kr.ohyung.domain.usecase.GetRandomPhotoUseCase
 import kr.ohyung.mvi.splash.mvi.SplashViewAction
 import kr.ohyung.mvi.splash.mvi.SplashViewIntent
@@ -25,6 +26,7 @@ object ProcessorModule {
     @Provides
     @Singleton
     fun provideSplashActionProcessor(
-        getRandomPhotoUseCase: GetRandomPhotoUseCase
-    ): ActionProcessor<SplashViewAction, SplashViewResult> = SplashActionProcessor(getRandomPhotoUseCase)
+        getRandomPhotoUseCase: GetRandomPhotoUseCase,
+        executorProvider: ExecutorProvider
+    ): ActionProcessor<SplashViewAction, SplashViewResult> = SplashActionProcessor(getRandomPhotoUseCase, executorProvider)
 }

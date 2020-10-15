@@ -26,5 +26,4 @@
         android:name="kr.ohyung.mvi.main.BottomNavigationFragment"
         tools:layout="@layout/fragment_bottom_navigation" />
 
-
 </navigation>
