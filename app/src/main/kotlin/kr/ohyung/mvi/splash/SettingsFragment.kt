@@ -9,4 +9,5 @@ import kr.ohyung.mvi.databinding.FragmentSettingsBinding
 
 class SettingsFragment : BaseFragment<FragmentSettingsBinding>(R.layout.fragment_settings) {
 
+
 }

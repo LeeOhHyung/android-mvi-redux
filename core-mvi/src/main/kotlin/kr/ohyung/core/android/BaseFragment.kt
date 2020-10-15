@@ -4,6 +4,7 @@
 package kr.ohyung.core.android
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,5 +23,10 @@ abstract class BaseFragment<V: ViewDataBinding>(
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.e("OnResume", "여기는 : ${javaClass.name}")
     }
 }

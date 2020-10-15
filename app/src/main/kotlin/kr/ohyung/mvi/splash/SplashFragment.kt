@@ -14,22 +14,20 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import kr.ohyung.core.android.BaseMviFragment
-import kr.ohyung.core.mvi.ViewIntent
-import kr.ohyung.core.mvi.toPublisher
-import kr.ohyung.core.mvi.toPublisherWithEmit
 import kr.ohyung.mvi.R
 import kr.ohyung.mvi.databinding.FragmentSplashBinding
 import kr.ohyung.mvi.splash.mvi.SplashViewIntent
 import kr.ohyung.mvi.splash.mvi.SplashViewState
-import kr.ohyung.mvi.utility.*
+import kr.ohyung.mvi.utility.load
+import kr.ohyung.mvi.utility.setOnDrawableListener
+import kr.ohyung.mvi.utility.setTransparentStatusBar
+import kr.ohyung.mvi.utility.toast
 
 @AndroidEntryPoint
 class SplashFragment : BaseMviFragment<FragmentSplashBinding,
         SplashViewIntent, SplashViewState>(R.layout.fragment_splash) {
 
     private val toHomeScreenSubject = PublishSubject.create<SplashViewIntent.ToHomeScreen>()
-    private val initSubject = PublishSubject.create<SplashViewIntent.FetchImage>()
-
     private val args by navArgs<SplashFragmentArgs>()
     private val splashViewModel by navGraphViewModels<SplashViewModel>(R.id.nav_graph) {
         defaultViewModelProviderFactory
@@ -44,7 +42,6 @@ class SplashFragment : BaseMviFragment<FragmentSplashBinding,
     override fun render(state: SplashViewState) {
         if(state.isLoading) {
             binding.progressBar.isVisible = true
-            toHomeScreenSubject.onNext(SplashViewIntent.ToHomeScreen(duration = args.duration))
         }
         if(state.imageUrl.isNullOrEmpty().not()) {
             binding.ivSplashImage.load(state.imageUrl) {
@@ -56,8 +53,7 @@ class SplashFragment : BaseMviFragment<FragmentSplashBinding,
             }
         }
         if(state.timerEnd) {
-            findNavController().navigate(R.id.to_bottom_navigation_fragment)
-            findNavController().graph.startDestination = R.id.to_bottom_navigation_fragment
+            findNavController().navigate(SplashFragmentDirections.toBottomNavigationFragment())
         }
         if(state.error != null){
             toast(state.error.message.toString())
