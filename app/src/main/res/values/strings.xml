@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">android-mvi-redux</string>
+
+    <string name="bottom_tab_home">Home</string>
+    <string name="bottom_tab_bookmark">Bookmark</string>
+    <string name="bottom_tab_settings">Settings</string>
 </resources>

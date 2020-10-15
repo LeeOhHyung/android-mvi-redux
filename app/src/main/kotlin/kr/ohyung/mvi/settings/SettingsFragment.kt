@@ -1,7 +1,7 @@
 /*
  * Created by Lee Oh Hyung on 2020/10/15.
  */
-package kr.ohyung.mvi.splash
+package kr.ohyung.mvi.settings
 
 import kr.ohyung.core.android.BaseFragment
 import kr.ohyung.mvi.R

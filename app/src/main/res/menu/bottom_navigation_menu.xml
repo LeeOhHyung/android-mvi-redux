@@ -4,15 +4,15 @@
         android:id="@+id/menu_home"
         android:icon="@drawable/ic_home"
         android:orderInCategory="1"
-        android:title="Home" />
+        android:title="@string/bottom_tab_home" />
     <item
         android:id="@+id/menu_bookmark"
         android:icon="@drawable/ic_bookmark"
         android:orderInCategory="2"
-        android:title="Bookmark" />
+        android:title="@string/bottom_tab_bookmark" />
     <item
         android:id="@+id/menu_settings"
         android:icon="@drawable/ic_settings"
         android:orderInCategory="3"
-        android:title="Settings" />
+        android:title="@string/bottom_tab_settings" />
 </menu>

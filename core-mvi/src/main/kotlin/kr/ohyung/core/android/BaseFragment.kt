@@ -27,6 +27,6 @@ abstract class BaseFragment<V: ViewDataBinding>(
 
     override fun onResume() {
         super.onResume()
-        Log.e("OnResume", "여기는 : ${javaClass.name}")
+        Log.e("OnResume", "여기는 : ${javaClass.simpleName}")
     }
 }

@@ -30,19 +30,19 @@ class BottomNavigationFragment :
     private fun initBottomNavHostFragment() {
         bottomNavigationHostFragment = childFragmentManager.findFragmentById(R.id.bottom_navigation_host_fragment) as? NavHostFragment
         childNavController = bottomNavigationHostFragment?.navController
-        childNavController?.setGraph(R.navigation.nav_graph_bottom_navigation)
+        childNavController?.setGraph(R.navigation.nav_graph)
         childNavController?.navigate(R.id.fragment_home)
     }
 
     private fun setupNavigationItemSelectedListener() {
         binding.bottomNavigationView.setOnNavigationItemSelectedListener { item ->
-            val destinationId = when(item.itemId) {
-                R.id.menu_home -> R.id.fragment_home
-                R.id.menu_bookmark -> R.id.fragment_bookmark
-                R.id.menu_settings -> R.id.fragment_settings
-                else -> throw IllegalStateException("invalid fragment id of bottom navigation")
+            val direction = when(item.itemId) {
+                R.id.menu_home -> BottomNavigationFragmentDirections.toHomeFragment()
+                R.id.menu_bookmark -> BottomNavigationFragmentDirections.toBookmarkFragment()
+                R.id.menu_settings -> BottomNavigationFragmentDirections.toSettingsFragment()
+                else -> throw IllegalStateException("invalid direction of bottom navigation")
             }
-            childNavController?.navigate(destinationId)
+            childNavController?.navigate(direction)
             return@setOnNavigationItemSelectedListener true
         }
     }
