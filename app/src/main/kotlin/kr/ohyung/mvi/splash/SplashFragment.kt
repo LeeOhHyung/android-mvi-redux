@@ -44,6 +44,7 @@ class SplashFragment : BaseMviFragment<FragmentSplashBinding,
     override fun render(state: SplashViewState) {
         if(state.isLoading) {
             binding.progressBar.isVisible = true
+            toHomeScreenSubject.onNext(SplashViewIntent.ToHomeScreen(duration = args.duration))
         }
         if(state.imageUrl.isNullOrEmpty().not()) {
             binding.ivSplashImage.load(state.imageUrl) {
@@ -56,6 +57,7 @@ class SplashFragment : BaseMviFragment<FragmentSplashBinding,
         }
         if(state.timerEnd) {
             findNavController().navigate(R.id.to_bottom_navigation_fragment)
+            findNavController().graph.startDestination = R.id.to_bottom_navigation_fragment
         }
         if(state.error != null){
             toast(state.error.message.toString())

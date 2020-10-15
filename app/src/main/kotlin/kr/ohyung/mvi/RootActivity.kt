@@ -1,8 +1,9 @@
 package kr.ohyung.mvi
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kr.ohyung.mvi.databinding.ActivityRootBinding
@@ -12,6 +13,7 @@ import kr.ohyung.mvi.splash.SplashFragmentArgs
 class RootActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRootBinding
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,12 +21,17 @@ class RootActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
 
         val startArgs = SplashFragmentArgs(SPLASH_DURATION, SPLASH_IMAGE_QUERY).toBundle()
-        val navController = findNavController(R.id.nav_host_fragment)
+        navController = findNavController(R.id.nav_host_fragment)
         navController.setGraph(R.navigation.nav_graph, startArgs)
-        navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            // can set about state bar or action bar, etc when navigating fragments.
-        }
     }
+
+    override fun onBackPressed() {
+        if(navController.currentDestination?.id != R.id.bottom_navigation_fragment)
+            super.onBackPressed()
+    }
+
+    override fun onSupportNavigateUp(): Boolean =
+        navController.navigateUp() || super.onSupportNavigateUp()
 
     companion object {
         private const val SPLASH_DURATION: Long = 2500L

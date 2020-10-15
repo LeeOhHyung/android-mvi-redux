@@ -17,13 +17,15 @@
             app:argType="string" />
         <action
             android:id="@+id/to_bottom_navigation_fragment"
+            app:popUpTo="@id/bottom_navigation_fragment"
+            app:popUpToInclusive="true"
             app:launchSingleTop="true"
             app:destination="@id/bottom_navigation_fragment" />
     </fragment>
 
     <fragment
         android:id="@+id/bottom_navigation_fragment"
-        android:name="kr.ohyung.mvi.main.BottomNavigationFragment"
+        android:name="kr.ohyung.mvi.BottomNavigationFragment"
         tools:layout="@layout/fragment_bottom_navigation" />
 
 </navigation>
