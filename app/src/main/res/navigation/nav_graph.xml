@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/splash">
+    app:startDestination="@id/fragment_splash">
 
     <fragment
-        android:id="@+id/splash"
+        android:id="@+id/fragment_splash"
         android:name="kr.ohyung.mvi.splash.SplashFragment"
         tools:layout="@layout/fragment_splash">
         <argument
@@ -17,15 +17,30 @@
             app:argType="string" />
         <action
             android:id="@+id/to_bottom_navigation_fragment"
-            app:popUpTo="@id/bottom_navigation_fragment"
+            app:popUpTo="@id/fragment_bottom_navigation"
             app:popUpToInclusive="true"
             app:launchSingleTop="true"
-            app:destination="@id/bottom_navigation_fragment" />
+            app:destination="@id/fragment_bottom_navigation" />
     </fragment>
 
     <fragment
-        android:id="@+id/bottom_navigation_fragment"
+        android:id="@+id/fragment_bottom_navigation"
         android:name="kr.ohyung.mvi.BottomNavigationFragment"
         tools:layout="@layout/fragment_bottom_navigation" />
+
+    <fragment
+        android:id="@+id/fragment_home"
+        android:name="kr.ohyung.mvi.home.HomeFragment"
+        tools:layout="@layout/fragment_home"/>
+
+    <fragment
+        android:id="@+id/fragment_bookmark"
+        android:name="kr.ohyung.mvi.bookmark.BookmarkFragment"
+        tools:layout="@layout/fragment_bookmark"/>
+
+    <fragment
+        android:id="@+id/fragment_settings"
+        android:name="kr.ohyung.mvi.splash.SettingsFragment"
+        tools:layout="@layout/fragment_settings"/>
 
 </navigation>

@@ -26,7 +26,7 @@ class RootActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if(navController.currentDestination?.id != R.id.bottom_navigation_fragment)
+        if(navController.currentDestination?.id != R.id.fragment_bottom_navigation)
             super.onBackPressed()
     }
 
