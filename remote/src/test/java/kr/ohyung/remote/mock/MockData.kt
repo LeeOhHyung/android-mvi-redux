@@ -17,6 +17,7 @@ internal object MockData {
             description = "설명없음",
             thumbnail = "썸네일 없음",
             fullSizeImageUrl = "N/A",
+            regularSizeImageUrl = "N/A",
             likes = 10224,
             username = "이오형"
         )

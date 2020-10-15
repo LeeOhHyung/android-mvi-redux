@@ -17,6 +17,7 @@ object MockData {
             description = "설명없음",
             thumbnail = "썸네일 없음",
             fullSizeImageUrl = "사진없음",
+            regularSizeImageUrl = "사진없음",
             likes = 10224,
             username = "이오형"
         )
@@ -29,6 +30,7 @@ object MockData {
             description = "설명없음",
             thumbnail = "썸네일 없음",
             fullSizeImageUrl = "사진없음",
+            regularSizeImageUrl = "사진없음",
             likes = 10224,
             username = "이오형"
         )
