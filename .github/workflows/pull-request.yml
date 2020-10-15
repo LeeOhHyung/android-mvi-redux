@@ -25,6 +25,10 @@ jobs:
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
         restore-keys: |
           ${{ runner.os }}-gradle-
+    - name: Decode BASEURL
+       env:
+        BASEURL: ${{ secrets.BASE_URL }}
+        run: echo BASE_URL="$BASE_URL" > /local.properties
           
     - name: Debug Build with Gradle
       run: ./gradlew clean assembleDebug
