@@ -25,14 +25,6 @@ jobs:
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
         restore-keys: |
           ${{ runner.os }}-gradle-
-    - name: Decode BASEURL
-      env:
-       BASE_URL: ${{ secrets.BASE_URL }}
-      run: echo BASE_URL=\"$BASE_URL\" > ./local.properties
-    - name: Decode clientId
-      env:
-       clientId: ${{ secrets.CLIENTID }}
-      run: echo clientId=\"$clientId\" > ./local.properties
           
     - name: Debug Build with Gradle
       run: ./gradlew clean assembleDebug
