@@ -51,11 +51,13 @@ dependencies {
 String getBaseUrl() {
     def localProperties = new Properties()
     localProperties.load(new FileInputStream(rootProject.file("./local.properties")))
-    return localProperties.getProperty("BASE_URL")
+    def baseUrl = localProperties.getProperty("BASE_URL")
+    if(baseUrl != null) baseUrl else "\"https://fake.api.com\""
 }
 
 String getClientId() {
     def localProperties = new Properties()
     localProperties.load(new FileInputStream(rootProject.file("./local.properties")))
-    return localProperties.getProperty("clientId")
+    def clientId = localProperties.getProperty("clientId")
+    if(clientId != null) clientId else "\"fakeApiKey\""
 }
