@@ -3,18 +3,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 
-def localProperties = new Properties()
-localProperties.load(new FileInputStream(rootProject.file("local.properties")))
-def BASE_URL = localProperties.getProperty("BASE_URL")
-def clientId = localProperties.getProperty("clientId")
-
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        buildConfigField("String", "BASE_URL", BASE_URL)
-        buildConfigField("String", "clientId", clientId)
+        buildConfigField("String", "BASE_URL", getBaseUrl())
+        buildConfigField("String", "clientId", getClientId())
     }
 
     compileOptions {
@@ -51,4 +46,16 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:3.3.3'
     testImplementation 'org.mockito:mockito-inline:3.3.3'
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0'
+}
+
+String getBaseUrl() {
+    def localProperties = new Properties()
+    localProperties.load(new FileInputStream(rootProject.file("./local.properties")))
+    return localProperties.getProperty("BASE_URL")
+}
+
+String getClientId() {
+    def localProperties = new Properties()
+    localProperties.load(new FileInputStream(rootProject.file("./local.properties")))
+    return localProperties.getProperty("clientId")
 }
