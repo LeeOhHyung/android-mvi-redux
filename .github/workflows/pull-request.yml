@@ -25,14 +25,12 @@ jobs:
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
         restore-keys: |
           ${{ runner.os }}-gradle-
+          
     - name: Decode BASEURL
-      env:
-       BASE_URL: ${{ secrets.BASE_URL }}
-      run: echo BASE_URL=\"$BASE_URL\" > ./local.properties
+      run: echo BASE_URL=\"$https://fake.api.com/\" > ./local.properties
+      
     - name: Decode clientId
-      env:
-       clientId: ${{ secrets.CLIENTID }}
-      run: echo clientId=\"$clientId\" > ./local.properties
+      run: echo clientId=\"$fakeApiKey\" > ./local.properties
           
     - name: Debug Build with Gradle
       run: ./gradlew clean assembleDebug --stacktrace
