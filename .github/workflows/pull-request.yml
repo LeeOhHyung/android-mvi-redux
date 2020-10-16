@@ -27,12 +27,12 @@ jobs:
           ${{ runner.os }}-gradle-
     - name: Decode BASEURL
       env:
-       BASEURL: ${{ secrets.BASE_URL }}
-      run: echo BASE_URL="$BASE_URL" > local.properties
+       BASE_URL: ${{ secrets.BASE_URL }}
+      run: echo BASE_URL="$BASE_URL" > ./local.properties
     - name: Decode clientId
       env:
-       CLIENTID: ${{ secrets.CLIENTID }}
-      run: echo CLIENTID="$CLIENTID" > local.properties
+       clientId: ${{ secrets.CLIENTID }}
+      run: echo clientId="$clientId" > ./local.properties
           
     - name: Debug Build with Gradle
       run: ./gradlew clean assembleDebug
