@@ -27,4 +27,4 @@ jobs:
           ${{ runner.os }}-gradle-
           
     - name: Debug Build with Gradle
-      run: ./gradlew clean assembleDebug
+      run: ./gradlew clean assembleDebug --stacktrace
