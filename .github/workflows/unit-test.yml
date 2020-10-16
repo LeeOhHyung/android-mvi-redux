@@ -26,11 +26,11 @@ jobs:
      - name: Decode BASEURL
        env:
         BASE_URL: ${{ secrets.BASE_URL }}
-       run: echo BASE_URL="$BASE_URL" > ./local.properties
+       run: echo BASE_URL="\$BASE_URL\" > ./local.properties
      - name: Decode clientId
        env:
         clientId: ${{ secrets.CLIENTID }}
-       run: echo clientId="$clientId" > ./local.properties
+       run: echo clientId=\"$clientId\" > ./local.properties
      
      - name: Unit Test
        run: bash ./gradlew test --stacktrace
