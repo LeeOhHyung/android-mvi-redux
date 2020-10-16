@@ -33,4 +33,4 @@ jobs:
        run: echo clientId=\"$clientId\" > ./local.properties
      
      - name: Unit Test
-       run: bash ./gradlew test --stacktrace
+       run: bash ./gradlew assembleDebug --stacktrace
