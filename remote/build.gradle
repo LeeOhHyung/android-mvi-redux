@@ -70,5 +70,4 @@ String getClientId() {
         e.printStackTrace()
         "\"fakeApiKey\""
     }
-
 }

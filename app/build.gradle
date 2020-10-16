@@ -82,9 +82,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-reactivestreams:2.2.0"
     
     // Navigation
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
-    implementation 'androidx.navigation:navigation-testing:2.3.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.1'
+    implementation 'androidx.navigation:navigation-testing:2.3.1'
 
     // Retrofit - add for resolve dagger processor error
     // https://stackoverflow.com/questions/47124987/dagger-2-cannot-access-retrofit
@@ -96,6 +96,9 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxjava:2.2.19'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
     implementation 'io.reactivex.rxjava2:rxkotlin:2.4.0'
+
+    // Google
+    implementation "com.google.android.gms:play-services-location:17.1.0"
 
     // Mockito, JUnit, kotlin test
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0'

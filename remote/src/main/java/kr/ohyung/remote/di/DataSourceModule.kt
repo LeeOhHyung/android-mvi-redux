@@ -10,7 +10,13 @@ import kr.ohyung.remote.mapper.PhotosResponseMapper
 import kr.ohyung.remote.source.PhotoRemoteDataSourceImpl
 import javax.inject.Singleton
 
-@Module
+@Module(
+    includes = [
+        ApiModule::class,
+        MapperModule::class,
+        RetrofitModule::class
+    ]
+)
 @InstallIn(ApplicationComponent::class)
 object DataSourceModule {
 

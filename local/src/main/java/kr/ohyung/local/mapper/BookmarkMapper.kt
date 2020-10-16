@@ -6,8 +6,9 @@ package kr.ohyung.local.mapper
 import kr.ohyung.data.model.BookmarkDataModel
 import kr.ohyung.local.RoomObjectMapper
 import kr.ohyung.local.model.BookmarkRoomObject
+import javax.inject.Inject
 
-class BookmarkMapper : RoomObjectMapper<BookmarkRoomObject, BookmarkDataModel> {
+class BookmarkMapper @Inject constructor() : RoomObjectMapper<BookmarkRoomObject, BookmarkDataModel> {
 
     override fun toDataModel(roomObject: BookmarkRoomObject) =
         BookmarkDataModel(

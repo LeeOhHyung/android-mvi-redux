@@ -10,8 +10,9 @@ import kr.ohyung.data.source.local.BookmarkLocalDataSource
 import kr.ohyung.local.compose
 import kr.ohyung.local.dao.BookmarkDao
 import kr.ohyung.local.mapper.BookmarkMapper
+import javax.inject.Inject
 
-class BookmarkLocalDataSourceImpl(
+class BookmarkLocalDataSourceImpl @Inject constructor(
     private val bookmarkDao: BookmarkDao,
     private val bookmarkMapper: BookmarkMapper
 ) : BookmarkLocalDataSource {

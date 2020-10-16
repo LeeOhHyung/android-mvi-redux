@@ -10,8 +10,9 @@ import kr.ohyung.data.source.local.SearchHistoryLocalDataSource
 import kr.ohyung.local.compose
 import kr.ohyung.local.dao.SearchHistoryDao
 import kr.ohyung.local.mapper.SearchHistoryMapper
+import javax.inject.Inject
 
-class SearchHistoryLocalDataSourceImpl(
+class SearchHistoryLocalDataSourceImpl @Inject constructor(
     private val searchHistoryDao: SearchHistoryDao,
     private val searchHistoryMapper: SearchHistoryMapper
 ) : SearchHistoryLocalDataSource {
