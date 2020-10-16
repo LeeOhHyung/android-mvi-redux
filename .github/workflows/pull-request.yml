@@ -27,10 +27,10 @@ jobs:
           ${{ runner.os }}-gradle-
           
     - name: Decode BASEURL
-      run: echo BASE_URL=\"$https://fake.api.com/\" > ./local.properties
+      run: echo BASE_URL=\"https://fake.api.com/\" > ./local.properties
       
     - name: Decode clientId
-      run: echo clientId=\"$fakeApiKey\" > ./local.properties
+      run: echo clientId=\"fakeApiKey\" > ./local.properties
           
     - name: Debug Build with Gradle
       run: ./gradlew clean assembleDebug --stacktrace
