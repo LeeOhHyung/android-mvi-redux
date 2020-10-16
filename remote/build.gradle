@@ -49,15 +49,26 @@ dependencies {
 }
 
 String getBaseUrl() {
-    def localProperties = new Properties()
-    localProperties.load(new FileInputStream(rootProject.file("./local.properties")))
-    def baseUrl = localProperties.getProperty("BASE_URL")
-    if(baseUrl != null) baseUrl else "\"https://fake.api.com\""
+    try {
+        def localProperties = new Properties()
+        localProperties.load(new FileInputStream(rootProject.file("./local.properties")))
+        def baseUrl = localProperties.getProperty("BASE_URL")
+        if(baseUrl != null) baseUrl else "\"https://fake.api.com\""
+    } catch(FileNotFoundException e) {
+        e.printStackTrace()
+        "\"https://fake.api.com\""
+    }
 }
 
 String getClientId() {
-    def localProperties = new Properties()
-    localProperties.load(new FileInputStream(rootProject.file("./local.properties")))
-    def clientId = localProperties.getProperty("clientId")
-    if(clientId != null) clientId else "\"fakeApiKey\""
+    try {
+        def localProperties = new Properties()
+        localProperties.load(new FileInputStream(rootProject.file("./local.properties")))
+        def clientId = localProperties.getProperty("clientId")
+        if(clientId != null) clientId else "\"fakeApiKey\""
+    } catch(FileNotFoundException e) {
+        e.printStackTrace()
+        "\"fakeApiKey\""
+    }
+
 }
