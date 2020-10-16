@@ -24,7 +24,7 @@ jobs:
        with:
          java-version: 1.8
      - name: Decode BASEURL
-       run: echo BASE_URL="\https://fake.api.com/\" > ./local.properties
+       run: echo BASE_URL=\"https://fake.api.com/\" > ./local.properties
      - name: Decode clientId
        run: echo clientId=\"fakkeApiKey\" > ./local.properties
      
