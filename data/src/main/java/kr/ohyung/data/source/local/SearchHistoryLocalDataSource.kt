@@ -7,7 +7,7 @@ import io.reactivex.Completable
 import io.reactivex.Single
 import kr.ohyung.data.model.SearchHistoryDataModel
 
-interface SearchHistoryLocalDataSource : LocalDataSource<SearchHistoryDataModel> {
+interface SearchHistoryLocalDataSource : RoomDataSource<SearchHistoryDataModel> {
     fun hasItem(keyword: String): Single<Boolean>
     fun delete(keyword: String): Completable
 }
