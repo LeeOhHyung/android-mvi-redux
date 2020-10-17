@@ -7,5 +7,5 @@ import io.reactivex.subjects.PublishSubject
 
 interface IntentProcessor<I: ViewIntent, A: ViewAction> {
     val intentsSubject: PublishSubject<I>
-    fun intentToAction(intent: I): A
+    fun toAction(intent: I): A
 }

@@ -5,7 +5,7 @@ package kr.ohyung.domain.repository
 
 import io.reactivex.Single
 import kr.ohyung.domain.Repository
-import kr.ohyung.domain.entity.OrderBy
+import kr.ohyung.domain.entity.unit.OrderBy
 import kr.ohyung.domain.entity.PhotoSummary
 
 interface PhotoRepository : Repository {

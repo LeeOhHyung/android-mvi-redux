@@ -7,12 +7,13 @@ import io.reactivex.Single
 import kr.ohyung.data.model.toEntity
 import kr.ohyung.data.source.local.FusedLocationDataSource
 import kr.ohyung.domain.entity.Location
-import kr.ohyung.domain.repository.GpsLocationRepository
+import kr.ohyung.domain.repository.LocationRepository
 import javax.inject.Inject
 
-class GpsLocationRepositoryImpl @Inject constructor(
+class LocationRepositoryImpl @Inject constructor(
     private val fusedLocationDataSource: FusedLocationDataSource
-) : GpsLocationRepository {
+) : LocationRepository {
+
     override fun getLocationFromGps(): Single<Location> =
         fusedLocationDataSource.getLocation()
             .map { it.toEntity() }

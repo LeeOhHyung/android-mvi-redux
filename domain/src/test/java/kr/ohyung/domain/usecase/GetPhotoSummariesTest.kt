@@ -6,7 +6,7 @@ package kr.ohyung.domain.usecase
 import com.nhaarman.mockitokotlin2.any
 import io.reactivex.Single
 import kr.ohyung.domain.UseCaseTest
-import kr.ohyung.domain.entity.OrderBy
+import kr.ohyung.domain.entity.unit.OrderBy
 import kr.ohyung.domain.entity.PhotoSummary
 import kr.ohyung.domain.exception.NoParamsException
 import kr.ohyung.domain.mock.TestExecutors

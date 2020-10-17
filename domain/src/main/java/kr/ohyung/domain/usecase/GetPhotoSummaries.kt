@@ -4,7 +4,7 @@
 package kr.ohyung.domain.usecase
 
 import io.reactivex.Scheduler
-import kr.ohyung.domain.entity.OrderBy
+import kr.ohyung.domain.entity.unit.OrderBy
 import kr.ohyung.domain.entity.PhotoSummary
 import kr.ohyung.domain.repository.PhotoRepository
 import kr.ohyung.domain.usecase.base.ParameterizedSingleUseCase

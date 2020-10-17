@@ -1,7 +1,7 @@
 /*
  * Created by Lee Oh Hyung on 2020/09/19.
  */
-package kr.ohyung.domain.entity
+package kr.ohyung.domain.entity.unit
 
 import kr.ohyung.domain.Entity
 

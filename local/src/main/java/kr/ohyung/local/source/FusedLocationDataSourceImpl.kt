@@ -11,8 +11,9 @@ import io.reactivex.Single
 import io.reactivex.subjects.PublishSubject
 import kr.ohyung.data.model.LocationDataModel
 import kr.ohyung.data.source.local.FusedLocationDataSource
+import javax.inject.Inject
 
-class FusedLocationDataSourceImpl(
+class FusedLocationDataSourceImpl @Inject constructor(
     private val fusedLocationProviderClient: FusedLocationProviderClient
 ) : FusedLocationDataSource {
 

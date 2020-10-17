@@ -22,7 +22,7 @@ class SplashStateMachine @Inject constructor(
     override val currentState: LiveData<SplashViewState> =
         LiveDataReactiveStreams.fromPublisher(
             intentProcessor.intentsSubject
-                .map { intent -> intentProcessor.intentToAction(intent) }
+                .map { intent -> intentProcessor.toAction(intent) }
                 .compose(actionProcessor.compose())
                 .scan(SplashViewState.idle(), reducer.reduce())
                 .distinctUntilChanged()

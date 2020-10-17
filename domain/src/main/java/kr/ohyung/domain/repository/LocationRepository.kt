@@ -7,6 +7,6 @@ import io.reactivex.Single
 import kr.ohyung.domain.Repository
 import kr.ohyung.domain.entity.Location
 
-interface GpsLocationRepository : Repository {
+interface LocationRepository : Repository {
     fun getLocationFromGps(): Single<Location>
 }
