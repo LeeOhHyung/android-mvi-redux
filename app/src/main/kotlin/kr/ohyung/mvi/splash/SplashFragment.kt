@@ -13,7 +13,7 @@ import androidx.navigation.navGraphViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
-import kr.ohyung.core.android.BaseMviFragment
+import kr.ohyung.core.android.MviFragment
 import kr.ohyung.mvi.R
 import kr.ohyung.mvi.databinding.FragmentSplashBinding
 import kr.ohyung.mvi.splash.mvi.SplashViewIntent
@@ -24,7 +24,7 @@ import kr.ohyung.mvi.utility.setTransparentStatusBar
 import kr.ohyung.mvi.utility.toast
 
 @AndroidEntryPoint
-class SplashFragment : BaseMviFragment<FragmentSplashBinding,
+class SplashFragment : MviFragment<FragmentSplashBinding,
         SplashViewIntent, SplashViewState>(R.layout.fragment_splash) {
 
     private val toHomeScreenSubject = PublishSubject.create<SplashViewIntent.ToHomeScreen>()
