@@ -97,9 +97,6 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
     implementation 'io.reactivex.rxjava2:rxkotlin:2.4.0'
 
-    // Google
-    implementation "com.google.android.gms:play-services-location:17.1.0"
-
     // Mockito, JUnit, kotlin test
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0'
     testImplementation 'org.mockito:mockito-junit-jupiter:3.0.0'
