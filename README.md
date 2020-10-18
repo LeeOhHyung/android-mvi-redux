@@ -87,25 +87,22 @@
 - [Github Action 을 이용한 CI 구축하기](https://dublin-java.tistory.com/65)
 - [Accessing an Android app secret from GitHub Actions using Gradle](https://blog.jakelee.co.uk/accessing-android-app-secret-from-github-actions-using-gradle/)
 
-#### ETC
-- [Get Current location using FusedLocationProviderClient in Android](https://droidbyme.medium.com/get-current-location-using-fusedlocationproviderclient-in-android-cb7ebf5ab88e)
-
 ### Repos
 - [MVI-Architecture-Android-Beginners](https://github.com/MindorksOpenSource/MVI-Architecture-Android-Beginners)
 - [TvFlix](https://github.com/reactivedroid/TvFlix)
-- 🚀[google-location-rx](https://github.com/PedroOkawa/google-location-rx)
-- [uniflow-kt](https://github.com/uniflow-kt/uniflow-kt)
+- [google-location-rx](https://github.com/PedroOkawa/google-location-rx)
+- 🚀[uniflow-kt](https://github.com/uniflow-kt/uniflow-kt)
 - 🚀[weatherapp-uniflow](https://github.com/uniflow-kt/weatherapp-uniflow)
 - [android-mvi-sample](https://github.com/kanawish/android-mvi-sample)
 - 🚀[android-clean-architecture-mvi-boilerplate](https://github.com/bufferapp/android-clean-architecture-mvi-boilerplate)
 - [spotify - mobius](https://github.com/spotify/mobius)
 - [RxRedux](https://github.com/freeletics/RxRedux)
 - 🚀[ywett02 - CountriesMVI](https://github.com/ywett02/CountriesMVI)
-- [Tinder - StateMachine](https://github.com/Tinder/StateMachine)
+- 🚀[Tinder - StateMachine](https://github.com/Tinder/StateMachine)
 - [badoo - MVICore](https://github.com/badoo/MVICore)
 - 🚀[MyRealTrip - box](https://github.com/myrealtrip/box)
 - 🚀[airbnb - MvRx](https://github.com/airbnb/MvRx)
-- 🚀[Baking-App-Kotlin](https://github.com/Ezike/Baking-App-Kotlin)
+- [Baking-App-Kotlin](https://github.com/Ezike/Baking-App-Kotlin)
 - 🚀[mozilla-firefox-fenix](https://github.com/mozilla-mobile/fenix)
 - [MVVM-Kotlin-Android-Architecture](https://github.com/ahmedeltaher/MVVM-Kotlin-Android-Architecture)
 ```
