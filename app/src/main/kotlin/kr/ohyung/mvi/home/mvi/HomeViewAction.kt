@@ -7,6 +7,7 @@ import kr.ohyung.core.mvi.ViewAction
 import kr.ohyung.domain.entity.Bookmark
 
 sealed class HomeViewAction : ViewAction {
+    object Nothing : HomeViewAction()
     object GetLocationAndPhotos : HomeViewAction()
     data class AddBookmark(val bookmark: Bookmark) : HomeViewAction()
     data class DeleteBookmark(val id: String) : HomeViewAction()

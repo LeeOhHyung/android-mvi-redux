@@ -4,8 +4,10 @@
 package kr.ohyung.remote.response.geocoding
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import kr.ohyung.remote.Response
 
+@JsonClass(generateAdapter = true)
 data class NaverReverseGeocodingArea(
     @field:Json(name = "name")
     val name: String,
@@ -13,11 +15,13 @@ data class NaverReverseGeocodingArea(
     val coords: CoordsResponse
 ): Response {
 
+    @JsonClass(generateAdapter = true)
     data class CoordsResponse(
         @field:Json(name = "center")
         val center: CenterResponse
     ): Response {
 
+        @JsonClass(generateAdapter = true)
         data class CenterResponse(
             @field:Json(name = "crs") // 좌표계
             val crs: String,

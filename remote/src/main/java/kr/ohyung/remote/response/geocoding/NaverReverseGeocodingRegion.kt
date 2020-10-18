@@ -4,8 +4,10 @@
 package kr.ohyung.remote.response.geocoding
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import kr.ohyung.remote.Response
 
+@JsonClass(generateAdapter = true)
 data class NaverReverseGeocodingRegion(
     @field:Json(name ="area0") // 국가 코드
     val area0: NaverReverseGeocodingArea,

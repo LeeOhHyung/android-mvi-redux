@@ -36,7 +36,6 @@ object UseCaseModule {
     ): GetCurrentLegalNameUseCase = GetCurrentLegalNameUseCase(
         locationRepository = locationRepository,
         weatherRepository =  weatherRepository,
-        executorThread = executorProvider.io(),
-        postExecutionThread = executorProvider.mainThread()
+        executorProvider = executorProvider
     )
 }

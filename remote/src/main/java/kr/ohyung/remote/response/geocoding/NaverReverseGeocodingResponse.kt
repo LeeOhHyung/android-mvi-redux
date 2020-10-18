@@ -4,10 +4,12 @@
 package kr.ohyung.remote.response.geocoding
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import kr.ohyung.data.exception.NetworkException
 import kr.ohyung.data.model.LegalNameDataModel
 import kr.ohyung.remote.Response
 
+@JsonClass(generateAdapter = true)
 data class NaverReverseGeocodingResponse(
 
     @field:Json(name = "status")

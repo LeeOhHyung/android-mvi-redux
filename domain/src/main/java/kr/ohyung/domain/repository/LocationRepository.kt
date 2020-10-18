@@ -3,10 +3,10 @@
  */
 package kr.ohyung.domain.repository
 
-import io.reactivex.Single
+import io.reactivex.Flowable
 import kr.ohyung.domain.Repository
 import kr.ohyung.domain.entity.Location
 
 interface LocationRepository : Repository {
-    fun getLocationFromGps(): Single<Location>
+    fun getLocationFromGps(): Flowable<Location>
 }

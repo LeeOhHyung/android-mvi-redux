@@ -7,6 +7,7 @@ import kr.ohyung.core.mvi.ViewIntent
 import kr.ohyung.domain.entity.Bookmark
 
 sealed class HomeViewIntent : ViewIntent {
+    object Noting : HomeViewIntent()
     object Retry : HomeViewIntent()
     object InitHomeScreen : HomeViewIntent()
     data class AddBookmark(val bookmark: Bookmark) : HomeViewIntent()

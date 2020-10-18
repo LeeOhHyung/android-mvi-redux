@@ -20,7 +20,7 @@ class GetCurrentLocationForecastUseCase(
 
     override fun buildUseCaseSingle(): Single<Forecast> =
         locationRepository.getLocationFromGps()
-            .flatMap { location ->
+            .flatMapSingle { location ->
                 if(location.isKoreaLatLng())
                     Single.zip(
                         weatherRepository.getCurrentLegalName(location).subscribeOn(executorProvider.io()),
@@ -30,4 +30,5 @@ class GetCurrentLocationForecastUseCase(
                 else
                     Single.error(InvalidLatLonException("this location is not korea latitude and longitude"))
             }
+            .singleOrError()
 }

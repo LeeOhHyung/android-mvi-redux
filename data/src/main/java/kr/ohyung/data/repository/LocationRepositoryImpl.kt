@@ -3,7 +3,7 @@
  */
 package kr.ohyung.data.repository
 
-import io.reactivex.Single
+import io.reactivex.Flowable
 import kr.ohyung.data.model.toEntity
 import kr.ohyung.data.source.local.FusedLocationDataSource
 import kr.ohyung.domain.entity.Location
@@ -14,7 +14,8 @@ class LocationRepositoryImpl @Inject constructor(
     private val fusedLocationDataSource: FusedLocationDataSource
 ) : LocationRepository {
 
-    override fun getLocationFromGps(): Single<Location> =
+    override fun getLocationFromGps(): Flowable<Location> =
         fusedLocationDataSource.getLocation()
             .map { it.toEntity() }
+
 }

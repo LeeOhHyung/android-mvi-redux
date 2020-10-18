@@ -13,6 +13,7 @@ class HomeIntentProcessor @Inject constructor() : IntentProcessor<HomeViewIntent
     override val intentsSubject = PublishSubject.create<HomeViewIntent>()
     override fun toAction(intent: HomeViewIntent) =
         when(intent) {
+            HomeViewIntent.Noting -> HomeViewAction.Nothing
             HomeViewIntent.Retry -> HomeViewAction.GetLocationAndPhotos
             HomeViewIntent.InitHomeScreen -> HomeViewAction.GetLocationAndPhotos
             is HomeViewIntent.AddBookmark -> HomeViewAction.AddBookmark(bookmark = intent.bookmark)

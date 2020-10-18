@@ -26,11 +26,15 @@ class HomeActionProcessor @Inject constructor(
 
     private val getLocationAndWeatherPhotos =
         ObservableTransformer<HomeViewAction.GetLocationAndPhotos, HomeViewResult> { actions ->
-            actions.flatMapSingle {
+            actions.flatMap {
                 getCurrentLegalNameUseCase.execute()
+                    .map { legalName -> HomeViewResult.GetLocationAndPhotosResult.Success(legalName) }
+                    .toObservable()
+                    .cast(HomeViewResult::class.java)
+                    .onErrorReturn { HomeViewResult.GetLocationAndPhotosResult.Error(it) }
                     .subscribeOn(executorProvider.io())
                     .observeOn(executorProvider.mainThread())
-                    .cast(HomeViewResult::class.java)
+                    .startWith(HomeViewResult.GetLocationAndPhotosResult.Loading)
             }
         }
 }

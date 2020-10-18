@@ -17,4 +17,5 @@ class GetGpsLocationUseCase(
 
     override fun buildUseCaseSingle(): Single<Location> =
         locationRepository.getLocationFromGps()
+            .singleOrError()
 }

@@ -25,6 +25,7 @@ class HomeStateMachine @Inject constructor(
                 .map { intent -> intentProcessor.toAction(intent) }
                 .compose(actionProcessor.compose())
                 .scan(HomeViewState.idle(), reducer.reduce())
+                .distinctUntilChanged()
                 .replay(1)
                 .autoConnect(0)
                 .toFlowable(BackpressureStrategy.BUFFER)
