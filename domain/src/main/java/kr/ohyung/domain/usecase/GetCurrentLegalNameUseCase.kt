@@ -11,8 +11,9 @@ import kr.ohyung.domain.exception.InvalidLatLonException
 import kr.ohyung.domain.repository.LocationRepository
 import kr.ohyung.domain.repository.WeatherRepository
 import kr.ohyung.domain.usecase.base.SingleUseCase
+import javax.inject.Inject
 
-class GetCurrentLegalNameUseCase(
+class GetCurrentLegalNameUseCase @Inject constructor(
     private val locationRepository: LocationRepository,
     private val weatherRepository: WeatherRepository,
     executorThread: Scheduler,
