@@ -3,7 +3,7 @@ package kr.ohyung.mvi.di
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.FragmentComponent
+import dagger.hilt.android.components.ApplicationComponent
 import kr.ohyung.core.mvi.ActionProcessor
 import kr.ohyung.core.mvi.IntentProcessor
 import kr.ohyung.domain.executor.ExecutorProvider
@@ -22,7 +22,7 @@ import kr.ohyung.mvi.splash.processor.SplashIntentProcessor
 import javax.inject.Singleton
 
 @Module
-@InstallIn(FragmentComponent::class)
+@InstallIn(ApplicationComponent::class)
 object ProcessorModule {
 
     @Provides

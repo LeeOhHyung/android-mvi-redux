@@ -8,8 +8,13 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        buildConfigField("String", "BASE_URL", getBaseUrl())
-        buildConfigField("String", "clientId", getClientId())
+        buildConfigField("String", "BASE_URL_UNSPLASH", getBaseUrl("BASE_URL_UNSPLASH"))
+        buildConfigField("String", "BASE_URL_OPEN_WEATHER_MAP", getBaseUrl("BASE_URL_OPEN_WEATHER_MAP"))
+        buildConfigField("String", "BASE_URL_NAVER_MAP", getBaseUrl("BASE_URL_NAVER_MAP"))
+        buildConfigField("String", "API_KEY_UNSPLASH", getApiKey("API_KEY_UNSPLASH"))
+        buildConfigField("String", "API_KEY_OPEN_WEATHER_MAP", getApiKey("API_KEY_OPEN_WEATHER_MAP"))
+        buildConfigField("String", "API_KEY_NAVER_MAP_CLIENT_ID", getApiKey("API_KEY_NAVER_MAP_CLIENT_ID"))
+        buildConfigField("String", "API_KEY_NAVER_MAP_CLIENT_SECRET", getApiKey("API_KEY_NAVER_MAP_CLIENT_SECRET"))
     }
 
     compileOptions {
@@ -48,11 +53,11 @@ dependencies {
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0'
 }
 
-String getBaseUrl() {
+String getBaseUrl(String name) {
     try {
-        def localProperties = new Properties()
-        localProperties.load(new FileInputStream(rootProject.file("./local.properties")))
-        def baseUrl = localProperties.getProperty("BASE_URL")
+        def properties = new Properties()
+        properties.load(new FileInputStream(rootProject.file("./local.properties")))
+        def baseUrl = properties.getProperty(name)
         if(baseUrl != null) baseUrl else "\"https://fake.api.com\""
     } catch(FileNotFoundException e) {
         e.printStackTrace()
@@ -60,12 +65,12 @@ String getBaseUrl() {
     }
 }
 
-String getClientId() {
+String getApiKey(String name) {
     try {
-        def localProperties = new Properties()
-        localProperties.load(new FileInputStream(rootProject.file("./local.properties")))
-        def clientId = localProperties.getProperty("clientId")
-        if(clientId != null) clientId else "\"fakeApiKey\""
+        def properties = new Properties()
+        properties.load(new FileInputStream(rootProject.file("./local.properties")))
+        def apiKey = properties.getProperty(name)
+        if(apiKey != null) apiKey else "\"fakeApiKey\""
     } catch(FileNotFoundException e) {
         e.printStackTrace()
         "\"fakeApiKey\""

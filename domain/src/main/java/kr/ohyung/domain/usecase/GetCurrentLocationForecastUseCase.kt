@@ -23,15 +23,9 @@ class GetCurrentLocationForecastUseCase(
             .flatMap { location ->
                 if(location.isKoreaLatLng())
                     Single.zip(
-                        weatherRepository.getCurrentLegalName(location.latitude, location.longitude).subscribeOn(executorProvider.io()),
-                        weatherRepository.getWeatherByLatLon(location.latitude, location.longitude).subscribeOn(executorProvider.io()),
-                        BiFunction { legalName: LegalName, weather: Weather ->
-                            Forecast(
-                                countryCode = legalName.countryCode,
-                                city = legalName.city,
-                                weather = weather
-                            )
-                        }
+                        weatherRepository.getCurrentLegalName(location).subscribeOn(executorProvider.io()),
+                        weatherRepository.getWeatherByLatLon(location).subscribeOn(executorProvider.io()),
+                        BiFunction(::Forecast)
                     )
                 else
                     Single.error(InvalidLatLonException("this location is not korea latitude and longitude"))

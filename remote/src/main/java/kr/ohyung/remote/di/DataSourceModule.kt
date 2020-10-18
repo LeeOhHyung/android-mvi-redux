@@ -5,9 +5,13 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import kr.ohyung.data.source.remote.PhotoRemoteDataSource
+import kr.ohyung.data.source.remote.WeatherRemoteDataSource
 import kr.ohyung.remote.api.PhotosApi
+import kr.ohyung.remote.api.ReverseGeocodingApi
+import kr.ohyung.remote.api.WeatherApi
 import kr.ohyung.remote.mapper.PhotosResponseMapper
 import kr.ohyung.remote.source.PhotoRemoteDataSourceImpl
+import kr.ohyung.remote.source.WeatherRemoteDataSourceImpl
 import javax.inject.Singleton
 
 @Module(
@@ -28,5 +32,15 @@ object DataSourceModule {
     ): PhotoRemoteDataSource = PhotoRemoteDataSourceImpl(
         photosApi = photosApi,
         photosResponseMapper = photosResponseMapper
+    )
+
+    @Provides
+    @Singleton
+    fun provideWeatherRemoteDataSource(
+        reverseGeocodingApi: ReverseGeocodingApi,
+        weatherApi: WeatherApi
+    ): WeatherRemoteDataSource = WeatherRemoteDataSourceImpl(
+        reverseGeocodingApi = reverseGeocodingApi,
+        weatherApi = weatherApi
     )
 }

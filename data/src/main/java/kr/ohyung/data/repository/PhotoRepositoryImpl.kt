@@ -7,8 +7,8 @@ import io.reactivex.Single
 import kr.ohyung.data.exception.NetworkException
 import kr.ohyung.data.mapper.PhotoEntityMapper
 import kr.ohyung.data.source.remote.PhotoRemoteDataSource
-import kr.ohyung.domain.entity.unit.OrderBy
 import kr.ohyung.domain.entity.PhotoSummary
+import kr.ohyung.domain.entity.unit.OrderBy
 import kr.ohyung.domain.exception.Externals
 import kr.ohyung.domain.repository.PhotoRepository
 import javax.inject.Inject

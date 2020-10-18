@@ -5,7 +5,7 @@ package kr.ohyung.domain.entity.unit
 
 import kr.ohyung.domain.Entity
 
-enum class TempUnit(val value: String) : Entity {
+enum class TempUnit(val value: String) : Entity{
     IMPERIAL("imperial"),
     METRIC("metric"),
     KELVIN("kelvin")

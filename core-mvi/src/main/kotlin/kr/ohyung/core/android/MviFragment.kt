@@ -17,7 +17,9 @@ import kr.ohyung.core.mvi.ViewState
 abstract class MviFragment<V: ViewDataBinding, I: ViewIntent,
     S: ViewState>(@LayoutRes layoutId: Int) : BaseFragment<V>(layoutId), BaseView<I, S> {
 
-    override fun initView() { /* explicitly empty */ }
+    override fun initView() {
+        /* explicitly empty */
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

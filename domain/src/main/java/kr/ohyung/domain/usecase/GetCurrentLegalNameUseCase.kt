@@ -23,10 +23,7 @@ class GetCurrentLegalNameUseCase(
         locationRepository.getLocationFromGps()
             .flatMap { location ->
                 if(location.isKoreaLatLng())
-                    weatherRepository.getCurrentLegalName(
-                        lat = location.latitude,
-                        lon = location.longitude
-                    )
+                    weatherRepository.getCurrentLegalName(location)
                 else
                     Single.error(InvalidLatLonException("this location is not korea latitude and longitude"))
             }

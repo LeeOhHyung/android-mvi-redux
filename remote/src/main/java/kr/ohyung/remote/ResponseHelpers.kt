@@ -16,16 +16,17 @@ import java.lang.Exception
 internal class ResponseSingleTransformer<T> : SingleTransformer<T, T> {
     override fun apply(upstream: Single<T>): Single<T> =
         upstream.onErrorResumeNext { throwable ->
-            if(throwable is HttpException) {
-                val errorMessage: String = throwable.errorMessage
-                when(throwable.code()) {
-                    400 -> Single.error(NetworkException.BadRequestException(errorMessage))
-                    401 -> Single.error(NetworkException.UnauthorizedException(errorMessage))
-                    404 -> Single.error(NetworkException.NotFoundException(errorMessage))
-                    else -> Single.error(NetworkException.UnknownException(errorMessage))
+            when(throwable) {
+                is HttpException -> {
+                    val errorMessage: String = throwable.errorMessage
+                    when(throwable.code()) {
+                        400 -> Single.error(NetworkException.BadRequestException(errorMessage))
+                        401 -> Single.error(NetworkException.UnauthorizedException(errorMessage))
+                        404 -> Single.error(NetworkException.NotFoundException(errorMessage))
+                        else -> Single.error(NetworkException.UnknownException(errorMessage))
+                    }
                 }
-            } else {
-                Single.error(throwable)
+                else -> Single.error(throwable)
             }
         }
 }

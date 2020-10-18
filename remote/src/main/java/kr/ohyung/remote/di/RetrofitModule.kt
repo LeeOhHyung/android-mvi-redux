@@ -14,6 +14,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -30,28 +31,20 @@ object RetrofitModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
-        .baseUrl(BuildConfig.BASE_URL)
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        .addConverterFactory(MoshiConverterFactory.create())
-        .client(okHttpClient)
-        .build()
-
+    fun provideRetrofit(): Retrofit.Builder =
+        Retrofit.Builder()
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create())
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(
-        loggerInterceptor: HttpLoggingInterceptor,
-        headerInterceptor: Interceptor
-    ): OkHttpClient =
+    fun provideOkHttpClient(loggerInterceptor: HttpLoggingInterceptor): OkHttpClient.Builder =
         OkHttpClient.Builder()
             .retryOnConnectionFailure(true)
             .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
             .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
             .addInterceptor(loggerInterceptor)
-            .addInterceptor(headerInterceptor)
-            .build()
 
     @Provides
     @Singleton
@@ -64,13 +57,14 @@ object RetrofitModule {
 
     @Provides
     @Singleton
+    @Named("navermap")
     fun provideHeaderIntercept(): Interceptor =
         object: Interceptor {
             override fun intercept(chain: Interceptor.Chain): Response =
                 chain.proceed(
                     chain.request().newBuilder()
-                        .addHeader(HEADER_NAVER_MAP_CLIENT_ID, "") // Github Public Repo 에서도 안전하게 Key 전달하는 방법 찾아보기
-                        .addHeader(HEADER_NAVER_MAP_CLIENT_SECRET, "")
+                        .addHeader(HEADER_NAVER_MAP_CLIENT_ID, BuildConfig.API_KEY_NAVER_MAP_CLIENT_ID)
+                        .addHeader(HEADER_NAVER_MAP_CLIENT_SECRET, BuildConfig.API_KEY_NAVER_MAP_CLIENT_SECRET)
                         .build()
                 )
         }

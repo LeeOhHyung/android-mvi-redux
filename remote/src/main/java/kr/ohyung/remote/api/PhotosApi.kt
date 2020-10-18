@@ -22,6 +22,6 @@ interface PhotosApi : Api {
     @GET("photos/random")
     fun getRandomPhoto(
         @Query("query") query: String?,
-        @Query("client_id") clientId: String? = BuildConfig.clientId
+        @Query("client_id") clientId: String? = BuildConfig.API_KEY_OPEN_WEATHER_MAP
     ): Single<PhotosResponse>
 }

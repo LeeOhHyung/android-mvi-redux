@@ -7,7 +7,7 @@ import io.reactivex.functions.BiFunction
 import kr.ohyung.core.mvi.ViewStateReducer
 import javax.inject.Inject
 
-class SplashViewStateReducer @Inject constructor(): ViewStateReducer<SplashViewState, SplashViewResult> {
+class SplashViewStateReducer @Inject constructor() : ViewStateReducer<SplashViewState, SplashViewResult> {
     override fun reduce() = BiFunction { oldState: SplashViewState, result: SplashViewResult ->
         when(result) {
             SplashViewResult.Loading -> oldState.copy(isLoading = true)

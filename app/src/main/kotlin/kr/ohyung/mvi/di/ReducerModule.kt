@@ -3,7 +3,7 @@ package kr.ohyung.mvi.di
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.FragmentComponent
+import dagger.hilt.android.components.ApplicationComponent
 import kr.ohyung.core.mvi.ViewStateReducer
 import kr.ohyung.mvi.home.mvi.HomeViewResult
 import kr.ohyung.mvi.home.mvi.HomeViewState
@@ -14,7 +14,7 @@ import kr.ohyung.mvi.splash.mvi.SplashViewStateReducer
 import javax.inject.Singleton
 
 @Module
-@InstallIn(FragmentComponent::class)
+@InstallIn(ApplicationComponent::class)
 object ReducerModule {
 
     @Provides
