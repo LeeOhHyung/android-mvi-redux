@@ -10,7 +10,8 @@ data class WeatherDataModel(
     val longitude: Double,
     val weatherName: String,
     val description: String,
-    val icon: String
+    val icon: String,
+    val temp: Double
 ) : DataModel
 
 fun WeatherDataModel.toEntity() = Entity(
@@ -18,5 +19,6 @@ fun WeatherDataModel.toEntity() = Entity(
     longitude = longitude,
     name = weatherName,
     description = description,
-    icon = icon
+    icon = icon,
+    temp = temp
 )

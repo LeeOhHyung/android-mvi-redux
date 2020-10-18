@@ -10,5 +10,6 @@ data class Weather(
     val longitude: Double,
     val name: String,
     val description: String,
-    val icon: String
+    val icon: String,
+    val temp: Double
 ): Entity

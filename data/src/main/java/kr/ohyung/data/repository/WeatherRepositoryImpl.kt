@@ -31,7 +31,6 @@ class WeatherRepositoryImpl @Inject constructor(
                 }
             }
 
-
     override fun getWeatherByLatLon(location: Location): Single<Weather> =
         weatherRemoteDataSource
             .getWeatherByLatLon(latitude = location.latitude, longitude = location.longitude, units = TempUnit.METRIC.value)

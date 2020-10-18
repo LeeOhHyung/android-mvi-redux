@@ -5,7 +5,9 @@ package kr.ohyung.mvi.home
 
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.navigation.navGraphViewModels
@@ -31,6 +33,12 @@ class HomeFragment : MviFragment<FragmentHomeBinding,
         defaultViewModelProviderFactory
     }
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        super.onCreateView(inflater, container, savedInstanceState)
+        binding.viewModel = homeViewModel
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         doOnLocationPermissions()
@@ -47,8 +55,6 @@ class HomeFragment : MviFragment<FragmentHomeBinding,
     }
 
     override fun render(state: HomeViewState) = with(state) {
-        binding.progressBar.isVisible = isLoading
-        binding.textView.text = currentAddress
         if(error != null)
             toast(error.message.toString())
     }

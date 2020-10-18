@@ -53,6 +53,19 @@
         <item name="fontFamily">@font/roboto_bold</item>
     </style>
 
+    <style name="Typography.450.Thin">
+        <item name="fontFamily">@font/roboto_thin</item>
+    </style>
+    <style name="Typography.450.Light">
+        <item name="fontFamily">@font/roboto_light</item>
+    </style>
+    <style name="Typography.450.Medium">
+        <item name="fontFamily">@font/roboto_medium</item>
+    </style>
+    <style name="Typography.450.Bold">
+        <item name="fontFamily">@font/roboto_bold</item>
+    </style>
+
     <style name="Typography.500.Thin">
         <item name="fontFamily">@font/roboto_thin</item>
     </style>
@@ -63,6 +76,19 @@
         <item name="fontFamily">@font/roboto_medium</item>
     </style>
     <style name="Typography.500.Bold">
+        <item name="fontFamily">@font/roboto_bold</item>
+    </style>
+
+    <style name="Typography.550.Thin">
+        <item name="fontFamily">@font/roboto_thin</item>
+    </style>
+    <style name="Typography.550.Light">
+        <item name="fontFamily">@font/roboto_light</item>
+    </style>
+    <style name="Typography.550.Medium">
+        <item name="fontFamily">@font/roboto_medium</item>
+    </style>
+    <style name="Typography.550.Bold">
         <item name="fontFamily">@font/roboto_bold</item>
     </style>
 

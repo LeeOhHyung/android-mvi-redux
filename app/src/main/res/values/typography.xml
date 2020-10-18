@@ -27,8 +27,18 @@
         <item name="android:textStyle">normal</item>
     </style>
 
+    <style name="Typography.450">
+        <item name="android:textSize" tools:ignore="SpUsage">@dimen/text_size18</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
     <style name="Typography.500">
         <item name="android:textSize" tools:ignore="SpUsage">@dimen/text_size20</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="Typography.550">
+        <item name="android:textSize" tools:ignore="SpUsage">@dimen/text_size22</item>
         <item name="android:textStyle">normal</item>
     </style>
 

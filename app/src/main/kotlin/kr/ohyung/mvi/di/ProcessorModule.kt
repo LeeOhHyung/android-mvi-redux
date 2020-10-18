@@ -8,6 +8,7 @@ import kr.ohyung.core.mvi.ActionProcessor
 import kr.ohyung.core.mvi.IntentProcessor
 import kr.ohyung.domain.executor.ExecutorProvider
 import kr.ohyung.domain.usecase.GetCurrentLegalNameUseCase
+import kr.ohyung.domain.usecase.GetCurrentLocationForecastUseCase
 import kr.ohyung.domain.usecase.GetRandomPhotoUseCase
 import kr.ohyung.mvi.home.mvi.HomeViewAction
 import kr.ohyung.mvi.home.mvi.HomeViewIntent
@@ -43,7 +44,7 @@ object ProcessorModule {
     @Provides
     @Singleton
     fun provideHomeActionProcessor(
-        getCurrentLegalNameUseCase: GetCurrentLegalNameUseCase,
+        getCurrentLocationForecastUseCase: GetCurrentLocationForecastUseCase,
         executorProvider: ExecutorProvider
-    ): ActionProcessor<HomeViewAction, HomeViewResult> = HomeActionProcessor(getCurrentLegalNameUseCase, executorProvider)
+    ): ActionProcessor<HomeViewAction, HomeViewResult> = HomeActionProcessor(getCurrentLocationForecastUseCase, executorProvider)
 }

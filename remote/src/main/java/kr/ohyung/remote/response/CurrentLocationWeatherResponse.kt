@@ -4,9 +4,11 @@
 package kr.ohyung.remote.response
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import kr.ohyung.data.model.WeatherDataModel
 import kr.ohyung.remote.Response
 
+@JsonClass(generateAdapter = true)
 data class CurrentLocationWeatherResponse(
     @field:Json(name = "cod")
     val cod: Int,
@@ -26,6 +28,7 @@ data class CurrentLocationWeatherResponse(
     val main: Main
 ) : Response {
 
+    @JsonClass(generateAdapter = true)
     data class Coord(
         @field:Json(name = "lat")
         val lat: Double,
@@ -33,6 +36,7 @@ data class CurrentLocationWeatherResponse(
         val lon: Double
     )
 
+    @JsonClass(generateAdapter = true)
     data class Weather(
         @field:Json(name = "id")
         val id: Int,
@@ -44,15 +48,16 @@ data class CurrentLocationWeatherResponse(
         val icon: String
     )
 
+    @JsonClass(generateAdapter = true)
     data class Main(
         @field:Json(name = "temp")
-        val temp: Int,
+        val temp: Double,
         @field:Json(name = "feels_like")
         val feels_like: Double,
         @field:Json(name = "temp_min")
-        val temp_min: Int,
+        val temp_min: Double,
         @field:Json(name = "temp_max")
-        val temp_max: Int,
+        val temp_max: Double,
         @field:Json(name = "pressure")
         val pressure: Int,
         @field:Json(name = "humidity")
@@ -65,5 +70,6 @@ fun CurrentLocationWeatherResponse.toDataModel() = WeatherDataModel(
     longitude = coord.lon,
     weatherName = weather.first().main,
     description = weather.first().description,
-    icon = weather.first().icon
+    icon = weather.first().icon,
+    temp = main.temp
 )
