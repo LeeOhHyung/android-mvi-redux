@@ -18,4 +18,8 @@
         <item name="android:includeFontPadding">false</item>
     </style>
 
+    <style name="Gray900ProgressBar" parent="Widget.AppCompat.ProgressBar">
+        <item name="android:indeterminateTint">@color/gray_900</item>
+    </style>
+
 </resources>

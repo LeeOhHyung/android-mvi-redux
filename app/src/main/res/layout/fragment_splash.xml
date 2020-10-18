@@ -18,10 +18,10 @@
 
         <ProgressBar
             android:id="@+id/progress_bar"
+            style="@style/Gray900ProgressBar"
             android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:indeterminateTint="@color/gray_900"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

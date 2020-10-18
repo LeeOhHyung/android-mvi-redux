@@ -17,7 +17,7 @@ abstract class NoParamsUseCase : UseCase {
 
 // if params is null, throw exception.
 // note that, params cannot be null.
-fun <T: Any> ParameterizedUseCase<*>.requireParams(value: T?): T {
+fun <T: Any> ParameterizedUseCase<*>.requireParamsNonNull(value: T?): T {
     if(value == null) {
         throw NoParamsException()
     } else {

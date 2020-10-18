@@ -6,6 +6,7 @@ package kr.ohyung.mvi.home
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.navigation.navGraphViewModels
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,9 +47,8 @@ class HomeFragment : MviFragment<FragmentHomeBinding,
     }
 
     override fun render(state: HomeViewState) = with(state) {
-        if(isLoading) {
-            // define when loading state.
-        }
+        binding.progressBar.isVisible = isLoading
+        binding.textView.text = currentAddress
         if(error != null)
             toast(error.message.toString())
     }

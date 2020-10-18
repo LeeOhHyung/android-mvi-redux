@@ -14,7 +14,7 @@ abstract class ParameterizedSingleUseCase<T, in Params>(
     protected abstract fun buildUseCaseSingle(params: Params): Single<T>
 
     override fun get(params: Params?): Single<T> =
-        buildUseCaseSingle(params = requireParams(params))
+        buildUseCaseSingle(params = requireParamsNonNull(params))
 
     override fun execute(params: Params?): Single<T> =
         get(params).subscribeOn(executorThread)

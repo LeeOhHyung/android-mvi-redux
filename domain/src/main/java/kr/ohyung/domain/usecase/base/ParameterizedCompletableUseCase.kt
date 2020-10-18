@@ -14,7 +14,7 @@ abstract class ParameterizedCompletableUseCase<in Params>(
     protected abstract fun buildUseCaseCompletable(params: Params): Completable
 
     override fun get(params: Params?): Completable =
-        buildUseCaseCompletable(params = requireParams(params))
+        buildUseCaseCompletable(params = requireParamsNonNull(params))
 
     override fun execute(params: Params?): Completable =
         get(params)
