@@ -64,7 +64,7 @@
             app:layout_constraintEnd_toEndOf="parent"/>
 
         <TextView
-            style="@style/Typography.400.Bold"
+            style="@style/Typography.500.Bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin4"
