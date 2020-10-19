@@ -2,6 +2,6 @@ include ':local'
 include ':remote'
 include ':data'
 include ':domain'
-include ':app'
+include ':presentation'
 include ':core-mvi'
 rootProject.name = "android-on-redux"
