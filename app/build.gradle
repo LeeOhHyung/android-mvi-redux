@@ -1,0 +1,73 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        applicationId "kr.ohyung.mvi"
+        minSdkVersion 23
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0.0"
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    buildFeatures {
+        dataBinding true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation project(':core-mvi')
+    implementation project(':presentation')
+    implementation project(':domain')
+    implementation project(':data')
+    implementation project(':remote')
+    implementation project(':local')
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+
+    // Hilt
+    implementation 'com.google.dagger:hilt-android:2.28.3-alpha'
+    implementation 'com.google.dagger:hilt-android-testing:2.28.3-alpha'
+    implementation 'androidx.hilt:hilt-common:1.0.0-alpha02'
+    implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02'
+    kapt 'com.google.dagger:hilt-android-compiler:2.28.3-alpha'
+    kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha02'
+
+    // RxJava2
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.19'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.4.0'
+
+    // Retrofit - add for resolve dagger processor error
+    // https://stackoverflow.com/questions/47124987/dagger-2-cannot-access-retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.8.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.8.1'
+}

@@ -1,7 +1,7 @@
 /*
  * Created by Lee Oh Hyung on 2020/09/14.
  */
-package kr.ohyung.mvi
+package kr.ohyung.app
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

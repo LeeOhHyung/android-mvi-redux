@@ -1,6 +1,5 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: "androidx.navigation.safeargs.kotlin"
@@ -9,50 +8,28 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
-    defaultConfig {
-        applicationId "kr.ohyung.mvi"
-        minSdkVersion 23
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0.0"
-    }
-
-    buildTypes {
-        debug {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-        release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-
     buildFeatures {
         dataBinding true
     }
 
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
-    }
-
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
         test.java.srcDirs += 'src/test/kotlin'
     }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 
 dependencies {
     implementation project(':core-mvi')
     implementation project(':domain')
-    implementation project(':data')
-    implementation project(':remote')
-    implementation project(':local')
 
     // Android, Kotlin Libraries
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -78,18 +55,12 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
     implementation "androidx.lifecycle:lifecycle-common-java8:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-reactivestreams:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:2.2.0"
     
     // Navigation
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.1'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.1'
     implementation 'androidx.navigation:navigation-testing:2.3.1'
-
-    // Retrofit - add for resolve dagger processor error
-    // https://stackoverflow.com/questions/47124987/dagger-2-cannot-access-retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.okhttp3:okhttp:4.8.1'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.8.1'
 
     // RxJava2
     implementation 'io.reactivex.rxjava2:rxjava:2.2.19'
@@ -99,7 +70,7 @@ dependencies {
     // Mockito, JUnit, kotlin test
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0'
     testImplementation 'org.mockito:mockito-junit-jupiter:3.0.0'
-    testImplementation 'junit:junit:4.13'
+    testImplementation 'junit:junit:4.13.1'
     testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 }
