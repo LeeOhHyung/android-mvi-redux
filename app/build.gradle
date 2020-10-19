@@ -63,11 +63,4 @@ dependencies {
     // RxJava2
     implementation 'io.reactivex.rxjava2:rxjava:2.2.19'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-    implementation 'io.reactivex.rxjava2:rxkotlin:2.4.0'
-
-    // Retrofit - add for resolve dagger processor error
-    // https://stackoverflow.com/questions/47124987/dagger-2-cannot-access-retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.okhttp3:okhttp:4.8.1'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.8.1'
 }
