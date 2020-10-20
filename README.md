@@ -25,10 +25,10 @@
 그림 추가
 #### Redux 또는 MVI 구조도 에서 각 지점별 용어 정리와 흐름에 대한 설명
 
-## Unit Test
-
 ### Typography
 프로젝트에서 사용할 font, font-weight, font size를 미리 정의해둠.
+
+## Unit Test
 
 ## Screenshots
 
