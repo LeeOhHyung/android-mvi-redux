@@ -19,7 +19,9 @@ abstract class BaseFragment<V: ViewDataBinding>(
 
     protected lateinit var binding: V
 
-    abstract fun initView()
+    open fun initView() {
+        /* explicitly empty */
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false)

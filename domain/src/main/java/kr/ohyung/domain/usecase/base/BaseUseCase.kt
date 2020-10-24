@@ -16,8 +16,7 @@ abstract class NoParamsUseCase : UseCase {
     abstract fun execute(): Any
 }
 
-// if params is null, throw exception.
-// note that, params cannot be null.
+// ParameterizedUseCase 의 Params 로 전달된 인자가 null 이라면, throw exception.
 fun <T: Any> ParameterizedUseCase<*>.requireParamsNonNull(value: T?): T {
     if(value == null) {
         throw NoParamsException()

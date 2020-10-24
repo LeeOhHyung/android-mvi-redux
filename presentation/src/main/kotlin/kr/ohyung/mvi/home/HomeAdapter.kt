@@ -39,7 +39,7 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when(ViewType.values()[viewType]) {
             ViewType.WEATHER -> WeatherViewHolder(parent)
-            ViewType.PHOTO -> TODO()
+            ViewType.PHOTO -> PhotoViewHolder(parent)
         }
 
     @Suppress("UNCHECKED_CAST")

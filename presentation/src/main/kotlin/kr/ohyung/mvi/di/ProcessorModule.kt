@@ -10,6 +10,7 @@ import kr.ohyung.core.mvi.IntentProcessor
 import kr.ohyung.domain.executor.ExecutorProvider
 import kr.ohyung.domain.usecase.GetCurrentLocationForecastUseCase
 import kr.ohyung.domain.usecase.GetRandomPhotoUseCase
+import kr.ohyung.domain.usecase.SearchPhotoUseCase
 import kr.ohyung.mvi.home.mvi.HomeViewAction
 import kr.ohyung.mvi.home.mvi.HomeViewIntent
 import kr.ohyung.mvi.home.mvi.HomeViewResult
@@ -44,6 +45,7 @@ object ProcessorModule {
     @ActivityRetainedScoped
     fun provideHomeActionProcessor(
         getCurrentLocationForecastUseCase: GetCurrentLocationForecastUseCase,
+        searchPhotoUseCase: SearchPhotoUseCase,
         executorProvider: ExecutorProvider
-    ): ActionProcessor<HomeViewAction, HomeViewResult> = HomeActionProcessor(getCurrentLocationForecastUseCase, executorProvider)
+    ): ActionProcessor<HomeViewAction, HomeViewResult> = HomeActionProcessor(getCurrentLocationForecastUseCase, searchPhotoUseCase, executorProvider)
 }

@@ -4,15 +4,22 @@
 package kr.ohyung.mvi.home.processor
 
 import io.reactivex.ObservableTransformer
+import io.reactivex.Single
+import io.reactivex.functions.BiFunction
 import kr.ohyung.core.mvi.ActionProcessor
+import kr.ohyung.domain.entity.Forecast
+import kr.ohyung.domain.entity.PhotoSummary
 import kr.ohyung.domain.executor.ExecutorProvider
 import kr.ohyung.domain.usecase.GetCurrentLocationForecastUseCase
+import kr.ohyung.domain.usecase.SearchParams
+import kr.ohyung.domain.usecase.SearchPhotoUseCase
 import kr.ohyung.mvi.home.mvi.HomeViewAction
 import kr.ohyung.mvi.home.mvi.HomeViewResult
 import javax.inject.Inject
 
 class HomeActionProcessor @Inject constructor(
     private val getCurrentLocationForecastUseCase: GetCurrentLocationForecastUseCase,
+    private val searchPhotoUseCase: SearchPhotoUseCase,
     private val executorProvider: ExecutorProvider
 ) : ActionProcessor<HomeViewAction, HomeViewResult> {
 
@@ -27,8 +34,17 @@ class HomeActionProcessor @Inject constructor(
     private val getLocationAndWeatherPhotos =
         ObservableTransformer<HomeViewAction.GetLocationAndPhotos, HomeViewResult> { actions ->
             actions.flatMap {
-                getCurrentLocationForecastUseCase.execute()
-                    .map { forecast -> HomeViewResult.GetLocationAndPhotosResult.Success(forecast) }
+                getCurrentLocationForecastUseCase.get()
+                    .flatMapSingle { forecast ->
+                        Single.zip(
+                            Single.just(forecast),
+                            searchPhotoUseCase.get(params = SearchParams(query = forecast.weather.name))
+                                .subscribeOn(executorProvider.io()),
+                            BiFunction { _: Forecast, photos: List<PhotoSummary> ->
+                                HomeViewResult.GetLocationAndPhotosResult.Success(forecast, photos)
+                            }
+                        )
+                    }
                     .toObservable()
                     .cast(HomeViewResult::class.java)
                     .onErrorReturn { HomeViewResult.GetLocationAndPhotosResult.Error(it) }
