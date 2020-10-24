@@ -1,7 +1,7 @@
 /*
  * Created by Lee Oh Hyung on 2020/10/18.
  */
-package kr.ohyung.mvi.utility
+package kr.ohyung.mvi.utility.extension
 
 import android.Manifest
 import android.app.Activity

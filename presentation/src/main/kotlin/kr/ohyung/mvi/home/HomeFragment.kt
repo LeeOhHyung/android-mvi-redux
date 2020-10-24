@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
@@ -20,10 +19,10 @@ import kr.ohyung.mvi.R
 import kr.ohyung.mvi.databinding.FragmentHomeBinding
 import kr.ohyung.mvi.home.mvi.HomeViewIntent
 import kr.ohyung.mvi.home.mvi.HomeViewState
-import kr.ohyung.mvi.utility.REQUEST_CODE_PERMISSION
-import kr.ohyung.mvi.utility.isPermissionGranted
-import kr.ohyung.mvi.utility.requestPermissions
-import kr.ohyung.mvi.utility.toast
+import kr.ohyung.mvi.utility.extension.REQUEST_CODE_PERMISSION
+import kr.ohyung.mvi.utility.extension.isPermissionGranted
+import kr.ohyung.mvi.utility.extension.requestPermissions
+import kr.ohyung.mvi.utility.extension.toast
 
 @AndroidEntryPoint
 class HomeFragment : MviFragment<FragmentHomeBinding,

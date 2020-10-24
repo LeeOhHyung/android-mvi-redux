@@ -12,7 +12,7 @@ import kr.ohyung.domain.entity.PhotoSummary
 import kr.ohyung.mvi.R
 import kr.ohyung.mvi.databinding.ItemCurrentWeatherBinding
 import kr.ohyung.mvi.databinding.ItemPhotoBinding
-import kr.ohyung.mvi.utility.load
+import kr.ohyung.mvi.utility.extension.load
 import kr.ohyung.mvi.utility.widget.Binder
 import kr.ohyung.mvi.utility.widget.HolderItem
 

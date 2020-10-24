@@ -1,13 +1,12 @@
 /*
  * Created by Lee Oh Hyung on 2020/10/11.
  */
-package kr.ohyung.mvi.utility
+package kr.ohyung.mvi.utility.extension
 
 import android.app.Activity
 import android.graphics.Color
 import android.os.Build
 import android.view.View
-import android.view.WindowManager
 
 fun Activity.setTransparentStatusBar() {
     window.run {
