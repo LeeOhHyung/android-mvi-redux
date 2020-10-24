@@ -30,9 +30,8 @@ interface PhotosApi : Api {
     @GET("search/photos")
     fun searchPhotos(
         @Query("query") query: String,
-        @Query("page") page: Int?,
-        @Query("per_page") perPage: Int?,
-        @Query("order_by") orderBy: String?,
+        @Query("page") page: Int?, // default 1
+        @Query("per_page") perPage: Int?, // default 10
         @Query("client_id") clientId: String = BuildConfig.API_KEY_UNSPLASH
     ): Single<SearchPhotoResponse>
 }

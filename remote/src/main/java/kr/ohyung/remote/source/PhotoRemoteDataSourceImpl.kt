@@ -25,8 +25,8 @@ class PhotoRemoteDataSourceImpl @Inject constructor(
             .map { response -> photosResponseMapper.toDataModel(response) }
             .compose()
 
-    override fun searchPhotos(query: String, page: Int?, perPage: Int?, orderBy: String?): Single<List<PhotoSummaryDataModel>> =
-        photosApi.searchPhotos(query, page, perPage, orderBy)
+    override fun searchPhotos(query: String, page: Int?, perPage: Int?): Single<List<PhotoSummaryDataModel>> =
+        photosApi.searchPhotos(query, page, perPage)
             .map { response -> photosResponseMapper.toDataModels(response.results) }
             .compose()
 }

@@ -42,8 +42,8 @@ class PhotoRepositoryImpl @Inject constructor(
                 Single.error(errorType)
             }
 
-    override fun searchPhotos(query: String, page: Int?, perPage: Int?, orderBy: String?): Single<List<PhotoSummary>> =
-        photoRemoteDataSource.searchPhotos(query, page, perPage, orderBy)
+    override fun searchPhotos(query: String, page: Int?, perPage: Int?): Single<List<PhotoSummary>> =
+        photoRemoteDataSource.searchPhotos(query, page, perPage)
             .map { photoDatamodels -> photoEntityMapper.toEntities(photoDatamodels) }
             .onErrorResumeNext { throwable ->
                 val errorType = when(throwable) {
