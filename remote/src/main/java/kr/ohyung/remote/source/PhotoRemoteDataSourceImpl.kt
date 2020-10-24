@@ -24,4 +24,9 @@ class PhotoRemoteDataSourceImpl @Inject constructor(
         photosApi.getRandomPhoto(query)
             .map { response -> photosResponseMapper.toDataModel(response) }
             .compose()
+
+    override fun searchPhotos(query: String, page: Int?, perPage: Int?, orderBy: String?): Single<List<PhotoSummaryDataModel>> =
+        photosApi.searchPhotos(query, page, perPage, orderBy)
+            .map { response -> photosResponseMapper.toDataModels(response.results) }
+            .compose()
 }

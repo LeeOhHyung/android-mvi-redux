@@ -17,6 +17,15 @@
         android:layout_height="match_parent"
         android:background="@color/white_900">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/tv_current_location_hint"
             style="@style/Typography.400.Bold"
@@ -45,23 +54,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{String.valueOf(viewModel.viewState.forecast.weather.temp)}"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintTop_toTopOf="@id/iv_weather_icon"
             app:layout_constraintBottom_toBottomOf="@id/iv_weather_icon"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/iv_weather_icon"
-            tools:text="15.4"/>
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_weather_icon"
+            tools:text="15.4" />
 
         <ImageView
             android:id="@+id/iv_weather_icon"
             setImageCenterCrop="@{@string/format_weather_icon(viewModel.viewState.forecast.weather.icon)}"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:layout_marginTop="@dimen/margin16"
             android:layout_marginStart="@dimen/margin8"
-            app:layout_constraintTop_toBottomOf="@id/tv_current_location"
+            android:layout_marginTop="@dimen/margin16"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_current_location_temperature"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_current_location" />
 
         <TextView
             style="@style/Typography.500.Bold"
@@ -69,10 +78,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin4"
             android:text="@{viewModel.viewState.forecast.weather.description}"
-            app:layout_constraintTop_toBottomOf="@id/iv_weather_icon"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:text="Heavy Rain"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_weather_icon"
+            tools:text="Heavy Rain" />
 
         <ProgressBar
             android:id="@+id/progress_bar"
