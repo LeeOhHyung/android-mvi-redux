@@ -5,6 +5,7 @@ package kr.ohyung.mvi.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kr.ohyung.domain.entity.Forecast
 import kr.ohyung.mvi.databinding.ItemCurrentWeatherBinding
@@ -27,7 +28,8 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    // fun submitList() 페이지네이션 용으로
+    // For Pagination
+    // fun submitList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when(ViewType.values()[viewType]) {
@@ -57,4 +59,13 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             executePendingBindings()
         }
     }
+
+    private class PhotoViewHolder
 }
+
+@BindingAdapter("setForecast")
+fun RecyclerView.setForecast(forecast: Forecast?) =
+    forecast?.let {
+        val adapter = adapter as? HomeAdapter
+        adapter?.submitList(it)
+    }

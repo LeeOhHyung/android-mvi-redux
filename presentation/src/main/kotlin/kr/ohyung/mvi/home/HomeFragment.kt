@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.navGraphViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
@@ -35,6 +36,8 @@ class HomeFragment : MviFragment<FragmentHomeBinding,
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         binding.viewModel = homeViewModel
+        binding.recyclerView.adapter = HomeAdapter()
+        binding.recyclerView.layoutManager = LinearLayoutManager(context)
         return binding.root
     }
 
