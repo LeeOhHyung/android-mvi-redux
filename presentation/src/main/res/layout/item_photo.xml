@@ -15,15 +15,24 @@
         android:layout_height="wrap_content"
         android:background="@color/white_900">
 
-        <ImageView
-            android:id="@+id/iv_thumbnail"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_thumbnail"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:src="@color/gray_400"
             app:layout_constraintDimensionRatio="h, 4:3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:cardElevation="@dimen/elevation0"
+            app:cardCornerRadius="@dimen/corner_radius8">
+
+            <ImageView
+                android:id="@+id/iv_thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@color/gray_400" />
+
+        </androidx.cardview.widget.CardView>
 
         <TextView
             style="@style/Typography.400.Medium"
@@ -34,7 +43,7 @@
             android:maxLines="2"
             android:text="@{photo.description}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_thumbnail"
+            app:layout_constraintTop_toBottomOf="@id/cv_thumbnail"
             tools:text="A Colorado rainbow and rainshaft observed while on College of Dupage's Storm Chasing Trip 3." />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

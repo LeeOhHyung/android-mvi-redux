@@ -4,6 +4,7 @@
 package kr.ohyung.mvi.home
 
 import android.content.pm.PackageManager
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
@@ -19,10 +21,7 @@ import kr.ohyung.mvi.R
 import kr.ohyung.mvi.databinding.FragmentHomeBinding
 import kr.ohyung.mvi.home.mvi.HomeViewIntent
 import kr.ohyung.mvi.home.mvi.HomeViewState
-import kr.ohyung.mvi.utility.extension.REQUEST_CODE_PERMISSION
-import kr.ohyung.mvi.utility.extension.isPermissionGranted
-import kr.ohyung.mvi.utility.extension.requestPermissions
-import kr.ohyung.mvi.utility.extension.toast
+import kr.ohyung.mvi.utility.extension.*
 
 @AndroidEntryPoint
 class HomeFragment : MviFragment<FragmentHomeBinding,
@@ -69,6 +68,21 @@ class HomeFragment : MviFragment<FragmentHomeBinding,
                         }
                 }
             }
+        binding.recyclerView.addItemDecoration(object : RecyclerView.ItemDecoration() {
+            override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+                val layoutParams = view.layoutParams as GridLayoutManager.LayoutParams
+                val position: Int = parent.getChildAdapterPosition(view)
+                val viewType: Int? = parent.adapter?.getItemViewType(position)
+
+                if(viewType == HomeAdapter.ViewType.PHOTO.index) {
+                    with(outRect) {
+                        top = 16.dpToPx()
+                        left = if(layoutParams.spanIndex == 0) 16.dpToPx() else 8.dpToPx()
+                        right = if(layoutParams.spanIndex == layoutParams.spanSize - 1) 8.dpToPx() else 16.dpToPx()
+                    }
+                }
+            }
+        })
     }
 
     override fun render(state: HomeViewState) = with(state) {
