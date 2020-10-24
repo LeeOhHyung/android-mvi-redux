@@ -16,6 +16,7 @@ class HomeIntentProcessor @Inject constructor() : IntentProcessor<HomeViewIntent
             HomeViewIntent.Noting -> HomeViewAction.Nothing
             HomeViewIntent.Retry -> HomeViewAction.GetLocationAndPhotos
             HomeViewIntent.InitHomeScreen -> HomeViewAction.GetLocationAndPhotos
+            is HomeViewIntent.PhotoLoadMore -> HomeViewAction.PhotoLoadMore(intent.query, intent.page)
             is HomeViewIntent.AddBookmark -> HomeViewAction.AddBookmark(bookmark = intent.bookmark)
             is HomeViewIntent.DeleteBookmark -> HomeViewAction.DeleteBookmark(id = intent.id)
         }

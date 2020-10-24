@@ -10,6 +10,7 @@ sealed class HomeViewIntent : ViewIntent {
     object Noting : HomeViewIntent()
     object Retry : HomeViewIntent()
     object InitHomeScreen : HomeViewIntent()
+    data class PhotoLoadMore(val query: String, val page: Int) : HomeViewIntent()
     data class AddBookmark(val bookmark: Bookmark) : HomeViewIntent()
     data class DeleteBookmark(val id: String) : HomeViewIntent()
 }

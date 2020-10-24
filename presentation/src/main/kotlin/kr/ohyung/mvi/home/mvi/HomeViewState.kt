@@ -13,6 +13,7 @@ data class HomeViewState(
     val isLoading: Boolean,
     val forecast: Forecast,
     val photos: List<PhotoSummary>,
+    val page: Int,
     val error: Throwable?
 ) : ViewState {
     companion object {
@@ -35,6 +36,7 @@ data class HomeViewState(
                 )
             ),
             photos = listOf(),
+            page = 1,
             error = null
         )
     }

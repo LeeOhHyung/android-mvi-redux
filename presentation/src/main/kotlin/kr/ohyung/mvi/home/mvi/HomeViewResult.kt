@@ -14,4 +14,10 @@ sealed class HomeViewResult : ViewResult {
         data class Success(val forecast: Forecast, val photos: List<PhotoSummary>) : GetLocationAndPhotosResult()
         data class Error(val throwable: Throwable?) : GetLocationAndPhotosResult()
     }
+
+    sealed class SearchPagedPhotoResult : HomeViewResult() {
+        object Loading : SearchPagedPhotoResult()
+        data class Success(val photos: List<PhotoSummary>) : SearchPagedPhotoResult()
+        data class Error(val throwable: Throwable?) : SearchPagedPhotoResult()
+    }
 }

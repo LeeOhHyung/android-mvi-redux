@@ -6,6 +6,7 @@ package kr.ohyung.mvi.home
 import android.content.pm.PackageManager
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,10 +23,11 @@ import kr.ohyung.mvi.databinding.FragmentHomeBinding
 import kr.ohyung.mvi.home.mvi.HomeViewIntent
 import kr.ohyung.mvi.home.mvi.HomeViewState
 import kr.ohyung.mvi.utility.extension.*
+import kr.ohyung.mvi.utility.widget.EndlessRecyclerViewScrollListener
 
 @AndroidEntryPoint
 class HomeFragment : MviFragment<FragmentHomeBinding,
-    HomeViewIntent, HomeViewState>(R.layout.fragment_home) {
+        HomeViewIntent, HomeViewState>(R.layout.fragment_home) {
 
     private val getLocationSubject = PublishSubject.create<HomeViewIntent.InitHomeScreen>()
     private val homeViewModel by navGraphViewModels<HomeViewModel>(R.id.nav_graph) {
@@ -34,8 +36,24 @@ class HomeFragment : MviFragment<FragmentHomeBinding,
     private val homeAdapter by lazy {
         HomeAdapter()
     }
+    private val gridLayoutManager by lazy {
+        GridLayoutManager(context, SPAN_COUNT_DEFAULT)
+            .apply {
+                spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                    override fun getSpanSize(position: Int): Int =
+                        when (homeAdapter.getItemViewType(position)) {
+                            HomeAdapter.ViewType.PHOTO.index -> SPAN_SIZE_PHOTO
+                            else -> SPAN_COUNT_DEFAULT
+                        }
+                }
+            }
+    }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         binding.viewModel = homeViewModel
         return binding.root
@@ -47,10 +65,14 @@ class HomeFragment : MviFragment<FragmentHomeBinding,
         homeViewModel.viewState.observe(viewLifecycleOwner, Observer(::render))
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if(requestCode == REQUEST_CODE_PERMISSION && grantResults.isNotEmpty()) {
-            if(grantResults.first() == PackageManager.PERMISSION_GRANTED) {
+        if (requestCode == REQUEST_CODE_PERMISSION && grantResults.isNotEmpty()) {
+            if (grantResults.first() == PackageManager.PERMISSION_GRANTED) {
                 doOnLocationPermissions()
             }
         }
@@ -58,27 +80,18 @@ class HomeFragment : MviFragment<FragmentHomeBinding,
 
     override fun initView() {
         binding.recyclerView.adapter = homeAdapter
-        binding.recyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT_DEFAULT)
-            .apply {
-                spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                    override fun getSpanSize(position: Int): Int =
-                        when(homeAdapter.getItemViewType(position)) {
-                            HomeAdapter.ViewType.PHOTO.index -> SPAN_SIZE_PHOTO
-                            else -> SPAN_COUNT_DEFAULT
-                        }
-                }
-            }
+        binding.recyclerView.layoutManager = gridLayoutManager
         binding.recyclerView.addItemDecoration(object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
                 val layoutParams = view.layoutParams as GridLayoutManager.LayoutParams
                 val position: Int = parent.getChildAdapterPosition(view)
                 val viewType: Int? = parent.adapter?.getItemViewType(position)
 
-                if(viewType == HomeAdapter.ViewType.PHOTO.index) {
+                if (viewType == HomeAdapter.ViewType.PHOTO.index) {
                     with(outRect) {
-                        top = 16.dpToPx()
-                        left = if(layoutParams.spanIndex == 0) 16.dpToPx() else 8.dpToPx()
-                        right = if(layoutParams.spanIndex == layoutParams.spanSize - 1) 8.dpToPx() else 16.dpToPx()
+                        bottom = 16.dpToPx()
+                        left = if (layoutParams.spanIndex == 0) 16.dpToPx() else 8.dpToPx()
+                        right = if (layoutParams.spanIndex == layoutParams.spanSize - 1) 8.dpToPx() else 16.dpToPx()
                     }
                 }
             }
@@ -86,7 +99,10 @@ class HomeFragment : MviFragment<FragmentHomeBinding,
     }
 
     override fun render(state: HomeViewState) = with(state) {
-        if(error != null)
+        if(forecast.weather.name.isNotEmpty()) {
+            addPagedScrollListener()
+        }
+        if (error != null)
             toast(error.message.toString())
     }
 
@@ -99,11 +115,20 @@ class HomeFragment : MviFragment<FragmentHomeBinding,
     override fun subscribeIntents() = homeViewModel.subscribeIntents(intents)
 
     private fun doOnLocationPermissions() {
-        if(isPermissionGranted()) {
+        if (isPermissionGranted()) {
             getLocationSubject.onNext(HomeViewIntent.InitHomeScreen)
         } else {
             requestPermissions()
         }
+    }
+
+    private fun addPagedScrollListener() {
+        binding.recyclerView.addOnScrollListener(object : EndlessRecyclerViewScrollListener(gridLayoutManager) {
+            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
+                Log.e("onLoadMore", "page: $page, totalItemsCount: $totalItemsCount")
+                homeViewModel.getPagedPhotos()
+            }
+        })
     }
 
     companion object {

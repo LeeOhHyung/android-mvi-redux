@@ -9,6 +9,7 @@ import kr.ohyung.domain.entity.Bookmark
 sealed class HomeViewAction : ViewAction {
     object Nothing : HomeViewAction()
     object GetLocationAndPhotos : HomeViewAction()
+    data class PhotoLoadMore(val query: String, val page: Int) : HomeViewAction()
     data class AddBookmark(val bookmark: Bookmark) : HomeViewAction()
     data class DeleteBookmark(val id: String) : HomeViewAction()
 }

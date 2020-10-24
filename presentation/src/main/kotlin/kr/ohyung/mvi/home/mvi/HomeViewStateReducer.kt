@@ -18,9 +18,17 @@ class HomeViewStateReducer @Inject constructor() : ViewStateReducer<HomeViewStat
                         oldState.copy(
                             isLoading = false,
                             forecast = result.forecast,
-                            photos = result.photos
+                            photos = result.photos,
+                            page = oldState.page.inc()
                         )
                     is HomeViewResult.GetLocationAndPhotosResult.Error -> oldState.copy(isLoading = false, error = result.throwable)
+                }
+            }
+            is HomeViewResult.SearchPagedPhotoResult -> {
+                when(result) {
+                    HomeViewResult.SearchPagedPhotoResult.Loading -> oldState.copy(isLoading = true)
+                    is HomeViewResult.SearchPagedPhotoResult.Success -> oldState.copy(isLoading = false, photos = oldState.photos.plus(result.photos), page = oldState.page.inc())
+                    is HomeViewResult.SearchPagedPhotoResult.Error -> oldState.copy(isLoading = false, error = result.throwable)
                 }
             }
         }

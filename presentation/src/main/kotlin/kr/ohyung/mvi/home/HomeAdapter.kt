@@ -37,7 +37,7 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
-        when(ViewType.values()[viewType]) {
+        when (ViewType.values()[viewType]) {
             ViewType.WEATHER -> WeatherViewHolder(parent)
             ViewType.PHOTO -> PhotoViewHolder(parent)
         }
@@ -88,9 +88,9 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 @BindingAdapter(value = ["android:setForecast", "android:setPhotos"], requireAll = false)
 fun RecyclerView.setForecast(forecast: Forecast?, photos: List<PhotoSummary>?) {
     val adapter = adapter as? HomeAdapter
-    if(forecast != null)
+    if (forecast != null)
         adapter?.submitList(forecast)
-    if(photos != null)
+    if (photos != null)
         adapter?.submitList(photos)
 }
 

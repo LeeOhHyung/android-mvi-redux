@@ -3,6 +3,7 @@
  */
 package kr.ohyung.mvi.home.processor
 
+import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
 import io.reactivex.Single
 import io.reactivex.functions.BiFunction
@@ -26,8 +27,12 @@ class HomeActionProcessor @Inject constructor(
     override fun compose(): ObservableTransformer<HomeViewAction, HomeViewResult> =
         ObservableTransformer { actions ->
             actions.publish { selector ->
-                selector.ofType(HomeViewAction.GetLocationAndPhotos::class.java)
-                    .compose(getLocationAndWeatherPhotos)
+                Observable.merge(
+                    selector.ofType(HomeViewAction.GetLocationAndPhotos::class.java)
+                        .compose(getLocationAndWeatherPhotos),
+                    selector.ofType(HomeViewAction.PhotoLoadMore::class.java)
+                        .compose(getPagedPhotos)
+                )
             }
         }
 
@@ -51,6 +56,18 @@ class HomeActionProcessor @Inject constructor(
                     .subscribeOn(executorProvider.io())
                     .observeOn(executorProvider.mainThread())
                     .startWith(HomeViewResult.GetLocationAndPhotosResult.Loading)
+            }
+        }
+
+    private val getPagedPhotos =
+        ObservableTransformer<HomeViewAction.PhotoLoadMore, HomeViewResult> { actions ->
+            actions.flatMap { action ->
+                searchPhotoUseCase.execute(SearchParams(query = action.query, page = action.page))
+                    .map { photos -> HomeViewResult.SearchPagedPhotoResult.Success(photos) }
+                    .toObservable()
+                    .cast(HomeViewResult::class.java)
+                    .onErrorReturn { HomeViewResult.SearchPagedPhotoResult.Error(it) }
+                    .startWith(HomeViewResult.SearchPagedPhotoResult.Loading)
             }
         }
 }
