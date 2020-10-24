@@ -3,7 +3,7 @@
 
     <style name="Typography">
         <item name="android:fontFamily">@font/roboto_regular</item>
-        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColor">@color/black_900</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 

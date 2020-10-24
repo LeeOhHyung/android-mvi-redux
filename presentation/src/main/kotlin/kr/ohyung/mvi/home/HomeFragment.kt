@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.navGraphViewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.Observable
@@ -32,12 +33,13 @@ class HomeFragment : MviFragment<FragmentHomeBinding,
     private val homeViewModel by navGraphViewModels<HomeViewModel>(R.id.nav_graph) {
         defaultViewModelProviderFactory
     }
+    private val homeAdapter by lazy {
+        HomeAdapter()
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         binding.viewModel = homeViewModel
-        binding.recyclerView.adapter = HomeAdapter()
-        binding.recyclerView.layoutManager = LinearLayoutManager(context)
         return binding.root
     }
 
@@ -54,6 +56,20 @@ class HomeFragment : MviFragment<FragmentHomeBinding,
                 doOnLocationPermissions()
             }
         }
+    }
+
+    override fun initView() {
+        binding.recyclerView.adapter = homeAdapter
+        binding.recyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT_DEFAULT)
+            .apply {
+                spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                    override fun getSpanSize(position: Int): Int =
+                        when(homeAdapter.getItemViewType(position)) {
+                            HomeAdapter.ViewType.PHOTO.index -> SPAN_SIZE_PHOTO
+                            else -> SPAN_COUNT_DEFAULT
+                        }
+                }
+            }
     }
 
     override fun render(state: HomeViewState) = with(state) {
@@ -75,5 +91,10 @@ class HomeFragment : MviFragment<FragmentHomeBinding,
         } else {
             requestPermissions()
         }
+    }
+
+    companion object {
+        private const val SPAN_COUNT_DEFAULT = 2
+        private const val SPAN_SIZE_PHOTO = 1
     }
 }

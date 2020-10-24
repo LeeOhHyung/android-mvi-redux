@@ -6,11 +6,13 @@ package kr.ohyung.mvi.home.mvi
 import kr.ohyung.core.mvi.ViewState
 import kr.ohyung.domain.entity.Forecast
 import kr.ohyung.domain.entity.LegalName
+import kr.ohyung.domain.entity.PhotoSummary
 import kr.ohyung.domain.entity.Weather
 
 data class HomeViewState(
     val isLoading: Boolean,
     val forecast: Forecast,
+    val photos: List<PhotoSummary>,
     val error: Throwable?
 ) : ViewState {
     companion object {
@@ -32,6 +34,7 @@ data class HomeViewState(
                     temp = 0.0
                 )
             ),
+            photos = listOf(),
             error = null
         )
     }

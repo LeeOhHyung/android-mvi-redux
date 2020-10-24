@@ -8,13 +8,17 @@ import android.view.ViewGroup
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kr.ohyung.domain.entity.Forecast
+import kr.ohyung.domain.entity.PhotoSummary
+import kr.ohyung.mvi.R
 import kr.ohyung.mvi.databinding.ItemCurrentWeatherBinding
+import kr.ohyung.mvi.databinding.ItemPhotoBinding
+import kr.ohyung.mvi.utility.load
 import kr.ohyung.mvi.utility.widget.Binder
 import kr.ohyung.mvi.utility.widget.HolderItem
 
 class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private enum class ViewType(val index: Int) {
+    enum class ViewType(val index: Int) {
         WEATHER(0),
         PHOTO(1)
     }
@@ -24,12 +28,13 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     fun submitList(forecast: Forecast) {
         currentList.clear()
         currentList += WeatherViewHolder.Item(forecast = forecast)
-
         notifyDataSetChanged()
     }
 
-    // For Pagination
-    // fun submitList()
+    fun submitList(photos: List<PhotoSummary>) {
+        currentList += photos.map { photo -> PhotoViewHolder.Item(photo) }
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when(ViewType.values()[viewType]) {
@@ -60,12 +65,38 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-    private class PhotoViewHolder
+    private class PhotoViewHolder(
+        parent: ViewGroup,
+        private val binding: ItemPhotoBinding =
+            ItemPhotoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+    ) : RecyclerView.ViewHolder(binding.root), Binder<PhotoViewHolder.Item> {
+
+        class Item(val photos: PhotoSummary) : HolderItem(ViewType.PHOTO.index)
+
+        override fun bindTo(item: Item) = with(binding) {
+            this.photo = item.photos
+            ivThumbnail.load(item.photos.thumbnail) {
+                centerCrop()
+                placeholder(R.color.gray_400)
+                error(R.color.gray_400)
+            }
+            executePendingBindings()
+        }
+    }
 }
 
-@BindingAdapter("setForecast")
-fun RecyclerView.setForecast(forecast: Forecast?) =
-    forecast?.let {
+@BindingAdapter(value = ["android:setForecast", "android:setPhotos"], requireAll = false)
+fun RecyclerView.setForecast(forecast: Forecast?, photos: List<PhotoSummary>?) {
+    val adapter = adapter as? HomeAdapter
+    if(forecast != null)
+        adapter?.submitList(forecast)
+    if(photos != null)
+        adapter?.submitList(photos)
+}
+
+@BindingAdapter(value = ["android:setPagedPhotos"], requireAll = false)
+fun RecyclerView.setPagedPhotos(photos: List<PhotoSummary>?) =
+    photos?.let {
         val adapter = adapter as? HomeAdapter
-        adapter?.submitList(it)
+        adapter?.submitList(photos)
     }

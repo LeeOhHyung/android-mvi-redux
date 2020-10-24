@@ -19,9 +19,12 @@ abstract class BaseFragment<V: ViewDataBinding>(
 
     protected lateinit var binding: V
 
+    abstract fun initView()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
+        initView()
         return binding.root
     }
 
