@@ -13,6 +13,8 @@ abstract class SingleUseCase<T>(
 
     protected abstract fun buildUseCaseSingle(): Single<T>
 
+    override fun get(): Single<T> = buildUseCaseSingle()
+
     override fun execute(): Single<T> =
         buildUseCaseSingle()
             .subscribeOn(executorThread)

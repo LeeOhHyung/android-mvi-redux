@@ -12,6 +12,7 @@ abstract class ParameterizedUseCase<in Params> : UseCase {
 }
 
 abstract class NoParamsUseCase : UseCase {
+    abstract fun get(): Any
     abstract fun execute(): Any
 }
 

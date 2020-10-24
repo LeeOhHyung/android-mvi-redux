@@ -13,6 +13,8 @@ abstract class FlowableUseCase<T>(
 
     protected abstract fun buildUseCaseFlowable(): Flowable<T>
 
+    override fun get(): Flowable<T> = buildUseCaseFlowable()
+
     override fun execute(): Flowable<T> =
         buildUseCaseFlowable()
             .subscribeOn(executorThread)

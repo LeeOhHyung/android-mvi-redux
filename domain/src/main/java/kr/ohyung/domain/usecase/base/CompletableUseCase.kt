@@ -13,6 +13,8 @@ abstract class CompletableUseCase(
 
     protected abstract fun buildUseCaseCompletable(): Completable
 
+    override fun get() = buildUseCaseCompletable()
+
     override fun execute(): Completable =
         buildUseCaseCompletable()
             .subscribeOn(executorThread)
