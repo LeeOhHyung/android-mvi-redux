@@ -48,6 +48,30 @@ View 에서 입력받은 Intent는 ViewModel로 전달되는데, IntentProcessor
 - ActionProcessor는 StateMachine의 핵심 역할로써, UseCase를 실행시켜 Remote, Local 에서 데이터를 가져오는 작업이 실제로 실행되는 곳이다. 작업 실행의 결과를 Result로 변환시키고, Reducer로 전달하는 역할을 수행한다.
 - Reducer는 전달받은 Result가 무엇인지에 따라서 새로운 State를 생성하는 역할을 한다.
 
+```kotlin
+// HomeViewState
+data class HomeViewState(
+  val isLoading: Boolean,
+  val forecast: Forecast,
+  val error: Throwable?
+) : ViewState
+
+// HomeViewModel
+class HomeViewModel @ViewModelInject constructor(
+  private val stateMachine: HomeStateMachine
+) : MviViewModel<HomeViewIntent, HomeViewAction, HomeViewState, HomeViewResult>(stateMachine) {
+
+    override val viewState: LiveData<HomeViewState>
+        get() = stateMachine.currentState
+}
+
+// HomeActionProcessor
+class HomeActionProcessor @Inject constructor(
+  private val getCurrentLocationForecastUseCase: GetCurrentLocationForecastUseCase,
+  private val executorProvider: ExecutorProvider
+) : ActionProcessor<HomeViewAction, HomeViewResult>
+```
+
 #### 3. Typography
 font, font-weight, font size를 미리 정의해두고, TextView, EditText 등과 같이 Text속성이 필요한 곳에서 요긴하게 사용할 수 있도록 한다.
 ```xml
