@@ -26,10 +26,8 @@ class HomeViewModel @ViewModelInject constructor(
         subscribeIntents(pagedPhotoSubject.cast(HomeViewIntent::class.java))
     }
 
-    fun getPagedPhotos() =
-        Observable.just(HomeViewIntent.PhotoLoadMore(
-            query = viewState.value!!.forecast.weather.name,
-            page = viewState.value!!.page))
+    fun getPagedPhotos(page: Int) =
+        Observable.just(HomeViewIntent.PhotoLoadMore(query = viewState.value!!.forecast.weather.name, page = page))
             .throttleFirst(500L, TimeUnit.MILLISECONDS)
             .observeOn(executorProvider.mainThread())
             .subscribe(pagedPhotoSubject::onNext)

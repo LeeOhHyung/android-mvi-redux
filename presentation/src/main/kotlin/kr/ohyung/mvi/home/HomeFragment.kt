@@ -23,7 +23,6 @@ import kr.ohyung.mvi.databinding.FragmentHomeBinding
 import kr.ohyung.mvi.home.mvi.HomeViewIntent
 import kr.ohyung.mvi.home.mvi.HomeViewState
 import kr.ohyung.mvi.utility.extension.*
-import kr.ohyung.mvi.utility.widget.EndlessRecyclerViewScrollListener
 
 @AndroidEntryPoint
 class HomeFragment : MviFragment<FragmentHomeBinding,
@@ -99,9 +98,7 @@ class HomeFragment : MviFragment<FragmentHomeBinding,
     }
 
     override fun render(state: HomeViewState) = with(state) {
-        if(forecast.weather.name.isNotEmpty()) {
-            addPagedScrollListener()
-        }
+        homeAdapter.submitList(forecast, photos)
         if (error != null)
             toast(error.message.toString())
     }
@@ -120,15 +117,6 @@ class HomeFragment : MviFragment<FragmentHomeBinding,
         } else {
             requestPermissions()
         }
-    }
-
-    private fun addPagedScrollListener() {
-        binding.recyclerView.addOnScrollListener(object : EndlessRecyclerViewScrollListener(gridLayoutManager) {
-            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
-                Log.e("onLoadMore", "page: $page, totalItemsCount: $totalItemsCount")
-                homeViewModel.getPagedPhotos()
-            }
-        })
     }
 
     companion object {

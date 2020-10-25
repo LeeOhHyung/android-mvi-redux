@@ -25,14 +25,10 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val currentList = arrayListOf<HolderItem>()
 
-    fun submitList(forecast: Forecast) {
+    fun submitList(forecast: Forecast, photos: List<PhotoSummary>) {
         currentList.clear()
         currentList += WeatherViewHolder.Item(forecast = forecast)
-        notifyDataSetChanged()
-    }
-
-    fun submitList(photos: List<PhotoSummary>) {
-        currentList += photos.map { photo -> PhotoViewHolder.Item(photo) }
+        currentList += photos.map { photo -> PhotoViewHolder.Item(photos = photo) }
         notifyDataSetChanged()
     }
 
@@ -84,19 +80,3 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 }
-
-@BindingAdapter(value = ["android:setForecast", "android:setPhotos"], requireAll = false)
-fun RecyclerView.setForecast(forecast: Forecast?, photos: List<PhotoSummary>?) {
-    val adapter = adapter as? HomeAdapter
-    if (forecast != null)
-        adapter?.submitList(forecast)
-    if (photos != null)
-        adapter?.submitList(photos)
-}
-
-@BindingAdapter(value = ["android:setPagedPhotos"], requireAll = false)
-fun RecyclerView.setPagedPhotos(photos: List<PhotoSummary>?) =
-    photos?.let {
-        val adapter = adapter as? HomeAdapter
-        adapter?.submitList(photos)
-    }

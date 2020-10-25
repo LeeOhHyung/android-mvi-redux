@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class HomeViewStateReducer @Inject constructor() : ViewStateReducer<HomeViewState, HomeViewResult> {
 
-    override fun reduce() = BiFunction { oldState: HomeViewState, result: HomeViewResult ->
+    override fun reduce(): BiFunction<HomeViewState, HomeViewResult, HomeViewState> = BiFunction { oldState: HomeViewState, result: HomeViewResult ->
         when(result) {
             is HomeViewResult.GetLocationAndPhotosResult -> {
                 when(result) {
@@ -18,8 +18,7 @@ class HomeViewStateReducer @Inject constructor() : ViewStateReducer<HomeViewStat
                         oldState.copy(
                             isLoading = false,
                             forecast = result.forecast,
-                            photos = result.photos,
-                            page = oldState.page.inc()
+                            photos = result.photos
                         )
                     is HomeViewResult.GetLocationAndPhotosResult.Error -> oldState.copy(isLoading = false, error = result.throwable)
                 }
@@ -27,7 +26,7 @@ class HomeViewStateReducer @Inject constructor() : ViewStateReducer<HomeViewStat
             is HomeViewResult.SearchPagedPhotoResult -> {
                 when(result) {
                     HomeViewResult.SearchPagedPhotoResult.Loading -> oldState.copy(isLoading = true)
-                    is HomeViewResult.SearchPagedPhotoResult.Success -> oldState.copy(isLoading = false, photos = oldState.photos.plus(result.photos), page = oldState.page.inc())
+                    is HomeViewResult.SearchPagedPhotoResult.Success -> oldState.copy(isLoading = false, photos = oldState.photos)
                     is HomeViewResult.SearchPagedPhotoResult.Error -> oldState.copy(isLoading = false, error = result.throwable)
                 }
             }
