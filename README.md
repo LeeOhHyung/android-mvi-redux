@@ -19,9 +19,10 @@
 - [Github Action](https://github.com/features/actions)
 
 ## Features
-#### 1. Uni Directional Data Flow
+#### 1. Clean Architecture
 <p>
- <img src="https://user-images.githubusercontent.com/37705123/97113648-2402d800-172f-11eb-8c9b-9f2da2df4daf.png" width="400" />
+ <img src="https://user-images.githubusercontent.com/37705123/97113823-16018700-1730-11eb-8f79-8887cc22126b.png" width="400" />
+ <img src="https://user-images.githubusercontent.com/37705123/97113826-1863e100-1730-11eb-8c7c-e588244014ca.png" width="400" />
 </p>
 
 #### 2. MVI 아키텍처 - similar to Redux
