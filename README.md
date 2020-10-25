@@ -77,7 +77,7 @@ font, font-weight, font size를 미리 정의해두고, TextView, EditText 등�
 ```
 
 ## Trouble Shooting
-#### State가 무엇이고, View를 State관점으로 관리하면 어떤 장점이 있는가?
+#### 1. State가 무엇이고, View를 State관점으로 관리하면 어떤 장점이 있는가?
 [State](https://en.wikipedia.org/wiki/State_(computer_science))는 View/Application를 구성하기 위한 데이터 또는 행위들의 집합 이라고 표현 할 수 있다. 역으로 말하면, State만 보면 현재 View의 모습과 데이터를 알 수 있다. 그리고 상태 충돌을 피하기 위해서 불변하는 데이터구조를 가진다.
 
 State 관점으로 설계하는 디자인 패턴으로는 [상태패턴](https://refactoring.guru/design-patterns/state)이 있는데, 각각의 상태를 객체로 정의해서 조건문 분기처리가 아닌 상태객체 전달만으로도 View의 데이터를 갱신 시킬 수 있다. 또한, 상태객체에 행위를 위임함으로써 상태 변화를 쉽게 적용할 수 있다는 장점이 있다.
@@ -85,7 +85,7 @@ State 관점으로 설계하는 디자인 패턴으로는 [상태패턴](https:/
 
 주의 해야할 점 중 하나는, 각각의 상태는 불변객체로 정의하고, 새로 만들어진 상태와 이전 상태를 구분하기 위해서 새로운 상태객체를 발행할때는 반드시 새로운 객체를 반환해야한다는 점이다.
 
-#### 근본적으로 MVI 아키텍처는 어떠한 장점을 가져다 주는가? 혹은 단점은 무엇이 있을까?
+#### 2. 근본적으로 MVI 아키텍처는 어떠한 장점을 가져다 주는가? 혹은 단점은 무엇이 있을까?
 눈치가 빠르다면, 이미 짐작했겠지만, Android-MVI 아키텍처는 [React-redux](https://redux.js.org/)와 상당히 유사하다. 참고하기 바란다.
 MVI 아키텍처에서는 단방향 데이터 흐름(Uni-Directional Data Flow), 상태 불변성을 장점으로 내세우고 있다.
 
@@ -94,7 +94,7 @@ MVI 아키텍처에서는 단방향 데이터 흐름(Uni-Directional Data Flow),
 항상 장점만 있는것은 아니죠. MVI 아키텍처를 구현하기 위해서는 Intent, Action, Reducer, Processor 등등 많은 파일과 클래스를 만들어야 합니다. 아키텍처를 철저히 지키기 위해서는 반드시 이루어져야 하는 과정이지만, 많은 파일과 클래스는 그만큼 관리 포인트가 높아지는 효과를 가져옵니다.
 또한, 아직 명확하게 어떤 단계에서 구현해야 하는지 고민해야하는 부분들이 있다. 예를 들면, App Navigation, Toast, SnackBar 같은 일회성 ViewEvent에 대해서도 MVI-StateMachine 사이클을 모두 순회하고, 새로운 상태객체를 발행해서 처리 해야하는지, View에서 바로 처리해도 되는지 등등에 대한 문제이다. 그리고, 페이지네이션을 구현할때도 매우 골치가 아프다. 왜냐하면, 페이지네이션은 다른 상태값은 모두 같고, 새로 가지고 오는 List만 추가 되는 형태로 구현한다. 하지만, 이 과정에서 상태가 새롭게 발행되고, 화면의 모든 구성요소가 새롭게 그려지는 현상이 발생한다. 
 
-#### 부분 렌더링을 지원하는 방법?
+#### 3. 부분 렌더링을 지원하는 방법?
 먼저, 부분렌더링을 왜 지원해야하는지 고민해야할 필요가 있다. 아래와 같은 ViewState가 있다고 해보자
 ```kotlin
 data class ViewState(
@@ -141,7 +141,7 @@ override fun render(state: ViewState) {
 
 ## Reference
 ### Articles and Videos
-#### Clean Architecture
+#### 1. Clean Architecture
 - 🚀[Detailed Guide on Android Clean Architecture](https://medium.com/android-dev-hacks/detailed-guide-on-android-clean-architecture-9eab262a9011)
 - [Android — Retrieving Google Location using RxJava and Clean Architecture](https://medium.com/@PedroOkawa/android-retrieving-google-location-using-rxjava-and-clean-architecture-36c1017c6529)
 - [How to handle exceptions with clean architecture and Firebase](https://medium.com/firebase-tips-tricks/how-to-handle-exceptions-with-clean-architecture-and-firebase-5efbc13a1d54)
@@ -153,7 +153,7 @@ override fun render(state: ViewState) {
 - [Repository layer using Room and Dagger 2 — Android](https://android.jlelse.eu/repository-layer-using-room-and-dagger-2-android-12d311830fd9)
 
 
-#### MVI
+#### 2. MVI
 - [Android Unidirectional Data Flow — Kotlin Flow vs. RxJava](https://proandroiddev.com/udf-flowvsrx-a792b946d75c)
 - [Android Model-View-Intent with Kotlin Flow](https://proandroiddev.com/android-model-view-intent-with-kotlin-flow-ca5945316ec#ee30)
 - [Lessons Learned Implementing Redux on Android](https://hackernoon.com/lessons-learned-implementing-redux-on-android-cba1bed40c41)
@@ -175,21 +175,21 @@ override fun render(state: ViewState) {
 - [Créer une application Android en utilisant le pattern MVI et Kotlin Coroutines](https://blog.engineering.publicissapient.fr/2020/02/10/mvi-creer-une-application-android-en-utilisant-le-pattern-mvi-et-kotlin-coroutines/)
 - 🚀[Getting started with MVI Architecture on Android](https://proandroiddev.com/getting-started-with-mvi-architecture-on-android-b2c280b7023)
 
-#### Hilt
+#### 3. Hilt
 - [Dependency Injection in Android with Hilt: First Impression](https://medium.com/@amritlalsahu5/dependency-injection-in-android-with-hilt-41fb915997e4)
 - [Dagger - Hilt 간보기](https://two22.tistory.com/4)
 - [Dagger Hilt로 안드로이드 의존성 주입 시작하기](https://hyperconnect.github.io/2020/07/28/android-dagger-hilt.html)
 - [YouTube - [드로이드나이츠 2020] 옥수환 - Hilt와 함께 하는 안드로이드 의존성 주입](https://www.youtube.com/watch?v=gkUCs6YWzEY)
 - [Hilt — The Future of Dependency Injection in Android](https://levelup.gitconnected.com/hilt-the-future-of-dependency-injection-in-android-e9a919c0993d)
 
-#### Git
+#### 4. Git
 - [좋은 Readme 작성법](https://always0ne.github.io/github/Readme/)
 - 🚀[awesome-readme](https://github.com/matiassingers/awesome-readme)
 - [Android Github Actions #1](https://medium.com/@lee199402/android-github-actions-1-fd4754fa6b19)
 - [Github Action 을 이용한 CI 구축하기](https://dublin-java.tistory.com/65)
 - [Accessing an Android app secret from GitHub Actions using Gradle](https://blog.jakelee.co.uk/accessing-android-app-secret-from-github-actions-using-gradle/)
 
-### Repos
+### Github - Repository
 - [MVI-Architecture-Android-Beginners](https://github.com/MindorksOpenSource/MVI-Architecture-Android-Beginners)
 - [TvFlix](https://github.com/reactivedroid/TvFlix)
 - [google-location-rx](https://github.com/PedroOkawa/google-location-rx)
