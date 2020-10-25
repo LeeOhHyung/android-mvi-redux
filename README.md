@@ -46,7 +46,7 @@ View 에서 입력받은 Intent는 ViewModel로 전달되는데, IntentProcessor
 - Reducer는 전달받은 Result가 무엇인지에 따라서 새로운 State를 생성하는 역할을 한다.
 
 ### Typography
-프로젝트에서 사용할 font, font-weight, font size를 미리 정의해두고, TextView, EditText 등과 같이 Text속성이 필요한 곳에서 요긴하게 사용할 수 있도록 한다.
+font, font-weight, font size를 미리 정의해두고, TextView, EditText 등과 같이 Text속성이 필요한 곳에서 요긴하게 사용할 수 있도록 한다.
 ```xml
 // 모든 Typography style에 공통 적용될 폰트, 색상, 속성 등을 정의
 <style name="Typography">
@@ -76,18 +76,68 @@ View 에서 입력받은 Intent는 ViewModel로 전달되는데, IntentProcessor
 </style>
 ```
 
-## Unit Test
-
-## Screenshots
-
 ## Trouble Shooting
 #### State가 무엇이고, View를 State관점으로 관리하면 어떤 장점이 있는가?
-#### 왜 MVVM 아키텍처와 같이 하였는가? 근본적으로 MVI 아키텍처는 어떠한 장점을 가져다 주는가?
+[State](https://en.wikipedia.org/wiki/State_(computer_science))는 View/Application를 구성하기 위한 데이터 또는 행위들의 집합 이라고 표현 할 수 있다. 역으로 말하면, State만 보면 현재 View의 모습과 데이터를 알 수 있다. 그리고 상태 충돌을 피하기 위해서 불변하는 데이터구조를 가진다.
+
+State 관점으로 설계하는 디자인 패턴으로는 [상태패턴](https://refactoring.guru/design-patterns/state)이 있는데, 각각의 상태를 객체로 정의해서 조건문 분기처리가 아닌 상태객체 전달만으로도 View의 데이터를 갱신 시킬 수 있다. 또한, 상태객체에 행위를 위임함으로써 상태 변화를 쉽게 적용할 수 있다는 장점이 있다.
+만약, View의 상태를 추가해야한다면, 손쉽게 상태 객체를 추가할수 있으며, 상태 객체들은 모두 같은 인터페이스(혹은 추상클래스)를 상속받고 있기때문에 간편하게 확장시킬 수 있다.
+
+주의 해야할 점 중 하나는, 각각의 상태는 불변객체로 정의하고, 새로 만들어진 상태와 이전 상태를 구분하기 위해서 새로운 상태객체를 발행할때는 반드시 새로운 객체를 반환해야한다는 점이다.
+
+#### 근본적으로 MVI 아키텍처는 어떠한 장점을 가져다 주는가? 혹은 단점은 무엇이 있을까?
+눈치가 빠르다면, 이미 짐작했겠지만, Android-MVI 아키텍처는 [React-redux](https://redux.js.org/)와 상당히 유사하다. 참고하기 바란다.
+MVI 아키텍처에서는 단방향 데이터 흐름(Uni-Directional Data Flow), 상태 불변성을 장점으로 내세우고 있다.
+
+사용자로 부터 View Intent를 받고, `IntentProcessor -> ActionProcessor -> Reducer -> new State` 과정에서 데이터가 단방향으로만 흐르기 때문에, 확실히!! 앱의 로직흐름을 명확하게 이해할 수 있다는 장점이 있다. 마찮가지로 각자의 구성요소만 별도로 테스트 하면 되기 떄문에, 문제가 발생했을때 빠르게 디버깅할 수 있다.
+
+항상 장점만 있는것은 아니죠. MVI 아키텍처를 구현하기 위해서는 Intent, Action, Reducer, Processor 등등 많은 파일과 클래스를 만들어야 합니다. 아키텍처를 철저히 지키기 위해서는 반드시 이루어져야 하는 과정이지만, 많은 파일과 클래스는 그만큼 관리 포인트가 높아지는 효과를 가져옵니다.
+또한, 아직 명확하게 어떤 단계에서 구현해야 하는지 고민해야하는 부분들이 있다. 예를 들면, App Navigation, Toast, SnackBar 같은 일회성 ViewEvent에 대해서도 MVI-StateMachine 사이클을 모두 순회하고, 새로운 상태객체를 발행해서 처리 해야하는지, View에서 바로 처리해도 되는지 등등에 대한 문제이다. 그리고, 페이지네이션을 구현할때도 매우 골치가 아프다. 왜냐하면, 페이지네이션은 다른 상태값은 모두 같고, 새로 가지고 오는 List만 추가 되는 형태로 구현한다. 하지만, 이 과정에서 상태가 새롭게 발행되고, 화면의 모든 구성요소가 새롭게 그려지는 현상이 발생한다. 
+
 #### 부분 렌더링을 지원하는 방법?
-#### 생성되는 파일 개수를 줄이기 위해서는 어떤 시도를 해볼 수 있을까?
-#### MVI ViewModel을 테스트 하는 방법
-#### 왜 Moshi를 사용하였는가?
-#### Hilt를 통한 Dependency Injection을 사용하는 이유
+먼저, 부분렌더링을 왜 지원해야하는지 고민해야할 필요가 있다. 아래와 같은 ViewState가 있다고 해보자
+```kotlin
+data class ViewState(
+  val isLoading: Boolean,
+  val title: String,
+  val username: String,
+  val photos: List<Photo>,
+  val error: Throwable?
+)
+```
+만약, `photos`의 데이터가 변경되어서 새로운 상태 객체가 발행될때, `render` 함수에서는 title, username 등등은 데이터가 변경되지 않았음에도 화면을 다시 그리는 문제가 발생한다. 매우 불쾌한 사용자 경험을 줄 수 가 있는데, 페이지네이션을 해서 새로운 리스트를 계속 가지고 오는 상황에서 매번 스크롤이 상단으로 이동하게 될 것이다.
+
+부분 렌더링을 지원하는 방법을 고민해보니 두가지 방법을 제안하고자 한다.
+1. 값이 같으면 렌더링하지 않음.
+```kotlin
+fun render(oldState: ViewState, newState: ViewState) {
+  if(oldState.title != newState.title) {
+    tv_title.text = newState.title
+  }
+  if(oldState.username != newState.username) {
+    tv_username.text = newState.uername
+  }
+}
+```
+이것은 매우 간단하게 적용할 수 있겠지만, 항상 이전의 상태를 같이 전달해야 하는 분기처리 코드가 많이 추가되어서 가독성이 떨어질 수 있다.
+
+2. [RenderingScope](https://github.com/myrealtrip/box/blob/master/box/src/main/kotlin/com/mrt/box/android/BoxRenderingScope.kt)을 사용하는 방법.
+```kotlin 
+// MyRealTrip - Box 프레임워크에서 사용하는 방법
+override val partialRenderers: Map<BoxRenderingScope, BoxRenderer>? = mapOf(
+  ProgressScope to ProgressRenderer,
+  ColorScope to ColorRenderer
+)
+
+override fun render(state: ViewState) {
+  partialRenderers?.forEach {
+    if (state.scope() == it.key || if(state is ScopeState) state.scopes().contains(it.key) else false) {
+      it.value.renderView(this, state, vm)
+    }
+  }
+}
+```
+렌더링 해야하는 View는 여러 구역으로 나누어서, 필요한 부분부분만 업데이트 하도록 하는 방식이다. 부분렌더링 지원은 확실하게 할 수 있겠지만, Scope는 어떤 기준으로 나누어야 하는지와 Scope파일 관리 하는 방법 등에 대한 고민이 필요할 것으로 보인다.
 
 ## Reference
 ### Articles and Videos
