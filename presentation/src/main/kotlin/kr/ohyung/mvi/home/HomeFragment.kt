@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
@@ -48,11 +49,7 @@ class HomeFragment : MviFragment<FragmentHomeBinding,
             }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         binding.viewModel = homeViewModel
         return binding.root
@@ -64,11 +61,7 @@ class HomeFragment : MviFragment<FragmentHomeBinding,
         homeViewModel.viewState.observe(viewLifecycleOwner, Observer(::render))
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CODE_PERMISSION && grantResults.isNotEmpty()) {
             if (grantResults.first() == PackageManager.PERMISSION_GRANTED) {
@@ -95,10 +88,16 @@ class HomeFragment : MviFragment<FragmentHomeBinding,
                 }
             }
         })
+
+        binding.swipeLayout.setOnRefreshListener {
+            homeViewModel.retry()
+        }
     }
 
     override fun render(state: HomeViewState) = with(state) {
-        homeAdapter.submitList(forecast, photos)
+        if(photos.isNotEmpty()) {
+            homeAdapter.submitList(forecast, photos)
+        }
         if (error != null)
             toast(error.message.toString())
     }

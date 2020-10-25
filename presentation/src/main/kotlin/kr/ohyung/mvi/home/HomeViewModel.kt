@@ -21,9 +21,10 @@ class HomeViewModel @ViewModelInject constructor(
         get() = stateMachine.currentState
 
     private val pagedPhotoSubject = PublishSubject.create<HomeViewIntent.PhotoLoadMore>()
+    private val retry = PublishSubject.create<HomeViewIntent.Retry>()
 
     init {
-        subscribeIntents(pagedPhotoSubject.cast(HomeViewIntent::class.java))
+        subscribeIntents(Observable.merge(pagedPhotoSubject, retry))
     }
 
     fun getPagedPhotos(page: Int) =
@@ -32,4 +33,6 @@ class HomeViewModel @ViewModelInject constructor(
             .observeOn(executorProvider.mainThread())
             .subscribe(pagedPhotoSubject::onNext)
             .addDisposable()
+
+    fun retry() = retry.onNext(HomeViewIntent.Retry)
 }

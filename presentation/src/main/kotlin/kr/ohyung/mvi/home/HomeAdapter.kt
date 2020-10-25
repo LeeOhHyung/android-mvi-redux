@@ -5,7 +5,6 @@ package kr.ohyung.mvi.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kr.ohyung.domain.entity.Forecast
 import kr.ohyung.domain.entity.PhotoSummary

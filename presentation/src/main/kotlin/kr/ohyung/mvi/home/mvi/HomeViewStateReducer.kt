@@ -17,6 +17,7 @@ class HomeViewStateReducer @Inject constructor() : ViewStateReducer<HomeViewStat
                     is HomeViewResult.GetLocationAndPhotosResult.Success ->
                         oldState.copy(
                             isLoading = false,
+                            isRefresh = result.isRefresh,
                             forecast = result.forecast,
                             photos = result.photos
                         )
