@@ -90,6 +90,7 @@ class HomeFragment : MviFragment<FragmentHomeBinding,
         })
 
         binding.swipeLayout.setOnRefreshListener {
+            binding.swipeLayout.isRefreshing = true
             homeViewModel.retry()
         }
     }
@@ -97,6 +98,7 @@ class HomeFragment : MviFragment<FragmentHomeBinding,
     override fun render(state: HomeViewState) = with(state) {
         if(photos.isNotEmpty()) {
             homeAdapter.submitList(forecast, photos)
+            binding.swipeLayout.isRefreshing = false
         }
         if (error != null)
             toast(error.message.toString())

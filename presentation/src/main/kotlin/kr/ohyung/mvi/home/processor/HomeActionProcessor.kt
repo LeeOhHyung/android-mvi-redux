@@ -38,7 +38,7 @@ class HomeActionProcessor @Inject constructor(
 
     private val getLocationAndWeatherPhotos =
         ObservableTransformer<HomeViewAction.GetLocationAndPhotos, HomeViewResult> { actions ->
-            actions.flatMap { action ->
+            actions.flatMap {
                 getCurrentLocationForecastUseCase.get()
                     .flatMapSingle { forecast ->
                         Single.zip(
@@ -46,7 +46,7 @@ class HomeActionProcessor @Inject constructor(
                             searchPhotoUseCase.get(params = SearchParams(query = forecast.weather.name))
                                 .subscribeOn(executorProvider.io()),
                             BiFunction { _: Forecast, photos: List<PhotoSummary> ->
-                                HomeViewResult.GetLocationAndPhotosResult.Success(forecast, photos, action.isRefresh)
+                                HomeViewResult.GetLocationAndPhotosResult.Success(forecast, photos)
                             }
                         )
                     }
@@ -63,7 +63,9 @@ class HomeActionProcessor @Inject constructor(
         ObservableTransformer<HomeViewAction.PhotoLoadMore, HomeViewResult> { actions ->
             actions.flatMap { action ->
                 searchPhotoUseCase.execute(SearchParams(query = action.query, page = action.page))
-                    .map { photos -> HomeViewResult.SearchPagedPhotoResult.Success(photos) }
+                    .map { photos ->
+                        HomeViewResult.SearchPagedPhotoResult.Success(photos)
+                    }
                     .toObservable()
                     .cast(HomeViewResult::class.java)
                     .onErrorReturn { HomeViewResult.SearchPagedPhotoResult.Error(it) }

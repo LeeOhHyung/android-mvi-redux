@@ -11,7 +11,7 @@ import kr.ohyung.domain.entity.PhotoSummary
 sealed class HomeViewResult : ViewResult {
     sealed class GetLocationAndPhotosResult : HomeViewResult() {
         object Loading : GetLocationAndPhotosResult()
-        data class Success(val forecast: Forecast, val photos: List<PhotoSummary>, val isRefresh: Boolean) : GetLocationAndPhotosResult()
+        data class Success(val forecast: Forecast, val photos: List<PhotoSummary>) : GetLocationAndPhotosResult()
         data class Error(val throwable: Throwable?) : GetLocationAndPhotosResult()
     }
 

@@ -11,7 +11,6 @@ import kr.ohyung.domain.entity.Weather
 
 data class HomeViewState(
     val isLoading: Boolean,
-    val isRefresh: Boolean,
     val forecast: Forecast,
     val photos: List<PhotoSummary>,
     val error: Throwable?
@@ -19,7 +18,6 @@ data class HomeViewState(
     companion object {
         fun idle() = HomeViewState(
             isLoading = true,
-            isRefresh = false,
             forecast = Forecast(
                 legalName = LegalName(
                     latitude = 0.0,
