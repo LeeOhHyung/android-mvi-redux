@@ -4,7 +4,6 @@
 ## Table of Contents
  - Development and Architecture
  - Features
- - Screenshots
  - Trouble Shooting
  - Reference
  - License
@@ -20,10 +19,12 @@
 - [Github Action](https://github.com/features/actions)
 
 ## Features
-### UI State Management
-#### Uni Directional Data Flow
+#### 1. Uni Directional Data Flow
+<p>
+ <img src="https://user-images.githubusercontent.com/37705123/97113648-2402d800-172f-11eb-8c9b-9f2da2df4daf.png" width="400" />
+</p>
 
-#### Redux 또는 MVI 구조도 에서 각 지점별 용어 정리와 흐름에 대한 설명
+#### 2. MVI 아키텍처 - similar to Redux
 <p>
  <img src="https://user-images.githubusercontent.com/37705123/97111060-037f5180-1720-11eb-8656-af4d48c889e8.png" width="400" />
 </p> 
@@ -31,7 +32,7 @@
 가장 중요한 개념은, 사용자가 화면을 클릭하는 행위 - 버튼클릭, 토글조작, 스크롤링 등등 - 를 `객체를 발행하는 행위`라고 규정하는 것이다. 그리고, 사용자가 객체를 발행하는 행위가 기본적으로 앱의 상태를 변화시키고자 하는 의도를 나타낸다고 규정하고 이것을 `Intent` 라는 용어를 사용할 것 이다.
 
 <p>
- <img src="http://hannesdorfmann.com/images/mvi/mvi-func2.png" width="400" /> 
+ <img src="http://hannesdorfmann.com/images/mvi/mvi-func2.png" width="600" /> 
 </p>
 
 ```
@@ -45,7 +46,7 @@ View 에서 입력받은 Intent는 ViewModel로 전달되는데, IntentProcessor
 - ActionProcessor는 StateMachine의 핵심 역할로써, UseCase를 실행시켜 Remote, Local 에서 데이터를 가져오는 작업이 실제로 실행되는 곳이다. 작업 실행의 결과를 Result로 변환시키고, Reducer로 전달하는 역할을 수행한다.
 - Reducer는 전달받은 Result가 무엇인지에 따라서 새로운 State를 생성하는 역할을 한다.
 
-### Typography
+#### 3. Typography
 font, font-weight, font size를 미리 정의해두고, TextView, EditText 등과 같이 Text속성이 필요한 곳에서 요긴하게 사용할 수 있도록 한다.
 ```xml
 // 모든 Typography style에 공통 적용될 폰트, 색상, 속성 등을 정의
