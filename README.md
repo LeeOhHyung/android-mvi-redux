@@ -24,8 +24,9 @@
  <img src="https://user-images.githubusercontent.com/37705123/97113823-16018700-1730-11eb-8f79-8887cc22126b.png" width="400" />
  <img src="https://user-images.githubusercontent.com/37705123/97113826-1863e100-1730-11eb-8c7c-e588244014ca.png" width="400" />
 </p>
+Presentation - Data - Domain 3개의 Layer로 구성되어 있고, Data Layer는 다시 Remote, Local Layer로 이루어져 있다.  
 
-#### 2. MVI 아키텍처 - similar to Redux
+#### 2. MVI Architecture - similar to Redux
 <p>
  <img src="https://user-images.githubusercontent.com/37705123/97111060-037f5180-1720-11eb-8656-af4d48c889e8.png" width="400" />
 </p> 
