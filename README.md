@@ -107,8 +107,7 @@ data class ViewState(
 ```
 만약, `photos`의 데이터가 변경되어서 새로운 상태 객체가 발행될때, `render` 함수에서는 title, username 등등은 데이터가 변경되지 않았음에도 화면을 다시 그리는 문제가 발생한다. 매우 불쾌한 사용자 경험을 줄 수 가 있는데, 페이지네이션을 해서 새로운 리스트를 계속 가지고 오는 상황에서 매번 스크롤이 상단으로 이동하게 될 것이다.
 
-부분 렌더링을 지원하는 방법을 고민해보니 두가지 방법을 제안하고자 한다.
-1. 값이 같으면 렌더링하지 않음.
+###### 1. 값이 같으면 렌더링하지 않음.
 ```kotlin
 fun render(oldState: ViewState, newState: ViewState) {
   if(oldState.title != newState.title) {
@@ -119,9 +118,9 @@ fun render(oldState: ViewState, newState: ViewState) {
   }
 }
 ```
-이것은 매우 간단하게 적용할 수 있겠지만, 항상 이전의 상태를 같이 전달해야 하는 분기처리 코드가 많이 추가되어서 가독성이 떨어질 수 있다.
+이것은 매우 간단하게 적용할 수 있겠지만, 항상 이전의 상태를 같이 전달해야 하고, 분기 처리 코드가 많아 가독성이 떨어질 수 있다.
 
-2. [RenderingScope](https://github.com/myrealtrip/box/blob/master/box/src/main/kotlin/com/mrt/box/android/BoxRenderingScope.kt)을 사용하는 방법.
+###### 2. [RenderingScope](https://github.com/myrealtrip/box/blob/master/box/src/main/kotlin/com/mrt/box/android/BoxRenderingScope.kt)을 사용하는 방법.
 ```kotlin 
 // MyRealTrip - Box 프레임워크에서 사용하는 방법
 override val partialRenderers: Map<BoxRenderingScope, BoxRenderer>? = mapOf(
