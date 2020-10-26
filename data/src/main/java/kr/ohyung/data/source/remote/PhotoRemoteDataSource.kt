@@ -10,4 +10,5 @@ import kr.ohyung.data.source.DataSource
 interface PhotoRemoteDataSource : DataSource {
     fun getPhotos(page: Int?, perPage: Int?, orderBy: String?): Single<List<PhotoSummaryDataModel>>
     fun getRandomPhoto(query: String?): Single<PhotoSummaryDataModel>
+    fun searchPhotos(query: String, page: Int?, perPage: Int?): Single<List<PhotoSummaryDataModel>>
 }

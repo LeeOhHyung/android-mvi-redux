@@ -11,7 +11,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import kr.ohyung.core.android.BaseFragment
 import kr.ohyung.mvi.databinding.FragmentBottomNavigationBinding
-import kr.ohyung.mvi.utility.setWhiteStatusBar
+import kr.ohyung.mvi.utility.extension.setWhiteStatusBar
 
 class BottomNavigationFragment :
     BaseFragment<FragmentBottomNavigationBinding>(R.layout.fragment_bottom_navigation) {

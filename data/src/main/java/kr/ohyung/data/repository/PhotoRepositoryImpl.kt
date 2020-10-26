@@ -41,4 +41,17 @@ class PhotoRepositoryImpl @Inject constructor(
                 }
                 Single.error(errorType)
             }
+
+    override fun searchPhotos(query: String, page: Int?, perPage: Int?): Single<List<PhotoSummary>> =
+        photoRemoteDataSource.searchPhotos(query, page, perPage)
+            .map { photoDatamodels -> photoEntityMapper.toEntities(photoDatamodels) }
+            .onErrorResumeNext { throwable ->
+                val errorType = when(throwable) {
+                    is NetworkException.BadRequestException -> Externals.BadRequestException(throwable.message) // 400
+                    is NetworkException.UnauthorizedException -> Externals.UnauthorizedException(throwable.message) // 401
+                    is NetworkException.NotFoundException -> Externals.NotFoundException(throwable.message) // 404
+                    else -> Exception(throwable) // etc
+                }
+                Single.error(errorType)
+            }
 }

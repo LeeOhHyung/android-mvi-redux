@@ -18,10 +18,10 @@ import kr.ohyung.mvi.R
 import kr.ohyung.mvi.databinding.FragmentSplashBinding
 import kr.ohyung.mvi.splash.mvi.SplashViewIntent
 import kr.ohyung.mvi.splash.mvi.SplashViewState
-import kr.ohyung.mvi.utility.load
-import kr.ohyung.mvi.utility.setOnDrawableListener
-import kr.ohyung.mvi.utility.setTransparentStatusBar
-import kr.ohyung.mvi.utility.toast
+import kr.ohyung.mvi.utility.extension.load
+import kr.ohyung.mvi.utility.extension.setOnDrawableListener
+import kr.ohyung.mvi.utility.extension.setTransparentStatusBar
+import kr.ohyung.mvi.utility.extension.toast
 
 @AndroidEntryPoint
 class SplashFragment : MviFragment<FragmentSplashBinding,

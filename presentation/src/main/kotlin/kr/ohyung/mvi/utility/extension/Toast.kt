@@ -1,7 +1,7 @@
 /*
  * Created by Lee Oh Hyung on 2020/10/10.
  */
-package kr.ohyung.mvi.utility
+package kr.ohyung.mvi.utility.extension
 
 import android.content.Context
 import android.widget.Toast

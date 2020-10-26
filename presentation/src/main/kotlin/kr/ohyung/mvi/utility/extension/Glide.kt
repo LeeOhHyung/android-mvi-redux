@@ -1,7 +1,7 @@
 /*
  * Created by Lee Oh Hyung on 2020/10/09.
  */
-package kr.ohyung.mvi.utility
+package kr.ohyung.mvi.utility.extension
 
 import android.graphics.drawable.Drawable
 import android.widget.ImageView

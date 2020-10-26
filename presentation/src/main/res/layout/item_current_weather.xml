@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="forecast"
+            type="kr.ohyung.domain.entity.Forecast" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding16"
+        android:background="@color/white_900">
+
+        <TextView
+            android:id="@+id/tv_current_location_hint"
+            style="@style/Typography.400.Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin16"
+            android:text="@string/fragment_home_current_location_hint"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_current_location"
+            style="@style/Typography.600.Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin4"
+            android:text="@{forecast.legalName.city}"
+            app:layout_constraintStart_toStartOf="@id/tv_current_location_hint"
+            app:layout_constraintTop_toBottomOf="@id/tv_current_location_hint"
+            tools:text="서울특별시 영등포구 양평동 3가" />
+
+        <TextView
+            android:id="@+id/tv_current_location_temperature"
+            style="@style/Typography.1100.Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(forecast.weather.temp)}"
+            app:layout_constraintBottom_toBottomOf="@id/iv_weather_icon"
+            app:layout_constraintEnd_toStartOf="@id/iv_weather_icon"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_weather_icon"
+            tools:text="15.4" />
+
+        <ImageView
+            android:id="@+id/iv_weather_icon"
+            setImageCenterCrop="@{@string/format_weather_icon(forecast.weather.icon)}"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="@dimen/margin8"
+            android:layout_marginTop="@dimen/margin16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_current_location_temperature"
+            app:layout_constraintTop_toBottomOf="@id/tv_current_location" />
+
+        <TextView
+            style="@style/Typography.500.Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin4"
+            android:text="@{forecast.weather.description}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_weather_icon"
+            tools:text="Heavy Rain" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

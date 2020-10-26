@@ -11,4 +11,5 @@ import kr.ohyung.domain.entity.unit.OrderBy
 interface PhotoRepository : Repository {
     fun getPhotos(page: Int, perPage: Int, orderBy: OrderBy): Single<List<PhotoSummary>>
     fun getRandomPhoto(query: String): Single<PhotoSummary>
+    fun searchPhotos(query: String, page: Int?, perPage: Int?): Single<List<PhotoSummary>>
 }
